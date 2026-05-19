@@ -204,7 +204,8 @@ const localBusinessSchema = {
             href={waRoute}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex h-12 items-center justify-center rounded-lg bg-logo-500 px-6 text-sm font-bold text-white no-underline transition-all duration-150 hover:-translate-y-0.5 hover:bg-logo-600 hover:shadow-elevated"
+            class="btn-primary"
+            data-loading="false"
           >
             Ver destino
           </a>
@@ -283,7 +284,7 @@ const localBusinessSchema = {
                 class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                 loading="lazy"
               />
-              <span class="absolute right-3 top-3 z-10 rounded-full bg-pampa-50/95 px-3 py-1 text-xs font-extrabold text-pampa-600 shadow-soft backdrop-blur-md">
+              <span class="absolute right-3 top-3 z-10 rounded-full bg-pampa-50/95 px-3 py-1 text-xs font-extrabold text-pampa-600 shadow-soft backdrop-blur-md font-data">
                 {destination.price}
               </span>
             </div>
@@ -361,18 +362,17 @@ const localBusinessSchema = {
         </div>
       </div>
 
-      <!-- Mapa -->
+      <!-- Mapa interactivo -->
       <div class="relative h-80 overflow-hidden rounded-2xl border border-pampa-200/40 shadow-card sm:h-96 lg:h-[420px]">
-        <img
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWUXjyDxmxVfJFhSN1ezYkQCUwwOjdCPy4_jYlkBEBACPOyQnOZ1ciRqJuItVEJAi8aj46iw5RzkBVKAhhvX7bTZe_eXNM5V-gVxM4WLqm96YU9OBvk_es8uVsT_1nOZrNE4Dy--5EyNZCk8rw8QOYosghUGOlHl8hdcY0zCnMN6fV3UIP37RY6TIY-S79ta4o15dLZ7uAfXybCR8bxajviCvlapZh_3u59uKycQHmj5bDrGZfhqLV3MKna2RmKq7Ex4M1K1NSPg"
-          alt="Mapa de Ayacucho"
-          class="h-full w-full object-cover opacity-60 grayscale"
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3879.279!2d-74.226!3d-13.160!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDA5JzM2LjAiUyA3NMKwMTMnMzMuNiJX!5e0!3m2!1ses!2spe!4v1700000000000"
+          class="h-full w-full border-0 grayscale-[30%]"
+          allowfullscreen=""
           loading="lazy"
-        />
-        <div class="absolute inset-0 bg-cielo-500/10"></div>
-        <div class="absolute left-1/2 top-1/2 flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-pampa-500 text-white shadow-[0_0_0_12px_rgba(139,105,20,0.15)]">
-          <span class="material-symbols-outlined text-xl">directions_bus</span>
-        </div>
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Ubicacion de JR Transportes en Ayacucho"
+        ></iframe>
+        <div class="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-pampa-200/40"></div>
       </div>
     </div>
   </section>
@@ -446,6 +446,10 @@ const localBusinessSchema = {
     const routeCta = document.getElementById('route-cta');
 
     if (dropdown && dropdownButton && customMenu && customIcon && routeSelect && routeCta) {
+      // Estado inicial: CTA deshabilitado hasta seleccion
+      routeCta.setAttribute('disabled', 'true');
+      routeCta.setAttribute('aria-disabled', 'true');
+
       // Abrir/Cerrar menu
       dropdownButton.addEventListener('click', (e) => {
         e.preventDefault();
@@ -475,9 +479,11 @@ const localBusinessSchema = {
           
           if (value) {
             routeSelect.value = value;
-            if (selectedText) selectedText.textContent = `${name} - ${price}`;
+            if (selectedText) selectedText.textContent = `${name} — ${price}`;
             
-            // Actualizar CTA route
+            // Activar CTA
+            routeCta.removeAttribute('disabled');
+            routeCta.removeAttribute('aria-disabled');
             routeCta.href = `/destinos/${value}`;
             routeCta.removeAttribute('target');
             routeCta.removeAttribute('rel');

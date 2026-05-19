@@ -49,12 +49,26 @@
   /* Tipografia */
   --font-headline: 'DM Serif Display', Georgia, serif;
   --font-body: 'Manrope', system-ui, sans-serif;
+  --font-data: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Sistema de elevacion - Superficies apiladas con intencion */
+  --surface-bg: var(--color-pampa-50);
+  --surface-base: #ffffff;
+  --surface-raised: #ffffff;
+  --surface-floating: #ffffff;
+  --surface-overlay: rgba(13, 30, 48, 0.85);
 
   /* Sombras - Estrategia: sombras sutiles con tinte calido */
   --shadow-soft: 0 1px 3px rgba(44, 36, 24, 0.06);
   --shadow-card: 0 4px 16px rgba(44, 36, 24, 0.07);
   --shadow-elevated: 0 12px 32px rgba(44, 36, 24, 0.10);
   --shadow-float: 0 20px 48px rgba(44, 36, 24, 0.14);
+
+  /* Bordes - Progresion de intensidad */
+  --border-soft: rgba(139, 105, 20, 0.08);
+  --border-standard: rgba(139, 105, 20, 0.12);
+  --border-emphasis: rgba(139, 105, 20, 0.25);
+  --border-focus: rgba(196, 169, 77, 0.60);
 }
 
 @layer base {
@@ -93,6 +107,77 @@
   a {
     color: inherit;
   }
+}
+
+/* Data typography - numeros y precios alineados */
+.font-data {
+  font-family: var(--font-data);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* Sistema de botones con estados completos */
+.btn-primary {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 3rem;
+  padding: 0 1.5rem;
+  border-radius: 0.5rem;
+  background: var(--color-logo-500);
+  color: white;
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 150ms cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  background: var(--color-logo-600);
+  box-shadow: var(--shadow-elevated);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  background: var(--color-logo-600);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.15);
+  transition-duration: 50ms;
+}
+
+.btn-primary:disabled,
+.btn-primary[data-loading="true"] {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-primary:disabled:hover,
+.btn-primary[data-loading="true"]:hover {
+  background: var(--color-logo-500);
+  transform: none;
+  box-shadow: none;
+}
+
+/* Spinner para estado loading */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.btn-primary[data-loading="true"]::after {
+  content: '';
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
 }
 
 /* Material Symbols - Ocultar texto hasta que cargue la fuente */
