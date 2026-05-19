@@ -15,42 +15,72 @@
       }
     })();
   </script><style>
-    /* Dark Mode — "La noche cae sobre la pampa" */
+    /* ============================================
+       DARK MODE — "La noche cae sobre la pampa"
+       Estrategia: invertir las variables CSS de
+       Tailwind v4 para cubrir TODAS las clases
+       automaticamente (incluyendo opacidades).
+       html[data-theme="dark"] gana sobre :root.
+       ============================================ */
+
     [data-theme="dark"] { color-scheme: dark; }
+
+    html[data-theme="dark"] {
+      /* Pampa: tierra → nocturno (invertido) */
+      --color-pampa-50:  #0D1E30;
+      --color-pampa-100: #122840;
+      --color-pampa-200: #1B3A5C;
+      --color-pampa-300: #6B96C7;
+      --color-pampa-400: #A3BFE0;
+      --color-pampa-500: #D0DFF0;
+      --color-pampa-600: #F2EBD9;  /* mas brillante para opacidades */
+      --color-pampa-700: #FAF6ED;
+      --color-pampa-800: #FFFFFF;
+      --color-pampa-900: #FFFFFF;
+
+      /* Cielo: mantener oscuro en 900 (fondos) pero
+         iluminar 500/700 para links y textos */
+      --color-cielo-50:  #EDF3FA;
+      --color-cielo-100: #D0DFF0;
+      --color-cielo-200: #A3BFE0;
+      --color-cielo-300: #6B96C7;
+      --color-cielo-400: #4B78AA;
+      --color-cielo-500: #6B96C7;  /* links mas brillantes */
+      --color-cielo-600: #A3BFE0;
+      --color-cielo-700: #D0DFF0;  /* titulos mas brillantes */
+      --color-cielo-800: #EDF3FA;
+      --color-cielo-900: #0D1E30;  /* mantener oscuro para fondos */
+
+      /* Quebrada: verde mas brillante para iconos */
+      --color-quebrada-400: #6B9E67;
+      --color-quebrada-500: #5A8A56;
+      --color-quebrada-600: #4A7A46;
+
+      /* Logo: rojo se mantiene */
+      --color-logo-400: #E85D5D;
+      --color-logo-500: #D62828;
+      --color-logo-600: #B51F1F;
+
+      /* Blanco puro → azul oscuro para superficies */
+      --color-white: #1B3A5C;
+    }
+
+    /* Overrides para clases con fallback estatico
+       que no usan variables */
+    [data-theme="dark"] :is(.text-white) { color: #D0DFF0; }
+    [data-theme="dark"] :is(.bg-logo-500) { background-color: #D62828; }
+    [data-theme="dark"] :is(.bg-quebrada-500) { background-color: #5A8A56; }
+    [data-theme="dark"] :is(.text-quebrada-500) { color: #5A8A56; }
+
+    /* Imagenes y mapa */
     [data-theme="dark"] img:not([src*="google.com/maps"]) { filter: brightness(0.88) saturate(0.92); }
     [data-theme="dark"] iframe[src*="google.com/maps"] { filter: invert(0.88) hue-rotate(180deg) contrast(0.85); }
-    [data-theme="dark"] :is(.bg-pampa-50) { background-color: #0D1E30; }
-    [data-theme="dark"] :is(.bg-pampa-50\/80) { background-color: rgba(13, 30, 48, 0.80); }
-    [data-theme="dark"] :is(.bg-pampa-50\/95) { background-color: rgba(13, 30, 48, 0.95); }
-    [data-theme="dark"] :is(.bg-pampa-100) { background-color: #122840; }
-    [data-theme="dark"] :is(.bg-white) { background-color: #1B3A5C; }
-    [data-theme="dark"] :is(.bg-white\/95) { background-color: rgba(27, 58, 92, 0.95); }
-    [data-theme="dark"] :is(.text-pampa-900) { color: #F2EBD9; }
-    [data-theme="dark"] :is(.text-pampa-800) { color: #E3D6B8; }
-    [data-theme="dark"] :is(.text-pampa-700) { color: #C4A94D; }
-    [data-theme="dark"] :is(.text-pampa-700\/70) { color: rgba(196, 169, 77, 0.70); }
-    [data-theme="dark"] :is(.text-pampa-700\/80) { color: rgba(196, 169, 77, 0.80); }
-    [data-theme="dark"] :is(.text-pampa-600) { color: #A8892A; }
-    [data-theme="dark"] :is(.text-pampa-500) { color: #C4A94D; }
-    [data-theme="dark"] :is(.text-cielo-500) { color: #6B96C7; }
-    [data-theme="dark"] :is(.text-cielo-700) { color: #A3BFE0; }
-    [data-theme="dark"] :is(.border-pampa-200\/50) { border-color: rgba(27, 58, 92, 0.50); }
-    [data-theme="dark"] :is(.border-pampa-200\/60) { border-color: rgba(27, 58, 92, 0.60); }
-    [data-theme="dark"] :is(.border-pampa-200\/70) { border-color: rgba(27, 58, 92, 0.70); }
-    [data-theme="dark"] :is(.border-pampa-200\/40) { border-color: rgba(27, 58, 92, 0.40); }
-    [data-theme="dark"] [class*="hover:bg-pampa-100"]:hover { background-color: #2B4A75; }
-    [data-theme="dark"] [class*="hover:bg-pampa-200/50"]:hover { background-color: rgba(43, 74, 117, 0.50); }
-    [data-theme="dark"] [class*="hover:bg-pampa-200"]:hover { background-color: #2B4A75; }
-    [data-theme="dark"] [class*="hover:bg-white"]:hover { background-color: #2B4A75; }
-    [data-theme="dark"] [class*="hover:text-pampa-500"]:hover { color: #E3D6B8; }
-    [data-theme="dark"] [class*="hover:text-pampa-700"]:hover { color: #F2EBD9; }
-    [data-theme="dark"] [class*="hover:text-cielo-700"]:hover { color: #D0DFF0; }
-    [data-theme="dark"] [class*="focus:border-pampa-300"]:focus { border-color: #6B96C7; }
-    [data-theme="dark"] [class*="focus:ring-pampa-500/50"]:focus { --tw-ring-color: rgba(107, 150, 199, 0.50); }
-    [data-theme="dark"] ::selection { background-color: #3A5F94; color: #F2EBD9; }
+
+    /* Textura y detalles */
     [data-theme="dark"] .noise-overlay { mix-blend-mode: overlay; opacity: 0.08; }
     [data-theme="dark"] .andean-divider { opacity: 0.6; }
-  </style><link rel="stylesheet" href="/_astro/global.CRorDerk.css"></head> <body class="bg-pampa-50 selection:bg-pampa-300 selection:text-pampa-900"> <div class="noise-overlay"></div> <a class="skip-link" href="#contenido">Saltar al contenido</a> <!-- Header --><header class="andean-border-top sticky top-0 z-50 border-b border-pampa-200/60 bg-pampa-50/80 backdrop-blur-xl"> <div class="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-2"> <a href="/" class="no-underline flex items-center -ml-1"> <img src="/JRlogo.webp" alt="JR Transportes" class="h-14 w-auto object-contain"> </a> <!-- Navegacion desktop --> <nav class="hidden items-center gap-6 md:flex" aria-label="Menu principal"> <a href="/" class="text-sm font-semibold no-underline transition-colors duration-150 text-pampa-700/80 hover:text-pampa-500"> Inicio </a><a href="/#servicios" class="text-sm font-semibold no-underline transition-colors duration-150 text-pampa-700/80 hover:text-pampa-500"> Servicios </a><a href="/destinos" class="text-sm font-semibold no-underline transition-colors duration-150 text-pampa-700/80 hover:text-pampa-500"> Destinos </a><a href="/blog" class="text-sm font-semibold no-underline transition-colors duration-150 text-pampa-500 border-b border-pampa-500 pb-0.5"> Blog </a> </nav> <div class="flex items-center gap-2"> <a class="hidden rounded-lg bg-logo-500 px-4 py-2 text-sm font-bold text-white no-underline transition-all duration-150 hover:-translate-y-0.5 hover:bg-logo-600 hover:shadow-elevated sm:inline-flex" href="https://wa.me/51928413201?text=Hola%20JR%20Transportes" target="_blank" rel="noopener noreferrer"> Contactar </a> <!-- Theme toggle --> <button id="theme-toggle" type="button" class="inline-flex items-center justify-center rounded-lg p-2 text-pampa-600 transition-colors hover:bg-pampa-200/50" aria-label="Cambiar tema"> <span class="material-symbols-outlined" id="theme-icon">light_mode</span> </button> <!-- Boton hamburguesa movil --> <button id="menu-toggle" type="button" class="inline-flex items-center justify-center rounded-lg p-2 text-pampa-600 transition-colors hover:bg-pampa-200/50 md:hidden" aria-controls="mobile-menu" aria-expanded="false" aria-label="Abrir menu"> <span class="material-symbols-outlined" id="menu-icon">menu</span> </button> </div> </div> <!-- Menu movil --> <nav id="mobile-menu" class="hidden border-t border-pampa-200/60 bg-pampa-50 px-5 pb-4 pt-2 md:hidden" aria-label="Menu movil"> <a href="/" class="mobile-link block rounded-lg px-3 py-2.5 text-sm font-semibold text-pampa-700 no-underline transition-colors hover:bg-pampa-100"> Inicio </a><a href="/#servicios" class="mobile-link block rounded-lg px-3 py-2.5 text-sm font-semibold text-pampa-700 no-underline transition-colors hover:bg-pampa-100"> Servicios </a><a href="/destinos" class="mobile-link block rounded-lg px-3 py-2.5 text-sm font-semibold text-pampa-700 no-underline transition-colors hover:bg-pampa-100"> Destinos </a><a href="/blog" class="mobile-link block rounded-lg px-3 py-2.5 text-sm font-semibold text-pampa-700 no-underline transition-colors hover:bg-pampa-100"> Blog </a> <a class="mt-2 block rounded-lg bg-logo-500 px-3 py-2.5 text-center text-sm font-bold text-white no-underline" href="https://wa.me/51928413201?text=Hola%20JR%20Transportes" target="_blank" rel="noopener noreferrer"> Contactar </a> </nav> </header> <main id="contenido" class>   <section class="relative flex h-[280px] w-full items-end overflow-hidden sm:h-[320px] lg:h-[380px]"> <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDY7u1kL2Z1wZDsppmSkekS25Q5CEUM500ZfM0TwbLpuE9JB1NCTr6Yl8adRmLAk6icC0aC6oCBUzVdrb18-k2Dj6NyJGsrHtHsmsiZ3hVX6zjUx-Zz-oPShMrtGU81Sk4g72Yj2x2vYQeAcsfdzfBdtHDc5oiHmtSnM7WUkSYdrNAXvVAETkwWkgmiFVZuvLk7Dh5AcOTT7GlKyytJrCI_OkgoIxTcpjnCVzL3E4Bv2VGXudL3Y5cV6UilB4F_uGpFfrjEQHG6pw" alt="Paisaje andino de Ayacucho" class="absolute inset-0 h-full w-full object-cover"> <div class="absolute inset-0 bg-gradient-to-t from-pampa-900/85 via-pampa-900/30 to-transparent"></div> <div class="relative z-10 mx-auto w-full max-w-6xl px-5 pb-12 sm:pb-14"> <span class="mb-3 inline-block rounded-full bg-pampa-300 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-pampa-800">
+    [data-theme="dark"] ::selection { background-color: #3A5F94; color: #F2EBD9; }
+  </style><link rel="stylesheet" href="/_astro/global.DXve4zSK.css"></head> <body class="bg-pampa-50 selection:bg-pampa-300 selection:text-pampa-900"> <div class="noise-overlay"></div> <a class="skip-link" href="#contenido">Saltar al contenido</a> <!-- Header --><header class="andean-border-top sticky top-0 z-50 border-b border-pampa-200/60 bg-pampa-50/80 backdrop-blur-xl"> <div class="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-2"> <a href="/" class="no-underline flex items-center -ml-1"> <img src="/JRlogo.webp" alt="JR Transportes" class="h-14 w-auto object-contain"> </a> <!-- Navegacion desktop --> <nav class="hidden items-center gap-6 md:flex" aria-label="Menu principal"> <a href="/" class="text-sm font-semibold no-underline transition-colors duration-150 text-pampa-700/80 hover:text-pampa-500"> Inicio </a><a href="/#servicios" class="text-sm font-semibold no-underline transition-colors duration-150 text-pampa-700/80 hover:text-pampa-500"> Servicios </a><a href="/destinos" class="text-sm font-semibold no-underline transition-colors duration-150 text-pampa-700/80 hover:text-pampa-500"> Destinos </a><a href="/blog" class="text-sm font-semibold no-underline transition-colors duration-150 text-pampa-500 border-b border-pampa-500 pb-0.5"> Blog </a> </nav> <div class="flex items-center gap-2"> <a class="hidden rounded-lg bg-logo-500 px-4 py-2 text-sm font-bold text-white no-underline transition-all duration-150 hover:-translate-y-0.5 hover:bg-logo-600 hover:shadow-elevated sm:inline-flex" href="https://wa.me/51928413201?text=Hola%20JR%20Transportes" target="_blank" rel="noopener noreferrer"> Contactar </a> <!-- Theme toggle --> <button id="theme-toggle" type="button" class="inline-flex items-center justify-center rounded-lg p-2 text-pampa-600 transition-colors hover:bg-pampa-200/50" aria-label="Cambiar tema"> <span class="material-symbols-outlined" id="theme-icon">light_mode</span> </button> <!-- Boton hamburguesa movil --> <button id="menu-toggle" type="button" class="inline-flex items-center justify-center rounded-lg p-2 text-pampa-600 transition-colors hover:bg-pampa-200/50 md:hidden" aria-controls="mobile-menu" aria-expanded="false" aria-label="Abrir menu"> <span class="material-symbols-outlined" id="menu-icon">menu</span> </button> </div> </div> <!-- Menu movil --> <nav id="mobile-menu" class="hidden border-t border-pampa-200/60 bg-pampa-50 px-5 pb-4 pt-2 md:hidden" aria-label="Menu movil"> <a href="/" class="mobile-link block rounded-lg px-3 py-2.5 text-sm font-semibold text-pampa-700 no-underline transition-colors hover:bg-pampa-100"> Inicio </a><a href="/#servicios" class="mobile-link block rounded-lg px-3 py-2.5 text-sm font-semibold text-pampa-700 no-underline transition-colors hover:bg-pampa-100"> Servicios </a><a href="/destinos" class="mobile-link block rounded-lg px-3 py-2.5 text-sm font-semibold text-pampa-700 no-underline transition-colors hover:bg-pampa-100"> Destinos </a><a href="/blog" class="mobile-link block rounded-lg px-3 py-2.5 text-sm font-semibold text-pampa-700 no-underline transition-colors hover:bg-pampa-100"> Blog </a> <a class="mt-2 block rounded-lg bg-logo-500 px-3 py-2.5 text-center text-sm font-bold text-white no-underline" href="https://wa.me/51928413201?text=Hola%20JR%20Transportes" target="_blank" rel="noopener noreferrer"> Contactar </a> </nav> </header> <main id="contenido" class>   <section class="relative flex h-[280px] w-full items-end overflow-hidden sm:h-[320px] lg:h-[380px]"> <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDY7u1kL2Z1wZDsppmSkekS25Q5CEUM500ZfM0TwbLpuE9JB1NCTr6Yl8adRmLAk6icC0aC6oCBUzVdrb18-k2Dj6NyJGsrHtHsmsiZ3hVX6zjUx-Zz-oPShMrtGU81Sk4g72Yj2x2vYQeAcsfdzfBdtHDc5oiHmtSnM7WUkSYdrNAXvVAETkwWkgmiFVZuvLk7Dh5AcOTT7GlKyytJrCI_OkgoIxTcpjnCVzL3E4Bv2VGXudL3Y5cV6UilB4F_uGpFfrjEQHG6pw" alt="Paisaje andino de Ayacucho" class="absolute inset-0 h-full w-full object-cover"> <div class="absolute inset-0 bg-gradient-to-t from-pampa-900/85 via-pampa-900/30 to-transparent"></div> <div class="relative z-10 mx-auto w-full max-w-6xl px-5 pb-12 sm:pb-14"> <span class="mb-3 inline-block rounded-full bg-pampa-300 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-pampa-800">
 En ruta
 </span> <h1 class="font-headline text-4xl text-white sm:text-5xl">
 Blog de Viajes
