@@ -1,0 +1,63 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogType?: string;
+  ogImage?: string;
+  ogLocale?: string;
+  schema?: Record<string, any>;
+  noIndex?: boolean;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  ogTitle = title,
+  ogDescription = description,
+  ogType = 'website',
+  ogImage,
+  ogLocale = 'es_PE',
+  schema,
+  noIndex = false,
+} = Astro.props;
+
+const canonicalUrl = canonical || Astro.url.href;
+---
+
+<meta charset="utf-8" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" href="/favicon.ico" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="generator" content={Astro.generator} />
+{noIndex && <meta name="robots" content="noindex, nofollow" />}
+
+<title>{title}</title>
+<meta name="description" content={description} />
+
+<link rel="canonical" href={canonicalUrl} />
+
+<meta property="og:title" content={ogTitle} />
+<meta property="og:description" content={ogDescription} />
+<meta property="og:type" content={ogType} />
+<meta property="og:locale" content={ogLocale} />
+<meta property="og:url" content={canonicalUrl} />
+{ogImage && <meta property="og:image" content={ogImage} />}
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700;800&display=swap"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@200..700&display=swap"
+/>
+
+{schema && (
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+)}

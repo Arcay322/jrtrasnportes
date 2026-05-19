@@ -1,0 +1,49 @@
+---
+export interface Props {
+  showLinks?: boolean;
+  showLogo?: boolean;
+  variant?: 'dark' | 'blue';
+}
+
+const {
+  showLinks = true,
+  showLogo = true,
+  variant = 'dark',
+} = Astro.props;
+
+const waRoute = 'https://wa.me/51928413201?text=Hola%20JR%20Transportes%2C%20deseo%20consultar%20por%20rutas%20y%20horarios.';
+
+const bgClass = variant === 'blue' ? 'bg-cielo-900' : 'bg-cielo-900';
+const borderClass = 'border-pampa-50/15';
+---
+
+<footer class={`border-t ${borderClass} ${bgClass} py-8`}>
+  <div class="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-4 px-5 sm:flex-row">
+    <div>
+      {showLogo && (
+        <p class="font-headline text-base text-pampa-50">JR Transportes</p>
+      )}
+      <p class="mt-0.5 text-xs text-pampa-50/60">
+        &copy; {new Date().getFullYear()} JR Transportes. Ayacucho, Peru.
+      </p>
+    </div>
+    {showLinks && (
+      <div class="flex gap-5">
+        <a href="#" class="text-xs font-semibold text-pampa-50/75 no-underline transition-colors hover:text-pampa-50">
+          Terminos
+        </a>
+        <a href="#" class="text-xs font-semibold text-pampa-50/75 no-underline transition-colors hover:text-pampa-50">
+          Privacidad
+        </a>
+        <a
+          href={waRoute}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-xs font-semibold text-pampa-50/75 no-underline transition-colors hover:text-pampa-50"
+        >
+          WhatsApp
+        </a>
+      </div>
+    )}
+  </div>
+</footer>

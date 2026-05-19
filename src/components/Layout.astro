@@ -1,0 +1,78 @@
+---
+import SEO from './SEO.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import MobileMenuScript from './MobileMenuScript.astro';
+
+export interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogType?: string;
+  ogImage?: string;
+  ogLocale?: string;
+  schema?: Record<string, any>;
+  activePage?: string;
+  ctaText?: string;
+  ctaHref?: string;
+  showFooterLinks?: boolean;
+  footerVariant?: 'dark' | 'blue';
+  bodyClass?: string;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  ogTitle,
+  ogDescription,
+  ogType,
+  ogImage,
+  ogLocale,
+  schema,
+  activePage = '',
+  ctaText,
+  ctaHref,
+  showFooterLinks = true,
+  footerVariant = 'dark',
+  bodyClass = 'bg-pampa-50 selection:bg-pampa-300 selection:text-pampa-900',
+  mainClass = '',
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <SEO
+    title={title}
+    description={description}
+    canonical={canonical}
+    ogTitle={ogTitle}
+    ogDescription={ogDescription}
+    ogType={ogType}
+    ogImage={ogImage}
+    ogLocale={ogLocale}
+    schema={schema}
+  />
+</head>
+<body class={bodyClass}>
+  <div class="noise-overlay"></div>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <Header activePage={activePage} ctaText={ctaText} ctaHref={ctaHref} />
+
+  <main id="contenido" class={mainClass}>
+    <slot />
+  </main>
+
+  <Footer showLinks={showFooterLinks} variant={footerVariant} />
+
+  <slot name="after-footer" />
+
+  <MobileMenuScript />
+
+  <slot name="scripts" />
+</body>
+</html>

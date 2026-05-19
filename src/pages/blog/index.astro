@@ -1,178 +1,107 @@
 ---
+import Layout from '../../components/Layout.astro';
 import '../../styles/global.css';
 
 const rawPosts = import.meta.glob('../../data/blog/*.md', { eager: true });
 const posts = Object.values(rawPosts) as any[];
 posts.sort((a, b) => new Date(b.frontmatter.date).valueOf() - new Date(a.frontmatter.date).valueOf());
 
-const companyName = 'JR Transportes';
 const phoneRaw = '51928413201';
 const whatsappBase = `https://wa.me/${phoneRaw}`;
 
 const waRoute = `${whatsappBase}?text=${encodeURIComponent(
   'Hola JR Transportes'
 )}`;
-
-const menuLinks = [
-  { label: 'Inicio', href: '/' },
-  { label: 'Servicios', href: '/#servicios' },
-  { label: 'Destinos', href: '/destinos' },
-  { label: 'Blog', href: '/blog' }
-];
 ---
 
-<html lang="es">
-<head>
-  <meta charset="utf-8" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="icon" href="/favicon.ico" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Blog de Viajes | JR Transportes</title>
-  <meta name="description" content="Noticias, reportajes turísticos y guías para viajar por Ayacucho." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700;800&display=swap" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@200..700&display=swap" />
-</head>
-<body class="bg-pampa-50 selection:bg-pampa-300 selection:text-pampa-900">
-  <div class="noise-overlay"></div>
-  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+<Layout
+  title="Blog de Viajes | JR Transportes"
+  description="Noticias, reportajes turisticos y guias para viajar por Ayacucho."
+  ogTitle="Blog de Viajes"
+  ogDescription="Noticias, reportajes turisticos y guias para viajar por Ayacucho."
+  ogType="website"
+  activePage="blog"
+  ctaText="Contactar"
+  ctaHref={waRoute}
+>
+  <!-- Hero Blog -->
+  <section class="relative flex h-[280px] w-full items-end overflow-hidden sm:h-[320px] lg:h-[380px]">
+    <img
+      src="https://lh3.googleusercontent.com/aida-public/AB6AXuDY7u1kL2Z1wZDsppmSkekS25Q5CEUM500ZfM0TwbLpuE9JB1NCTr6Yl8adRmLAk6icC0aC6oCBUzVdrb18-k2Dj6NyJGsrHtHsmsiZ3hVX6zjUx-Zz-oPShMrtGU81Sk4g72Yj2x2vYQeAcsfdzfBdtHDc5oiHmtSnM7WUkSYdrNAXvVAETkwWkgmiFVZuvLk7Dh5AcOTT7GlKyytJrCI_OkgoIxTcpjnCVzL3E4Bv2VGXudL3Y5cV6UilB4F_uGpFfrjEQHG6pw"
+      alt="Paisaje andino de Ayacucho"
+      class="absolute inset-0 h-full w-full object-cover"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-pampa-900/85 via-pampa-900/30 to-transparent"></div>
 
-  <!-- Header -->
-  <header class="andean-border-top sticky top-0 z-50 border-b border-pampa-200/60 bg-pampa-50/80 backdrop-blur-xl">
-    <div class="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-2">
-      <a href="/" class="no-underline flex items-center -ml-1">
-        <img src="/JRlogo.webp" alt="JR Transportes" class="h-14 w-auto object-contain" />
-      </a>
-      <nav class="hidden items-center gap-6 md:flex" aria-label="Menu principal">
-        {menuLinks.map((item) => (
-          <a href={item.href} class="text-sm font-semibold text-pampa-700/80 no-underline transition-colors duration-150 hover:text-pampa-500">
-            {item.label}
-          </a>
-        ))}
-      </nav>
-      <div class="flex items-center gap-3">
-        <a class="hidden rounded-lg bg-logo-500 px-4 py-2 text-sm font-bold text-white no-underline transition-all duration-150 hover:-translate-y-0.5 hover:bg-logo-600 hover:shadow-elevated sm:inline-flex" href={waRoute} target="_blank" rel="noopener noreferrer">
-          Contactar
-        </a>
-        <button id="menu-toggle" type="button" class="inline-flex items-center justify-center rounded-lg p-2 text-pampa-600 transition-colors hover:bg-pampa-200/50 md:hidden" aria-controls="mobile-menu" aria-expanded="false">
-          <span id="menu-icon" class="material-symbols-outlined">menu</span>
-        </button>
-      </div>
+    <div class="relative z-10 mx-auto w-full max-w-6xl px-5 pb-12 sm:pb-14">
+      <span class="mb-3 inline-block rounded-full bg-pampa-300 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-pampa-800">
+        En ruta
+      </span>
+      <h1 class="font-headline text-4xl text-white sm:text-5xl">
+        Blog de Viajes
+      </h1>
+      <p class="mt-3 max-w-lg text-base leading-relaxed text-pampa-100/85">
+        Historias, reportajes y guias para descubrir Ayacucho.
+      </p>
     </div>
 
-    <!-- Menu movil -->
-    <nav
-      id="mobile-menu"
-      class="hidden border-t border-pampa-200/60 bg-pampa-50 px-5 pb-4 pt-2 md:hidden"
-      aria-label="Menu movil"
-    >
-      {menuLinks.map((item) => (
-        <a
-          href={item.href}
-          class="mobile-link block rounded-lg px-3 py-2.5 text-sm font-semibold text-pampa-700 no-underline transition-colors hover:bg-pampa-100"
-        >
-          {item.label}
-        </a>
-      ))}
-      <a
-        class="mt-2 block rounded-lg bg-logo-500 px-3 py-2.5 text-center text-sm font-bold text-white no-underline"
-        href={waRoute}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Contactar
-      </a>
-    </nav>
-  </header>
+    <div class="andean-divider absolute bottom-0 left-0 right-0 opacity-40"></div>
+  </section>
 
-  <main id="contenido" class="min-h-screen pt-4 pb-16">
-    <div class="mx-auto max-w-5xl px-5">
-      <div class="mb-12 text-center fade-in-up">
-        <h1 class="mb-4 font-headline text-4xl text-pampa-900 sm:text-5xl lg:text-6xl">Blog & Noticias</h1>
-        <p class="mx-auto max-w-2xl text-lg text-pampa-700/80">
-          Guías, tips y recorridos para disfrutar de cada viaje.
-        </p>
-      </div>
-
-      <div class="grid gap-8 sm:grid-cols-2">
-        {posts.map((post) => (
-          <article class="group relative flex flex-col overflow-hidden rounded-2xl border border-pampa-200/50 bg-white shadow-soft transition-transform duration-300 hover:-translate-y-1 hover:shadow-card fade-in-up">
-            <a href={`/blog/${post.frontmatter.slug}`} class="absolute inset-0 z-20">
-              <span class="sr-only">Leer articulo {post.frontmatter.title}</span>
-            </a>
-            
-            <div class="relative h-60 w-full overflow-hidden">
-              <img src={post.frontmatter.image} alt={post.frontmatter.title} loading="lazy" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+  <!-- Lista de Articulos -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto w-full max-w-6xl px-5">
+      <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {posts.map((post, i) => (
+          <article class={`fade-in-up stagger-${i + 1} group flex flex-col overflow-hidden rounded-xl border border-pampa-200/50 bg-white shadow-soft transition-all duration-300 hover:-translate-y-2 hover:shadow-float`}>
+            <div class="relative h-52 overflow-hidden">
+              <img
+                src={post.frontmatter.image}
+                alt={post.frontmatter.title}
+                class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                loading="lazy"
+              />
+              <span class="absolute left-3 top-3 z-10 rounded-full bg-cielo-700/90 px-3 py-1 text-xs font-extrabold text-white shadow-soft backdrop-blur-md">
+                {post.frontmatter.tag}
+              </span>
             </div>
-            
-            <div class="flex flex-1 flex-col p-6 sm:p-8">
-              <div class="mb-3 flex items-center justify-between">
-                <span class="rounded-md bg-pampa-100 px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest text-pampa-600">
-                  {post.frontmatter.author}
-                </span>
-                <span class="text-xs font-semibold text-pampa-500">
-                  {new Date(post.frontmatter.date).toLocaleDateString('es-PE', { year: 'numeric', month: 'long', day: 'numeric' })}
-                </span>
+            <div class="flex flex-1 flex-col justify-between p-5">
+              <div>
+                <div class="mb-2 flex items-center gap-2 text-xs font-semibold text-pampa-500">
+                  <span>{new Date(post.frontmatter.date).toLocaleDateString('es-PE', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                  <span class="h-1 w-1 rounded-full bg-pampa-300"></span>
+                  <span>{post.frontmatter.readingTime}</span>
+                </div>
+                <h3 class="font-headline text-xl text-pampa-800 leading-tight">{post.frontmatter.title}</h3>
+                <p class="mt-2 text-sm leading-relaxed text-pampa-700/70 line-clamp-3">{post.frontmatter.description}</p>
               </div>
-              <h2 class="mb-3 font-headline text-2xl text-pampa-900 transition-colors group-hover:text-cielo-700">
-                {post.frontmatter.title}
-              </h2>
-              <p class="mb-6 line-clamp-3 text-sm leading-relaxed text-pampa-700/80">
-                {post.frontmatter.description}
-              </p>
-              
-              <div class="mt-auto flex items-center gap-2 font-bold text-pampa-500 transition-colors group-hover:text-cielo-700">
-                <span class="text-xs uppercase tracking-widest">Leer mas</span>
-                <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+              <div class="mt-4 flex items-center justify-between">
+                <span class="text-xs font-bold uppercase tracking-widest text-pampa-500">Por {post.frontmatter.author}</span>
+                <a
+                  class="inline-flex items-center gap-1 text-sm font-bold text-cielo-500 no-underline transition-all hover:gap-2 hover:text-cielo-700"
+                  href={`/blog/${post.frontmatter.slug}`}
+                >
+                  Leer
+                  <span class="material-symbols-outlined text-base">arrow_forward</span>
+                </a>
               </div>
             </div>
           </article>
         ))}
       </div>
     </div>
-  </main>
+  </section>
 
-  <footer class="border-t border-pampa-50/15 bg-cielo-900 py-8">
-    <div class="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-4 px-5 sm:flex-row">
-      <div>
-        <p class="font-headline text-base text-pampa-50">JR Transportes</p>
-        <p class="mt-0.5 text-xs text-pampa-50/60">&copy; {new Date().getFullYear()} JR Transportes. Todos los derechos reservados.</p>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    // Menu hamburguesa
-    const toggle = document.getElementById('menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const mobileIcon = document.getElementById('menu-icon');
-
-    if (toggle && mobileMenu && mobileIcon) {
-      toggle.addEventListener('click', () => {
-        const open = mobileMenu.classList.toggle('hidden');
-        mobileIcon.textContent = open ? 'menu' : 'close';
-        toggle.setAttribute('aria-expanded', String(!open));
-      });
-
-      mobileMenu.querySelectorAll('.mobile-link').forEach((link) => {
-        link.addEventListener('click', () => {
-          mobileMenu.classList.add('hidden');
-          mobileIcon.textContent = 'menu';
-          toggle.setAttribute('aria-expanded', 'false');
-        });
-      });
-    }
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-    document.querySelectorAll('.fade-in-up').forEach((el) => observer.observe(el));
-  </script>
-</body>
-</html>
+  <!-- Boton flotante WhatsApp -->
+  <a
+    slot="after-footer"
+    class="fixed bottom-5 right-5 z-40 flex items-center gap-2 rounded-full bg-quebrada-500 px-4 py-3 text-sm font-bold text-white no-underline shadow-float transition-all duration-200 hover:-translate-y-0.5 hover:bg-quebrada-400 hover:shadow-elevated"
+    href={waRoute}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Abrir WhatsApp"
+  >
+    <span class="material-symbols-outlined text-lg">chat</span>
+    WhatsApp
+  </a>
+</Layout>

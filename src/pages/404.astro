@@ -1,0 +1,48 @@
+---
+import Layout from '../components/Layout.astro';
+import '../styles/global.css';
+
+const phoneRaw = '51928413201';
+const waRoute = `https://wa.me/${phoneRaw}?text=${encodeURIComponent(
+  'Hola JR Transportes, deseo consultar por rutas y horarios.'
+)}`;
+---
+
+<Layout
+  title="Pagina no encontrada | JR Transportes"
+  description="La pagina que buscas no existe. Explora nuestros destinos turisticos o contactanos directamente."
+  ogTitle="Pagina no encontrada"
+  ogType="website"
+  activePage="404"
+  ctaText="Contactar"
+  ctaHref={waRoute}
+>
+  <section class="flex min-h-[70vh] items-center justify-center bg-pampa-50 px-5 py-20">
+    <div class="text-center">
+      <div class="mb-6 flex items-center justify-center">
+        <span class="material-symbols-outlined text-8xl text-pampa-300">travel_explore</span>
+      </div>
+      <h1 class="font-headline text-6xl text-pampa-800 sm:text-8xl">404</h1>
+      <p class="mt-4 text-lg text-pampa-600">Destino no encontrado</p>
+      <p class="mt-2 max-w-md mx-auto text-sm text-pampa-500">
+        Parece que te perdiste en el camino. No te preocupes, te llevamos de vuelta.
+      </p>
+      <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a
+          href="/"
+          class="inline-flex items-center gap-2 rounded-xl bg-logo-500 px-6 py-3 text-sm font-bold text-white no-underline transition-all hover:-translate-y-0.5 hover:bg-logo-600 hover:shadow-elevated"
+        >
+          <span class="material-symbols-outlined text-lg">home</span>
+          Volver al inicio
+        </a>
+        <a
+          href="/destinos"
+          class="inline-flex items-center gap-2 rounded-xl border-2 border-pampa-300 px-6 py-3 text-sm font-bold text-pampa-700 no-underline transition-all hover:bg-pampa-100"
+        >
+          <span class="material-symbols-outlined text-lg">map</span>
+          Ver destinos
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
