@@ -17,70 +17,94 @@
   </script><style>
     /* ============================================
        DARK MODE — "La noche cae sobre la pampa"
-       Estrategia: invertir las variables CSS de
-       Tailwind v4 para cubrir TODAS las clases
-       automaticamente (incluyendo opacidades).
-       html[data-theme="dark"] gana sobre :root.
        ============================================ */
 
     [data-theme="dark"] { color-scheme: dark; }
 
     html[data-theme="dark"] {
-      /* Pampa: tierra → nocturno (invertido) */
+      /* Pampa: tierra → nocturno. 50/100 oscuros para fondos.
+         600-900 iluminados para textos. */
       --color-pampa-50:  #0D1E30;
       --color-pampa-100: #122840;
       --color-pampa-200: #1B3A5C;
       --color-pampa-300: #6B96C7;
       --color-pampa-400: #A3BFE0;
       --color-pampa-500: #D0DFF0;
-      --color-pampa-600: #F2EBD9;  /* mas brillante para opacidades */
-      --color-pampa-700: #FAF6ED;
-      --color-pampa-800: #FFFFFF;
+      --color-pampa-600: #E3D6B8;
+      --color-pampa-700: #F2EBD9;
+      --color-pampa-800: #FAF6ED;
       --color-pampa-900: #FFFFFF;
 
-      /* Cielo: mantener oscuro en 900 (fondos) pero
-         iluminar 500/700 para links y textos */
+      /* Cielo: 700/800/900 MANTENER oscuros para gradientes y fondos.
+         500/600 iluminados para links y acentos. */
       --color-cielo-50:  #EDF3FA;
       --color-cielo-100: #D0DFF0;
       --color-cielo-200: #A3BFE0;
       --color-cielo-300: #6B96C7;
       --color-cielo-400: #4B78AA;
-      --color-cielo-500: #6B96C7;  /* links mas brillantes */
+      --color-cielo-500: #6B96C7;
       --color-cielo-600: #A3BFE0;
-      --color-cielo-700: #D0DFF0;  /* titulos mas brillantes */
-      --color-cielo-800: #EDF3FA;
-      --color-cielo-900: #0D1E30;  /* mantener oscuro para fondos */
+      --color-cielo-700: #1B3A5C;
+      --color-cielo-800: #122840;
+      --color-cielo-900: #0D1E30;
 
-      /* Quebrada: verde mas brillante para iconos */
+      /* Quebrada */
       --color-quebrada-400: #6B9E67;
       --color-quebrada-500: #5A8A56;
       --color-quebrada-600: #4A7A46;
 
-      /* Logo: rojo se mantiene */
+      /* Logo */
       --color-logo-400: #E85D5D;
       --color-logo-500: #D62828;
       --color-logo-600: #B51F1F;
 
-      /* Blanco puro → azul oscuro para superficies */
+      /* Blanco → azul oscuro para superficies */
       --color-white: #1B3A5C;
     }
 
-    /* Overrides para clases con fallback estatico
-       que no usan variables */
+    /* Fallbacks estaticos que no usan variables */
     [data-theme="dark"] :is(.text-white) { color: #D0DFF0; }
     [data-theme="dark"] :is(.bg-logo-500) { background-color: #D62828; }
     [data-theme="dark"] :is(.bg-quebrada-500) { background-color: #5A8A56; }
     [data-theme="dark"] :is(.text-quebrada-500) { color: #5A8A56; }
 
+    /* HERO: el overlay usa pampa-900 que ahora es blanco.
+       Forzar a un gradiente oscuro coherente en dark mode. */
+    [data-theme="dark"] .hero-overlay {
+      background: linear-gradient(to right, rgba(13, 30, 48, 0.92), rgba(18, 40, 64, 0.75), rgba(13, 30, 48, 0.50)) !important;
+    }
+
+    /* CTA final: textos pampa-50/100 sobre fondo oscuro
+       deben seguir siendo claros (no invertidos) */
+    [data-theme="dark"] .cta-final-section :is(.text-pampa-50) { color: #F2EBD9; }
+    [data-theme="dark"] .cta-final-section :is(.text-pampa-50\\/80) { color: rgba(242, 235, 217, 0.80); }
+    [data-theme="dark"] .cta-final-section :is(.bg-pampa-300) { background-color: #C4A94D; }
+    [data-theme="dark"] .cta-final-section :is(.text-cielo-900) { color: #0D1E30; }
+
+    /* Footer: separador visual mas definido en dark mode */
+    [data-theme="dark"] footer { border-top-color: rgba(107, 150, 199, 0.20); }
+
+    /* Textos claros sobre fondos oscuros: forzar a beige
+       (pampa-50/100 se invierten a oscuros para fondos,
+        pero para textos deben seguir siendo claros) */
+    [data-theme="dark"] :is(.text-pampa-50) { color: #F2EBD9; }
+    [data-theme="dark"] :is(.text-pampa-50\\/60) { color: rgba(242, 235, 217, 0.60); }
+    [data-theme="dark"] :is(.text-pampa-50\\/75) { color: rgba(242, 235, 217, 0.75); }
+    [data-theme="dark"] :is(.text-pampa-50\\/80) { color: rgba(242, 235, 217, 0.80); }
+    [data-theme="dark"] :is(.text-pampa-50\\/95) { color: rgba(242, 235, 217, 0.95); }
+    [data-theme="dark"] :is(.text-pampa-100) { color: #E3D6B8; }
+    [data-theme="dark"] :is(.text-pampa-100\\/85) { color: rgba(227, 214, 184, 0.85); }
+    [data-theme="dark"] :is(.text-pampa-100\\/90) { color: rgba(227, 214, 184, 0.90); }
+
     /* Imagenes y mapa */
     [data-theme="dark"] img:not([src*="google.com/maps"]) { filter: brightness(0.88) saturate(0.92); }
     [data-theme="dark"] iframe[src*="google.com/maps"] { filter: invert(0.88) hue-rotate(180deg) contrast(0.85); }
 
-    /* Textura y detalles */
+    /* Textura */
     [data-theme="dark"] .noise-overlay { mix-blend-mode: overlay; opacity: 0.08; }
     [data-theme="dark"] .andean-divider { opacity: 0.6; }
     [data-theme="dark"] ::selection { background-color: #3A5F94; color: #F2EBD9; }
-  </style><link rel="stylesheet" href="/_astro/global.DXve4zSK.css"></head> <body class="bg-pampa-50 selection:bg-pampa-300 selection:text-pampa-900"> <div class="noise-overlay"></div> <a class="skip-link" href="#contenido">Saltar al contenido</a> <!-- Header --><header class="andean-border-top sticky top-0 z-50 border-b border-pampa-200/60 bg-pampa-50/80 backdrop-blur-xl"> <div class="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-2"> <a href="/" class="no-underline flex items-center -ml-1"> <img src="/JRlogo.webp" alt="JR Transportes" class="h-14 w-auto object-contain"> </a> <!-- Navegacion desktop --> <nav class="hidden items-center gap-6 md:flex" aria-label="Menu principal"> <a href="/" class="text-sm font-semibold no-underline transition-colors duration-150 text-pampa-700/80 hover:text-pampa-500"> Inicio </a><a href="/#servicios" class="text-sm font-semibold no-underline transition-colors duration-150 text-pampa-700/80 hover:text-pampa-500"> Servicios </a><a href="/destinos" class="text-sm font-semibold no-underline transition-colors duration-150 text-pampa-500 border-b border-pampa-500 pb-0.5"> Destinos </a><a href="/blog" class="text-sm font-semibold no-underline transition-colors duration-150 text-pampa-700/80 hover:text-pampa-500"> Blog </a><a href="/#contacto" class="text-sm font-semibold no-underline transition-colors duration-150 text-pampa-700/80 hover:text-pampa-500"> Contacto </a> </nav> <div class="flex items-center gap-2"> <a class="hidden rounded-lg bg-logo-500 px-4 py-2 text-sm font-bold text-white no-underline transition-all duration-150 hover:-translate-y-0.5 hover:bg-logo-600 hover:shadow-elevated sm:inline-flex" href="https://wa.me/51928413201?text=Hola%20JR%20Transportes%2C%20deseo%20informacion%20detallada%20sobre%20Cangallo." target="_blank" rel="noopener noreferrer"> Reservar ahora </a> <!-- Theme toggle --> <button id="theme-toggle" type="button" class="inline-flex items-center justify-center rounded-lg p-2 text-pampa-600 transition-colors hover:bg-pampa-200/50" aria-label="Cambiar tema"> <span class="material-symbols-outlined" id="theme-icon">light_mode</span> </button> <!-- Boton hamburguesa movil --> <button id="menu-toggle" type="button" class="inline-flex items-center justify-center rounded-lg p-2 text-pampa-600 transition-colors hover:bg-pampa-200/50 md:hidden" aria-controls="mobile-menu" aria-expanded="false" aria-label="Abrir menu"> <span class="material-symbols-outlined" id="menu-icon">menu</span> </button> </div> </div> <!-- Menu movil --> <nav id="mobile-menu" class="hidden border-t border-pampa-200/60 bg-pampa-50 px-5 pb-4 pt-2 md:hidden" aria-label="Menu movil"> <a href="/" class="mobile-link block rounded-lg px-3 py-2.5 text-sm font-semibold text-pampa-700 no-underline transition-colors hover:bg-pampa-100"> Inicio </a><a href="/#servicios" class="mobile-link block rounded-lg px-3 py-2.5 text-sm font-semibold text-pampa-700 no-underline transition-colors hover:bg-pampa-100"> Servicios </a><a href="/destinos" class="mobile-link block rounded-lg px-3 py-2.5 text-sm font-semibold text-pampa-700 no-underline transition-colors hover:bg-pampa-100"> Destinos </a><a href="/blog" class="mobile-link block rounded-lg px-3 py-2.5 text-sm font-semibold text-pampa-700 no-underline transition-colors hover:bg-pampa-100"> Blog </a><a href="/#contacto" class="mobile-link block rounded-lg px-3 py-2.5 text-sm font-semibold text-pampa-700 no-underline transition-colors hover:bg-pampa-100"> Contacto </a> <a class="mt-2 block rounded-lg bg-logo-500 px-3 py-2.5 text-center text-sm font-bold text-white no-underline" href="https://wa.me/51928413201?text=Hola%20JR%20Transportes%2C%20deseo%20informacion%20detallada%20sobre%20Cangallo." target="_blank" rel="noopener noreferrer"> Reservar ahora </a> </nav> </header> <main id="contenido" class>  <div class="bg-pampa-50"> <!-- Hero del destino --> <section class="relative flex h-[420px] w-full items-end overflow-hidden sm:h-[480px] lg:h-[540px]"> <img src="/images/Cangallo/Ciudad_de_Cangallo.webp" alt="Cangallo - Vista de portada" class="absolute inset-0 h-full w-full object-cover"> <div class="absolute inset-0 bg-gradient-to-t from-pampa-900/85 via-pampa-900/30 to-transparent"></div> <div class="relative z-10 mx-auto w-full max-w-6xl px-5 pb-16 sm:pb-20"> <span class="mb-4 inline-block rounded-full bg-pampa-300 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-pampa-800">
+  </style><link rel="stylesheet" href="/_astro/global.CyI3zvZl.css"></head> <body class="bg-pampa-50 selection:bg-pampa-300 selection:text-pampa-900"> <div class="noise-overlay"></div> <a class="skip-link" href="#contenido">Saltar al contenido</a> <!-- Header --><header class="andean-border-top sticky top-0 z-50 border-b border-pampa-200/60 bg-pampa-50/80 backdrop-blur-xl"> <div class="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-2"> <a href="/" class="no-underline flex items-center -ml-1"> <img src="/JRlogo.webp" alt="JR Transportes" class="h-14 w-auto object-contain"> </a> <!-- Navegacion desktop --> <nav class="hidden items-center gap-6 md:flex" aria-label="Menu principal"> <a href="/" class="text-sm font-semibold no-underline transition-colors duration-150 text-pampa-700/80 hover:text-pampa-500"> Inicio </a><a href="/#servicios" class="text-sm font-semibold no-underline transition-colors duration-150 text-pampa-700/80 hover:text-pampa-500"> Servicios </a><a href="/destinos" class="text-sm font-semibold no-underline transition-colors duration-150 text-pampa-500 border-b border-pampa-500 pb-0.5"> Destinos </a><a href="/blog" class="text-sm font-semibold no-underline transition-colors duration-150 text-pampa-700/80 hover:text-pampa-500"> Blog </a><a href="/#contacto" class="text-sm font-semibold no-underline transition-colors duration-150 text-pampa-700/80 hover:text-pampa-500"> Contacto </a> </nav> <div class="flex items-center gap-2"> <a class="hidden rounded-lg bg-logo-500 px-4 py-2 text-sm font-bold text-white no-underline transition-all duration-150 hover:-translate-y-0.5 hover:bg-logo-600 hover:shadow-elevated sm:inline-flex" href="https://wa.me/51928413201?text=Hola%20JR%20Transportes%2C%20deseo%20informacion%20detallada%20sobre%20Cangallo." target="_blank" rel="noopener noreferrer"> Reservar ahora </a> <!-- Theme toggle --> <button id="theme-toggle" type="button" class="inline-flex items-center justify-center rounded-lg p-2 text-pampa-600 transition-colors hover:bg-pampa-200/50" aria-label="Cambiar tema"> <span class="material-symbols-outlined" id="theme-icon">light_mode</span> </button> <!-- Boton hamburguesa movil --> <button id="menu-toggle" type="button" class="inline-flex items-center justify-center rounded-lg p-2 text-pampa-600 transition-colors hover:bg-pampa-200/50 md:hidden" aria-controls="mobile-menu" aria-expanded="false" aria-label="Abrir menu"> <span class="material-symbols-outlined" id="menu-icon">menu</span> </button> </div> </div> <!-- Menu movil --> <nav id="mobile-menu" class="hidden border-t border-pampa-200/60 bg-pampa-50 px-5 pb-4 pt-2 md:hidden" aria-label="Menu movil"> <a href="/" class="mobile-link block rounded-lg px-3 py-2.5 text-sm font-semibold text-pampa-700 no-underline transition-colors hover:bg-pampa-100"> Inicio </a><a href="/#servicios" class="mobile-link block rounded-lg px-3 py-2.5 text-sm font-semibold text-pampa-700 no-underline transition-colors hover:bg-pampa-100"> Servicios </a><a href="/destinos" class="mobile-link block rounded-lg px-3 py-2.5 text-sm font-semibold text-pampa-700 no-underline transition-colors hover:bg-pampa-100"> Destinos </a><a href="/blog" class="mobile-link block rounded-lg px-3 py-2.5 text-sm font-semibold text-pampa-700 no-underline transition-colors hover:bg-pampa-100"> Blog </a><a href="/#contacto" class="mobile-link block rounded-lg px-3 py-2.5 text-sm font-semibold text-pampa-700 no-underline transition-colors hover:bg-pampa-100"> Contacto </a> <a class="mt-2 block rounded-lg bg-logo-500 px-3 py-2.5 text-center text-sm font-bold text-white no-underline" href="https://wa.me/51928413201?text=Hola%20JR%20Transportes%2C%20deseo%20informacion%20detallada%20sobre%20Cangallo." target="_blank" rel="noopener noreferrer"> Reservar ahora </a> </nav> </header> <main id="contenido" class>  <div class="bg-pampa-50"> <!-- Hero del destino --> <section class="relative flex h-[420px] w-full items-end overflow-hidden sm:h-[480px] lg:h-[540px]"> <img src="/images/Cangallo/Ciudad_de_Cangallo.webp" alt="Cangallo - Vista de portada" class="absolute inset-0 h-full w-full object-cover"> <div class="absolute inset-0 bg-gradient-to-t from-pampa-900/85 via-pampa-900/30 to-transparent"></div> <div class="relative z-10 mx-auto w-full max-w-6xl px-5 pb-16 sm:pb-20"> <span class="mb-4 inline-block rounded-full bg-pampa-300 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-pampa-800">
 Destino destacado
 </span> <h1 class="font-headline text-5xl text-white sm:text-7xl lg:text-8xl"> Cangallo </h1> <p class="mt-4 max-w-lg text-base leading-relaxed text-pampa-100/85 sm:text-lg"> La ciudad heroica te espera. Conecta con su historia, su gente y sus paisajes viajando con seguridad. </p> </div> <div class="andean-divider absolute bottom-0 left-0 right-0 opacity-40"></div> </section> <!-- Stats bar --> <div class="relative z-10 mx-auto -mt-12 max-w-6xl px-5"> <div class="grid grid-cols-1 gap-5 rounded-2xl border border-pampa-200/50 bg-white p-6 shadow-card sm:grid-cols-2 sm:p-7 lg:grid-cols-4"> <div class="flex items-center gap-3"> <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-cielo-50 text-cielo-500"> <span class="material-symbols-outlined text-xl">schedule</span> </div> <div> <p class="text-[10px] font-bold uppercase tracking-widest text-pampa-600/50">Duracion</p> <p class="text-sm font-bold text-pampa-800">2h 30m aprox. desde Ayacucho (referencial)</p> </div> </div> <div class="flex items-center gap-3"> <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-cielo-50 text-cielo-500"> <span class="material-symbols-outlined text-xl">directions_car</span> </div> <div> <p class="text-[10px] font-bold uppercase tracking-widest text-pampa-600/50">Transporte</p> <p class="text-sm font-bold text-pampa-800">Vehículos modernos</p> </div> </div> <div class="flex items-center gap-3"> <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-cielo-50 text-cielo-500"> <span class="material-symbols-outlined text-xl">location_on</span> </div> <div> <p class="text-[10px] font-bold uppercase tracking-widest text-pampa-600/50">Salida</p> <p class="text-sm font-bold text-pampa-800">Terminal Terrestre de Ayacucho</p> </div> </div> <div class="flex items-center gap-3"> <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-pampa-100 text-pampa-500"> <span class="material-symbols-outlined text-xl">payments</span> </div> <div> <p class="text-[10px] font-bold uppercase tracking-widest text-pampa-600/50">Desde</p> <p class="text-sm font-bold text-pampa-600">Desde S/ 30</p> </div> </div> </div> </div> <!-- Contenido principal --> <section class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-5 py-16 sm:py-20 md:grid-cols-[1fr_340px]"> <!-- Columna principal --> <div class="space-y-14"> <!-- Galeria Inteligente --> <div> <h2 class="mb-6 flex items-center gap-3 font-headline text-2xl text-pampa-900 sm:text-3xl"> <span class="h-0.5 w-6 rounded-full bg-pampa-400"></span>
 Capturando la esencia
