@@ -122,7 +122,23 @@ Somos especialistas en rutas ayacuchanas. Más de una década transportando sue�
         }
       }
 
+      function disableTransitionsTemporarily() {
+        const css = document.createElement('style');
+        css.textContent = '*, *::before, *::after { transition: none !important; animation: none !important; }';
+        css.id = 'no-theme-transition';
+        document.head.appendChild(css);
+        // Forzar reflow para que el browser aplique el estilo
+        void document.documentElement.offsetHeight;
+        // Quitar en el siguiente frame (despues del cambio de tema)
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            css.remove();
+          });
+        });
+      }
+
       toggle?.addEventListener('click', () => {
+        disableTransitionsTemporarily();
         const isDark = html.getAttribute('data-theme') === 'dark';
         if (isDark) {
           html.removeAttribute('data-theme');
