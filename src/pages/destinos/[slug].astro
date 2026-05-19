@@ -81,8 +81,8 @@ const menuLinks = [
     <!-- Header -->
     <header class="andean-border-top sticky top-0 z-50 border-b border-pampa-200/60 bg-pampa-50/80 backdrop-blur-xl">
       <div class="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-5 py-3.5">
-        <a href="/" class="font-headline text-lg tracking-tight text-pampa-800 no-underline">
-          JR Transportes
+        <a href="/" class="no-underline flex items-center">
+            <img src="/JRlogo.webp" alt="JR Transportes" class="h-10 w-auto object-contain" />
         </a>
         <nav class="hidden items-center gap-6 md:flex" aria-label="Menu principal">
           {menuLinks.map((item) => (
@@ -104,7 +104,7 @@ const menuLinks = [
             href={waLink}
             target="_blank"
             rel="noopener noreferrer"
-            class="hidden rounded-lg bg-pampa-500 px-4 py-2 text-sm font-bold text-pampa-50 no-underline transition-all duration-150 hover:-translate-y-0.5 hover:bg-pampa-400 sm:inline-flex"
+            class="hidden rounded-lg bg-logo-500 px-4 py-2 text-sm font-bold text-white no-underline transition-all duration-150 hover:-translate-y-0.5 hover:bg-logo-600 sm:inline-flex"
           >
             Reservar ahora
           </a>
@@ -129,7 +129,7 @@ const menuLinks = [
           </a>
         ))}
         <a
-          class="mt-2 block rounded-lg bg-pampa-500 px-3 py-2.5 text-center text-sm font-bold text-pampa-50 no-underline"
+          class="mt-2 block rounded-lg bg-logo-500 px-3 py-2.5 text-center text-sm font-bold text-white no-underline"
           href={waLink}
           target="_blank"
           rel="noopener noreferrer"

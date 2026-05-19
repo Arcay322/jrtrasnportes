@@ -41,6 +41,11 @@
   --color-quebrada-500: #3D5C3A;
   --color-quebrada-600: #2D4A2B;
 
+  /* Logo - Rojo corporativo JR Transportes (acento, no dominante) */
+  --color-logo-400: #E85D5D;
+  --color-logo-500: #D62828;
+  --color-logo-600: #B51F1F;
+
   /* Tipografia */
   --font-headline: 'DM Serif Display', Georgia, serif;
   --font-body: 'Manrope', system-ui, sans-serif;
