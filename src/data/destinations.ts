@@ -26,7 +26,7 @@ export const destinations: Destination[] = [
       '/images/Pampa%20cangallo/pampa-cangallo2.webp',
       '/images/Pampa%20cangallo/pampa-cangallo3.webp'
     ],
-    fleetImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCb3Kr7pnNx5awxtl6uJb0IkCrk3d3Sg23kJcNGAwP-THMhuk18OJD9RsLM1ON13w55Y2OaNU78iXImbktJrCmgCQfK9qEfoMBJYpBpf9uarTTQsqZ-MMDGTgLo1D3MdT3I3Y3stp-pP5hRF-QEgRxqUpQixatNv-WqwAD5m-3mltctkGtNtxDYhcBgaernQqh097PR9_LqyN0GxF4bjMEmPCIm5SIoDLbI8gxmaJnxMZk4zQU6WmHd-l8NQUTeobujnnv3yvmxbw',
+    fleetImage: '/images/avanzarojo.webp',
     longDescription:
       'Ruta ideal para viajeros que valoran paisajes andinos y conectividad local. Nuestro servicio busca puntualidad, trato cercano y seguridad durante todo el trayecto.',
     travelTime: '2h aprox. desde Ayacucho (referencial)',
@@ -45,7 +45,7 @@ export const destinations: Destination[] = [
       '/images/Cangallo/Cangallo2.webp',
       '/images/Cangallo/Cangallo3.webp'
     ],
-    fleetImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCb3Kr7pnNx5awxtl6uJb0IkCrk3d3Sg23kJcNGAwP-THMhuk18OJD9RsLM1ON13w55Y2OaNU78iXImbktJrCmgCQfK9qEfoMBJYpBpf9uarTTQsqZ-MMDGTgLo1D3MdT3I3Y3stp-pP5hRF-QEgRxqUpQixatNv-WqwAD5m-3mltctkGtNtxDYhcBgaernQqh097PR9_LqyN0GxF4bjMEmPCIm5SIoDLbI8gxmaJnxMZk4zQU6WmHd-l8NQUTeobujnnv3yvmxbw',
+    fleetImage: '/images/avanzarojo.webp',
     longDescription:
       'Conectamos Ayacucho y Cangallo con unidades confiables y coordinacion rapida. Esta ruta es ideal para viajes familiares, laborales y de tramite.',
     travelTime: '2h 30m aprox. desde Ayacucho (referencial)',
@@ -58,14 +58,13 @@ export const destinations: Destination[] = [
     category: 'destino',
     price: 'Desde S/ 45',
     description: 'Conectamos destinos de altura con maxima responsabilidad.',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuCGjcNXSbkDLMxOTlvZxKkQJjkOKzn5HHqBOGD7q0KgEGCOEcwEgSaNj03YD1oHgTsI0DBpPg2G6G_XMvgJ7V-cTzL1gEBqUQs77hp07_i76RnPMIztEZgn79fAAq8I5YIyWaWYNeI-c8MPpQaBIaOJatFU3v2LiPJrBE2kftljMOIotCGECVYGZkAGPZA8CZpwY9ctypzAhvtKtOHxRKzrCJdRi7e3xSazEp9OLc3ipJHPq2pKn9DhAAvczw8muxjdzH7khgRbtw',
+    image: '/images/Huancasancos/Huancasancos.webp',
     gallery: [
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuCGjcNXSbkDLMxOTlvZxKkQJjkOKzn5HHqBOGD7q0KgEGCOEcwEgSaNj03YD1oHgTsI0DBpPg2G6G_XMvgJ7V-cTzL1gEBqUQs77hp07_i76RnPMIztEZgn79fAAq8I5YIyWaWYNeI-c8MPpQaBIaOJatFU3v2LiPJrBE2kftljMOIotCGECVYGZkAGPZA8CZpwY9ctypzAhvtKtOHxRKzrCJdRi7e3xSazEp9OLc3ipJHPq2pKn9DhAAvczw8muxjdzH7khgRbtw',
-      'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=800&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=800&auto=format&fit=crop'
+      '/images/Huancasancos/Huancasancos.webp',
+      '/images/Huancasancos/Huancasancos2.webp',
+      '/images/Huancasancos/Huancasancos3.webp'
     ],
-    fleetImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCb3Kr7pnNx5awxtl6uJb0IkCrk3d3Sg23kJcNGAwP-THMhuk18OJD9RsLM1ON13w55Y2OaNU78iXImbktJrCmgCQfK9qEfoMBJYpBpf9uarTTQsqZ-MMDGTgLo1D3MdT3I3Y3stp-pP5hRF-QEgRxqUpQixatNv-WqwAD5m-3mltctkGtNtxDYhcBgaernQqh097PR9_LqyN0GxF4bjMEmPCIm5SIoDLbI8gxmaJnxMZk4zQU6WmHd-l8NQUTeobujnnv3yvmxbw',
+    fleetImage: '/images/avanzarojo.webp',
     longDescription:
       'Servicio pensado para rutas de mayor distancia y geografia exigente. Priorizamos manejo responsable, comunicacion clara y cumplimiento de itinerario.',
     travelTime: '4h aprox. desde Ayacucho (referencial)',
@@ -84,7 +83,7 @@ export const destinations: Destination[] = [
       '/images/Aguas%20turquesas/aguas_turquesas2.webp',
       '/images/Aguas%20turquesas/aguas_turquesas3.jpg'
     ],
-    fleetImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCb3Kr7pnNx5awxtl6uJb0IkCrk3d3Sg23kJcNGAwP-THMhuk18OJD9RsLM1ON13w55Y2OaNU78iXImbktJrCmgCQfK9qEfoMBJYpBpf9uarTTQsqZ-MMDGTgLo1D3MdT3I3Y3stp-pP5hRF-QEgRxqUpQixatNv-WqwAD5m-3mltctkGtNtxDYhcBgaernQqh097PR9_LqyN0GxF4bjMEmPCIm5SIoDLbI8gxmaJnxMZk4zQU6WmHd-l8NQUTeobujnnv3yvmxbw',
+    fleetImage: '/images/avanzarojo.webp',
     longDescription: 'Son unas famosas piscinas naturales escalonadas que se forman a lo largo de un cañón en la comunidad de Circamarca. El color del agua es espectacular, sobre todo si vas entre mayo y noviembre, cuando las lluvias disminuyen.',
     travelTime: 'Full Day (3h a 4h de viaje solo ida)',
     fareNote: 'Consultar tarifas y horarios de salidas.',
@@ -102,7 +101,7 @@ export const destinations: Destination[] = [
       '/images/Pachapupum/pachapupum2.jpg',
       '/images/Pachapupum/pachapupum3.webp'
     ],
-    fleetImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCb3Kr7pnNx5awxtl6uJb0IkCrk3d3Sg23kJcNGAwP-THMhuk18OJD9RsLM1ON13w55Y2OaNU78iXImbktJrCmgCQfK9qEfoMBJYpBpf9uarTTQsqZ-MMDGTgLo1D3MdT3I3Y3stp-pP5hRF-QEgRxqUpQixatNv-WqwAD5m-3mltctkGtNtxDYhcBgaernQqh097PR9_LqyN0GxF4bjMEmPCIm5SIoDLbI8gxmaJnxMZk4zQU6WmHd-l8NQUTeobujnnv3yvmxbw',
+    fleetImage: '/images/avanzarojo.webp',
     longDescription: 'Es un monumento natural fascinante. Se trata de un cono volcánico de piedra caliza rodeado de pozas rústicas de aguas termales a las que se les atribuyen propiedades medicinales.',
     travelTime: 'Full Day',
     fareNote: 'Consultar tarifas.',
@@ -120,7 +119,7 @@ export const destinations: Destination[] = [
       '/images/Cataratas%20de%20pumapaqcha/batan.webp',
       '/images/Cataratas%20de%20pumapaqcha/pumapaqcha2.webp'
     ],
-    fleetImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCb3Kr7pnNx5awxtl6uJb0IkCrk3d3Sg23kJcNGAwP-THMhuk18OJD9RsLM1ON13w55Y2OaNU78iXImbktJrCmgCQfK9qEfoMBJYpBpf9uarTTQsqZ-MMDGTgLo1D3MdT3I3Y3stp-pP5hRF-QEgRxqUpQixatNv-WqwAD5m-3mltctkGtNtxDYhcBgaernQqh097PR9_LqyN0GxF4bjMEmPCIm5SIoDLbI8gxmaJnxMZk4zQU6WmHd-l8NQUTeobujnnv3yvmxbw',
+    fleetImage: '/images/avanzarojo.webp',
     longDescription: 'Están ubicadas en la provincia de Cangallo. Se suelen recorrer juntas en una caminata que incluye también la catarata de Qorimaqma. Son caídas de agua muy hermosas, rodeadas de historias locales y conocidas por la fuerte energía "mística" que se siente en el lugar.',
     travelTime: 'Full Day',
     fareNote: 'Consultar opciones de guiado.',
@@ -138,7 +137,7 @@ export const destinations: Destination[] = [
       '/images/cascada%20de%20campanayocc/campanayocc2.webp',
       '/images/cascada%20de%20campanayocc/campanayocc3.jpg'
     ],
-    fleetImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCb3Kr7pnNx5awxtl6uJb0IkCrk3d3Sg23kJcNGAwP-THMhuk18OJD9RsLM1ON13w55Y2OaNU78iXImbktJrCmgCQfK9qEfoMBJYpBpf9uarTTQsqZ-MMDGTgLo1D3MdT3I3Y3stp-pP5hRF-QEgRxqUpQixatNv-WqwAD5m-3mltctkGtNtxDYhcBgaernQqh097PR9_LqyN0GxF4bjMEmPCIm5SIoDLbI8gxmaJnxMZk4zQU6WmHd-l8NQUTeobujnnv3yvmxbw',
+    fleetImage: '/images/avanzarojo.webp',
     longDescription: 'Una imponente caída de agua rodeada de naturaleza pura en el distrito de Sarhua, un lugar que además es súper rico culturalmente por sus famosas tablas pintadas.',
     travelTime: 'Full Day (con visita a poblado)',
     fareNote: 'Consultar tarifas.',
@@ -156,7 +155,7 @@ export const destinations: Destination[] = [
       '/images/cascada%20de%20Ruqruqa/cascada_ruqruqa2.webp',
       '/images/cascada%20de%20Ruqruqa/cascada_ruqruqa3.webp'
     ],
-    fleetImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCb3Kr7pnNx5awxtl6uJb0IkCrk3d3Sg23kJcNGAwP-THMhuk18OJD9RsLM1ON13w55Y2OaNU78iXImbktJrCmgCQfK9qEfoMBJYpBpf9uarTTQsqZ-MMDGTgLo1D3MdT3I3Y3stp-pP5hRF-QEgRxqUpQixatNv-WqwAD5m-3mltctkGtNtxDYhcBgaernQqh097PR9_LqyN0GxF4bjMEmPCIm5SIoDLbI8gxmaJnxMZk4zQU6WmHd-l8NQUTeobujnnv3yvmxbw',
+    fleetImage: '/images/avanzarojo.webp',
     longDescription: 'Es una joya natural ubicada en Chuschi (Cangallo). Tiene una caída de agua cristalina de unos 20 metros de altura, famosa porque el rocío del agua y la luz del sol forman arcoíris naturales en el lugar.',
     travelTime: 'Full Day',
     fareNote: 'Consultar disponibilidad.',
@@ -174,7 +173,7 @@ export const destinations: Destination[] = [
       '/images/vilcashuaman/vilcashuaman2.webp',
       '/images/vilcashuaman/vilcashuaman3.webp'
     ],
-    fleetImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCb3Kr7pnNx5awxtl6uJb0IkCrk3d3Sg23kJcNGAwP-THMhuk18OJD9RsLM1ON13w55Y2OaNU78iXImbktJrCmgCQfK9qEfoMBJYpBpf9uarTTQsqZ-MMDGTgLo1D3MdT3I3Y3stp-pP5hRF-QEgRxqUpQixatNv-WqwAD5m-3mltctkGtNtxDYhcBgaernQqh097PR9_LqyN0GxF4bjMEmPCIm5SIoDLbI8gxmaJnxMZk4zQU6WmHd-l8NQUTeobujnnv3yvmxbw',
+    fleetImage: '/images/avanzarojo.webp',
     longDescription: 'Fue uno de los centros administrativos incaicos más importantes. Ahí puedes conocer el Templo del Sol y la Luna (sobre el cual se construyó la iglesia principal) y subir al Ushnu, una pirámide ceremonial escalonada.',
     travelTime: 'Full Day',
     fareNote: 'El ingreso arqueológico tiene costo aparte.',
@@ -192,7 +191,7 @@ export const destinations: Destination[] = [
       '/images/pampa%20de%20quinua/quinua2.webp',
       '/images/pampa%20de%20quinua/quinua3.jpg'
     ],
-    fleetImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCb3Kr7pnNx5awxtl6uJb0IkCrk3d3Sg23kJcNGAwP-THMhuk18OJD9RsLM1ON13w55Y2OaNU78iXImbktJrCmgCQfK9qEfoMBJYpBpf9uarTTQsqZ-MMDGTgLo1D3MdT3I3Y3stp-pP5hRF-QEgRxqUpQixatNv-WqwAD5m-3mltctkGtNtxDYhcBgaernQqh097PR9_LqyN0GxF4bjMEmPCIm5SIoDLbI8gxmaJnxMZk4zQU6WmHd-l8NQUTeobujnnv3yvmxbw',
+    fleetImage: '/images/avanzarojo.webp',
     longDescription: 'Es el Santuario Histórico de la Pampa de Ayacucho. Un lugar clave en la historia peruana y sudamericana por la Batalla de Ayacucho, donde destaca el gigantesco obelisco blanco de 44 metros de altura.',
     travelTime: 'Medio Día o Día completo',
     fareNote: 'Consultar salidas fin de semana.',
