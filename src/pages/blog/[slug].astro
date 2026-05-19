@@ -17,7 +17,7 @@ const rawPosts = import.meta.glob('../../data/blog/*.md', { eager: true });
 const allPosts = Object.values(rawPosts) as any[];
 const recentPosts = allPosts.filter(p => p.frontmatter.slug !== post.frontmatter.slug).slice(0, 3);
 
-const phoneRaw = '51918712309';
+const phoneRaw = '51928413201';
 const whatsappBase = `https://wa.me/${phoneRaw}`;
 const waRoute = `${whatsappBase}?text=${encodeURIComponent(
   `Hola JR Transportes, estuve leyendo el articulo "${post.frontmatter.title}" y deseo mas información.`

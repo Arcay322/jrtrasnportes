@@ -6,7 +6,7 @@ const posts = Object.values(rawPosts) as any[];
 posts.sort((a, b) => new Date(b.frontmatter.date).valueOf() - new Date(a.frontmatter.date).valueOf());
 
 const companyName = 'JR Transportes';
-const phoneRaw = '51918712309';
+const phoneRaw = '51928413201';
 const whatsappBase = `https://wa.me/${phoneRaw}`;
 
 const waRoute = `${whatsappBase}?text=${encodeURIComponent(
