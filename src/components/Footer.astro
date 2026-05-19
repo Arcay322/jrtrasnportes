@@ -17,33 +17,57 @@ const bgClass = variant === 'blue' ? 'bg-cielo-900' : 'bg-cielo-900';
 const borderClass = 'border-pampa-50/15';
 ---
 
-<footer class={`border-t ${borderClass} ${bgClass} py-8`}>
-  <div class="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-4 px-5 sm:flex-row">
-    <div>
-      {showLogo && (
-        <p class="font-headline text-base text-pampa-50">JR Transportes</p>
-      )}
-      <p class="mt-0.5 text-xs text-pampa-50/60">
-        &copy; {new Date().getFullYear()} JR Transportes. Ayacucho, Peru.
-      </p>
-    </div>
-    {showLinks && (
-      <div class="flex gap-5">
-        <a href="#" class="text-xs font-semibold text-pampa-50/75 no-underline transition-colors hover:text-pampa-50">
-          Terminos
-        </a>
-        <a href="#" class="text-xs font-semibold text-pampa-50/75 no-underline transition-colors hover:text-pampa-50">
-          Privacidad
-        </a>
-        <a
-          href={waRoute}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-xs font-semibold text-pampa-50/75 no-underline transition-colors hover:text-pampa-50"
-        >
-          WhatsApp
-        </a>
+<footer class={`${bgClass}`}>
+  <!-- CTA integrado -->
+  <div class="border-b border-pampa-50/10 py-10 sm:py-12">
+    <div class="mx-auto flex w-full max-w-6xl flex-col items-center gap-6 px-5 text-center sm:flex-row sm:text-left sm:justify-between">
+      <div>
+        <p class="font-headline text-2xl text-pampa-50 sm:text-3xl">JR Transportes</p>
+        <p class="mt-1 max-w-md text-sm leading-relaxed text-pampa-100/80">
+          Pasajeros, giros y encomiendas con la seguridad y confianza que Ayacucho merece.
+        </p>
       </div>
-    )}
+      <a
+        href={waRoute}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 rounded-xl bg-pampa-300 px-6 py-3.5 text-sm font-extrabold text-cielo-900 no-underline shadow-soft transition-all duration-200 hover:-translate-y-1 hover:bg-pampa-400 hover:shadow-float"
+      >
+        <span class="material-symbols-outlined text-lg">chat</span>
+        Contactar por WhatsApp ahora
+      </a>
+    </div>
+  </div>
+
+  <!-- Barra inferior -->
+  <div class={`border-t ${borderClass} py-6`}>
+    <div class="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-3 px-5 sm:flex-row">
+      <div>
+        {showLogo && (
+          <p class="font-headline text-sm text-pampa-50/90">JR Transportes</p>
+        )}
+        <p class="text-xs text-pampa-50/50">
+          &copy; {new Date().getFullYear()} JR Transportes. Ayacucho, Peru.
+        </p>
+      </div>
+      {showLinks && (
+        <div class="flex gap-5">
+          <a href="#" class="text-xs font-semibold text-pampa-50/60 no-underline transition-colors hover:text-pampa-50">
+            Terminos
+          </a>
+          <a href="#" class="text-xs font-semibold text-pampa-50/60 no-underline transition-colors hover:text-pampa-50">
+            Privacidad
+          </a>
+          <a
+            href={waRoute}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-xs font-semibold text-pampa-50/60 no-underline transition-colors hover:text-pampa-50"
+          >
+            WhatsApp
+          </a>
+        </div>
+      )}
+    </div>
   </div>
 </footer>

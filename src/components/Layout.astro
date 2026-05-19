@@ -161,21 +161,15 @@ const {
       background: linear-gradient(to right, rgba(13, 30, 48, 0.92), rgba(18, 40, 64, 0.75), rgba(13, 30, 48, 0.50)) !important;
     }
 
-    /* CTA final: fondo distintivo del footer para evitar
-       que parezcan dos footers. Gradiente mas vibrante. */
-    [data-theme="dark"] .cta-final-section {
-      background: linear-gradient(to bottom right, #1B3A5C, #122840, #0D1E30) !important;
-    }
-    /* CTA final: textos claros */
-    [data-theme="dark"] .cta-final-section :is(.text-pampa-50) { color: #F2EBD9 !important; }
-    [data-theme="dark"] .cta-final-section :is(.text-pampa-50\/80) { color: rgba(242, 235, 217, 0.80) !important; }
-    [data-theme="dark"] .cta-final-section :is(.bg-pampa-300) { background-color: #C4A94D !important; }
-    [data-theme="dark"] .cta-final-section :is(.text-cielo-900) { color: #0D1E30 !important; }
-
-    /* Footer: fondo mas oscuro que el CTA final para separacion clara */
+    /* Footer: fondo mas oscuro para separacion clara */
     [data-theme="dark"] footer {
-      background-color: #0A1620 !important;
-      border-top: 1px solid rgba(107, 150, 199, 0.25) !important;
+      background-color: #0D1E30 !important;
+    }
+    [data-theme="dark"] footer .border-pampa-50\/10 {
+      border-color: rgba(107, 150, 199, 0.15) !important;
+    }
+    [data-theme="dark"] footer .border-pampa-50\/15 {
+      border-color: rgba(107, 150, 199, 0.20) !important;
     }
 
     /* Textos claros sobre fondos oscuros: forzar a beige
