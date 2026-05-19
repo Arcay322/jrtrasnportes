@@ -20,12 +20,11 @@ export const destinations: Destination[] = [
     category: 'destino',
     price: 'Desde S/ 25',
     description: 'Tierra morochuca de llanuras altas y tradicion viva.',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuCytyOIHvkJrlDd8CJJOZLH83GUK5i6XHGQq_Qn1iEjNsFKeTg9VZcUFOdHPSsndCP0kqj7c0qZWj4BdZmmzYBvVwy67vvuDPGQH0TOtUeaOxh7gvHMzRQhrSRc65248m2VbEWIVTiWJlUtyprUtL4eBZyunT2m4eCBQ-WSNh0sYLGwyUQ6ReBlZCpLiGJbmWtOMdowaJPssYnUt5MrXTC43lzC9_TKpwot5SwZkrFgZ8sbwvHNuyvP0-zMeLJvGRCVldn6TXOlZQ',
+    image: '/images/Pampa%20cangallo/pampa-cangallo.webp',
     gallery: [
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuCytyOIHvkJrlDd8CJJOZLH83GUK5i6XHGQq_Qn1iEjNsFKeTg9VZcUFOdHPSsndCP0kqj7c0qZWj4BdZmmzYBvVwy67vvuDPGQH0TOtUeaOxh7gvHMzRQhrSRc65248m2VbEWIVTiWJlUtyprUtL4eBZyunT2m4eCBQ-WSNh0sYLGwyUQ6ReBlZCpLiGJbmWtOMdowaJPssYnUt5MrXTC43lzC9_TKpwot5SwZkrFgZ8sbwvHNuyvP0-zMeLJvGRCVldn6TXOlZQ',
-      'https://images.unsplash.com/photo-1587595431973-160d0d94add1?q=80&w=800&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1542259009477-d625272157b7?q=80&w=800&auto=format&fit=crop'
+      '/images/Pampa%20cangallo/pampa-cangallo.webp',
+      '/images/Pampa%20cangallo/pampa-cangallo2.webp',
+      '/images/Pampa%20cangallo/pampa-cangallo3.webp'
     ],
     fleetImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCb3Kr7pnNx5awxtl6uJb0IkCrk3d3Sg23kJcNGAwP-THMhuk18OJD9RsLM1ON13w55Y2OaNU78iXImbktJrCmgCQfK9qEfoMBJYpBpf9uarTTQsqZ-MMDGTgLo1D3MdT3I3Y3stp-pP5hRF-QEgRxqUpQixatNv-WqwAD5m-3mltctkGtNtxDYhcBgaernQqh097PR9_LqyN0GxF4bjMEmPCIm5SIoDLbI8gxmaJnxMZk4zQU6WmHd-l8NQUTeobujnnv3yvmxbw',
     longDescription:
@@ -40,12 +39,11 @@ export const destinations: Destination[] = [
     category: 'destino',
     price: 'Desde S/ 30',
     description: 'La ciudad heroica conectada con viajes seguros y puntuales.',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuBaAA8iBaJc6EPVD7cazpAjhenEt8rdfTgj4FLNTvqZKvaJwg4BO5wIOyL0kPLkgT1ItT-GkrwO6ZFBOvrOh7TZ5CKYZCb-UzCUfd5HmhwLx_yYPvZ5_dY8ogNt1kA01ffQtIgkF8WArqQae0eYKemLXq7lI7eOd17Z0Qb_4tGvWF16iXYOvbR6aGpEGi-Wr6d8BxDx7LZSTdMfONwlzzPIpM9a7MwwUzL92pAFO_shYLTvsb38X_krtBwuKBvIaPCwS93D_5EQ9Q',
+    image: '/images/Cangallo/Ciudad_de_Cangallo.webp',
     gallery: [
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuBaAA8iBaJc6EPVD7cazpAjhenEt8rdfTgj4FLNTvqZKvaJwg4BO5wIOyL0kPLkgT1ItT-GkrwO6ZFBOvrOh7TZ5CKYZCb-UzCUfd5HmhwLx_yYPvZ5_dY8ogNt1kA01ffQtIgkF8WArqQae0eYKemLXq7lI7eOd17Z0Qb_4tGvWF16iXYOvbR6aGpEGi-Wr6d8BxDx7LZSTdMfONwlzzPIpM9a7MwwUzL92pAFO_shYLTvsb38X_krtBwuKBvIaPCwS93D_5EQ9Q',
-      'https://images.unsplash.com/photo-1518182170546-076616fd628b?q=80&w=800&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1501555088652-021faa106b9b?q=80&w=800&auto=format&fit=crop'
+      '/images/Cangallo/Ciudad_de_Cangallo.webp',
+      '/images/Cangallo/Cangallo2.webp',
+      '/images/Cangallo/Cangallo3.webp'
     ],
     fleetImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCb3Kr7pnNx5awxtl6uJb0IkCrk3d3Sg23kJcNGAwP-THMhuk18OJD9RsLM1ON13w55Y2OaNU78iXImbktJrCmgCQfK9qEfoMBJYpBpf9uarTTQsqZ-MMDGTgLo1D3MdT3I3Y3stp-pP5hRF-QEgRxqUpQixatNv-WqwAD5m-3mltctkGtNtxDYhcBgaernQqh097PR9_LqyN0GxF4bjMEmPCIm5SIoDLbI8gxmaJnxMZk4zQU6WmHd-l8NQUTeobujnnv3yvmxbw',
     longDescription:

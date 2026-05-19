@@ -9,10 +9,13 @@ const waRoute = `https://wa.me/${phoneRaw}?text=${encodeURIComponent(
 ---
 
 <Layout
-  title="Pagina no encontrada | JR Transportes"
-  description="La pagina que buscas no existe. Explora nuestros destinos turisticos o contactanos directamente."
-  ogTitle="Pagina no encontrada"
+  title="Pagina no encontrada (404) | JR Transportes"
+  description="La pagina que buscas no existe. Explora nuestros destinos turisticos en Ayacucho o contactanos directamente por WhatsApp."
+  ogTitle="Pagina no encontrada | JR Transportes"
+  ogDescription="La pagina que buscas no existe. Explora nuestros destinos turisticos en Ayacucho o contactanos directamente."
   ogType="website"
+  ogImage="https://jrtours-morochucos.vercel.app/images/Pampa%20cangallo/pampa-cangallo.webp"
+  noIndex={true}
   activePage="404"
   ctaText="Contactar"
   ctaHref={waRoute}

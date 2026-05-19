@@ -59,11 +59,13 @@ const localBusinessSchema = {
 ---
 
 <Layout
-  title={`${destination.name} | JR Transportes`}
-  description={`Detalle de destino ${destination.name}: tarifas referenciales, tiempo estimado y coordinacion por WhatsApp.`}
-  ogTitle={destination.name}
-  ogDescription={destination.description}
-  ogType="website"
+  title={`${destination.name} - Transporte y Tours | JR Transportes Ayacucho`}
+  description={`${destination.name}: ${destination.description} Tarifas desde ${destination.price}. Tiempo estimado: ${destination.travelTime}. Reserva ahora por WhatsApp.`}
+  keywords={`${destination.name}, ${destination.category === 'destino' ? 'transporte' : 'tour'} ${destination.name.toLowerCase()}, viaje ${destination.name.toLowerCase()}, ${destination.category === 'tour' ? 'tour' : 'destino'} Ayacucho, precio ${destination.name.toLowerCase()}, como llegar ${destination.name.toLowerCase()}`}
+  ogTitle={`${destination.name} - Transporte y Tours | JR Transportes`}
+  ogDescription={`${destination.description} Tarifas desde ${destination.price}. Reserva ahora por WhatsApp.`}
+  ogType="article"
+  ogImage={destination.image.startsWith('http') ? destination.image : `https://jrtours-morochucos.vercel.app${destination.image}`}
   schema={localBusinessSchema}
   activePage="destino-detail"
   ctaText="Reservar ahora"

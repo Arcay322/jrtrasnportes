@@ -60,19 +60,80 @@ const localBusinessSchema = {
   "@context": 'https://schema.org',
   "@type": 'TravelAgency',
   name: companyName,
-  description:
-    'Empresa de transporte interprovincial en Ayacucho. Servicio de pasajeros, giros, encomiendas y traslado turistico.',
+  description: 'Empresa de transporte interprovincial en Ayacucho. Servicio de pasajeros, giros, encomiendas y traslado turistico.',
   telephone: `+${phoneRaw}`,
-  areaServed: 'Ayacucho, Peru'
+  url: 'https://jrtours-morochucos.vercel.app',
+  logo: 'https://jrtours-morochucos.vercel.app/JRlogo.webp',
+  image: 'https://jrtours-morochucos.vercel.app/images/Pampa%20cangallo/pampa-cangallo.webp',
+  areaServed: {
+    "@type": 'City',
+    name: 'Ayacucho',
+    address: {
+      "@type": 'PostalAddress',
+      addressLocality: 'Ayacucho',
+      addressRegion: 'Ayacucho',
+      addressCountry: 'PE'
+    }
+  },
+  address: {
+    "@type": 'PostalAddress',
+    addressLocality: 'Ayacucho',
+    addressRegion: 'Ayacucho',
+    addressCountry: 'PE'
+  },
+  geo: {
+    "@type": 'GeoCoordinates',
+    latitude: '-13.1631',
+    longitude: '-74.2244'
+  },
+  priceRange: 'S/ 25 - S/ 45',
+  currenciesAccepted: 'PEN',
+  paymentAccepted: 'Yape, Plin, Efectivo',
+  openingHours: 'Mo-Su 05:00-19:00',
+  sameAs: [
+    'https://wa.me/51928413201'
+  ],
+  hasOfferCatalog: {
+    "@type": 'OfferCatalog',
+    name: 'Servicios de Transporte',
+    itemListElement: [
+      {
+        "@type": 'Offer',
+        itemOffered: {
+          "@type": 'Service',
+          name: 'Transporte de Pasajeros',
+          description: 'Viajes interprovinciales seguros y puntuales'
+        }
+      },
+      {
+        "@type": 'Offer',
+        itemOffered: {
+          "@type": 'Service',
+          name: 'Servicio Turistico',
+          description: 'Traslados y tours por Ayacucho'
+        }
+      },
+      {
+        "@type": 'Offer',
+        itemOffered: {
+          "@type": 'Service',
+          name: 'Encomiendas',
+          description: 'Envio de paquetes y giros'
+        }
+      }
+    ]
+  }
 };
 ---
 
 <Layout
-  title="JR Transportes | Transporte interprovincial en Ayacucho"
-  description="Transporte interprovincial en Ayacucho: pasajeros, giros y encomiendas con responsabilidad y seguridad en cada viaje."
-  ogTitle="JR Transportes"
-  ogDescription="Servicio de transporte interprovincial, giros y encomiendas en Ayacucho."
+  title="JR Transportes | Transporte Interprovincial en Ayacucho"
+  description="Servicio de transporte interprovincial en Ayacucho. Pasajeros, giros, encomiendas y tours turisticos con la maxima seguridad. Viaja a Cangallo, Pampa Cangallo, Huancasancos y mas."
+  keywords="transporte Ayacucho, transporte interprovincial, pasajeros Ayacucho, encomiendas, giros, viajes Cangallo, Pampa Cangallo, Huancasancos, turismo Ayacucho, tours Ayacucho, JR Transportes, Morochucos, transporte seguro, terminal terrestre Ayacucho"
+  ogTitle="JR Transportes | Transporte Interprovincial Ayacucho"
+  ogDescription="Servicio de transporte interprovincial en Ayacucho. Pasajeros, giros, encomiendas y tours turisticos con la maxima seguridad."
   ogType="website"
+  ogImage="https://jrtours-morochucos.vercel.app/images/Pampa%20cangallo/pampa-cangallo.webp"
   ogLocale="es_PE"
   schema={localBusinessSchema}
   activePage="index"

@@ -75,12 +75,13 @@ const articleSchema = {
 </style>
 
 <Layout
-  title={`${post.frontmatter.title} | Blog JR Transportes`}
-  description={post.frontmatter.description}
+  title={`${post.frontmatter.title} - Blog de Viajes Ayacucho | JR Transportes`}
+  description={`${post.frontmatter.description} Lee mas en nuestro blog de viajes Ayacucho.`}
+  keywords={`${post.frontmatter.title}, viaje Ayacucho, ${post.frontmatter.tag || 'turismo'}, blog viajes Peru, guia Ayacucho, destinos Ayacucho`}
   ogTitle={post.frontmatter.title}
   ogDescription={post.frontmatter.description}
   ogType="article"
-  ogImage={post.frontmatter.image}
+  ogImage={post.frontmatter.image.startsWith('http') ? post.frontmatter.image : `https://jrtours-morochucos.vercel.app${post.frontmatter.image}`}
   schema={articleSchema}
   activePage="blog-detail"
   ctaText="Contactar"

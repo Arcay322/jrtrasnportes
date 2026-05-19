@@ -7,12 +7,18 @@ import MobileMenuScript from './MobileMenuScript.astro';
 export interface Props {
   title: string;
   description: string;
+  keywords?: string;
+  author?: string;
   canonical?: string;
   ogTitle?: string;
   ogDescription?: string;
   ogType?: string;
   ogImage?: string;
   ogLocale?: string;
+  ogSiteName?: string;
+  twitterCard?: string;
+  twitterImage?: string;
+  twitterCreator?: string;
   schema?: Record<string, any>;
   activePage?: string;
   ctaText?: string;
@@ -20,17 +26,26 @@ export interface Props {
   showFooterLinks?: boolean;
   footerVariant?: 'dark' | 'blue';
   bodyClass?: string;
+  mainClass?: string;
+  noIndex?: boolean;
+  preloadFonts?: boolean;
 }
 
 const {
   title,
   description,
+  keywords,
+  author,
   canonical,
   ogTitle,
   ogDescription,
   ogType,
   ogImage,
   ogLocale,
+  ogSiteName,
+  twitterCard,
+  twitterImage,
+  twitterCreator,
   schema,
   activePage = '',
   ctaText,
@@ -39,6 +54,8 @@ const {
   footerVariant = 'dark',
   bodyClass = 'bg-pampa-50 selection:bg-pampa-300 selection:text-pampa-900',
   mainClass = '',
+  noIndex = false,
+  preloadFonts = true,
 } = Astro.props;
 ---
 
@@ -48,13 +65,21 @@ const {
   <SEO
     title={title}
     description={description}
+    keywords={keywords}
+    author={author}
     canonical={canonical}
     ogTitle={ogTitle}
     ogDescription={ogDescription}
     ogType={ogType}
     ogImage={ogImage}
     ogLocale={ogLocale}
+    ogSiteName={ogSiteName}
+    twitterCard={twitterCard}
+    twitterImage={twitterImage}
+    twitterCreator={twitterCreator}
     schema={schema}
+    noIndex={noIndex}
+    preloadFonts={preloadFonts}
   />
 </head>
 <body class={bodyClass}>

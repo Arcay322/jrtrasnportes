@@ -2,62 +2,110 @@
 export interface Props {
   title: string;
   description: string;
+  keywords?: string;
+  author?: string;
   canonical?: string;
   ogTitle?: string;
   ogDescription?: string;
   ogType?: string;
   ogImage?: string;
   ogLocale?: string;
+  ogSiteName?: string;
+  twitterCard?: string;
+  twitterImage?: string;
+  twitterCreator?: string;
   schema?: Record<string, any>;
   noIndex?: boolean;
+  preloadFonts?: boolean;
 }
 
 const {
   title,
   description,
+  keywords = 'transporte Ayacucho, transporte interprovincial, pasajeros Ayacucho, encomiendas, giros, viajes Cangallo, Huancasancos, Pampa Cangallo, turismo Ayacucho, JR Transportes, Morochucos',
+  author = 'JR Transportes',
   canonical,
   ogTitle = title,
   ogDescription = description,
   ogType = 'website',
   ogImage,
   ogLocale = 'es_PE',
+  ogSiteName = 'JR Transportes',
+  twitterCard = 'summary_large_image',
+  twitterImage,
+  twitterCreator = '@jrtransportes',
   schema,
   noIndex = false,
+  preloadFonts = true,
 } = Astro.props;
 
 const canonicalUrl = canonical || Astro.url.href;
+const defaultOgImage = 'https://jrtours-morochucos.vercel.app/images/Pampa%20cangallo/pampa-cangallo.webp';
+const finalOgImage = ogImage || defaultOgImage;
+const finalTwitterImage = twitterImage || finalOgImage;
 ---
 
 <meta charset="utf-8" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="icon" href="/favicon.ico" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
 <meta name="generator" content={Astro.generator} />
+
 {noIndex && <meta name="robots" content="noindex, nofollow" />}
+{!noIndex && <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />}
 
 <title>{title}</title>
 <meta name="description" content={description} />
+<meta name="keywords" content={keywords} />
+<meta name="author" content={author} />
+<meta name="language" content="es" />
+<meta name="geo.region" content="PE-AYA" />
+<meta name="geo.placename" content="Ayacucho, Peru" />
+<meta name="geo.position" content="-13.1631;-74.2244" />
+<meta name="ICBM" content="-13.1631, -74.2244" />
 
 <link rel="canonical" href={canonicalUrl} />
 
+<!-- Preconnect -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+<link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+
+{preloadFonts && (
+  <>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700;800&display=swap" as="style" />
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@200..700&display=swap" as="style" />
+  </>
+)}
+
+<!-- Open Graph -->
 <meta property="og:title" content={ogTitle} />
 <meta property="og:description" content={ogDescription} />
 <meta property="og:type" content={ogType} />
 <meta property="og:locale" content={ogLocale} />
 <meta property="og:url" content={canonicalUrl} />
-{ogImage && <meta property="og:image" content={ogImage} />}
+<meta property="og:site_name" content={ogSiteName} />
+<meta property="og:image" content={finalOgImage} />
+<meta property="og:image:alt" content={ogTitle} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
 
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-  rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700;800&display=swap"
-/>
-<link
-  rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@200..700&display=swap"
-/>
+<!-- Twitter -->
+<meta name="twitter:card" content={twitterCard} />
+<meta name="twitter:title" content={ogTitle} />
+<meta name="twitter:description" content={ogDescription} />
+<meta name="twitter:image" content={finalTwitterImage} />
+<meta name="twitter:image:alt" content={ogTitle} />
+<meta name="twitter:creator" content={twitterCreator} />
+<meta name="twitter:site" content={twitterCreator} />
 
+<!-- Favicons -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="apple-touch-icon" href="/favicon.ico" />
+<meta name="theme-color" content="#8B6914" />
+<meta name="msapplication-TileColor" content="#8B6914" />
+
+<!-- Schema.org JSON-LD -->
 {schema && (
   <script type="application/ld+json" set:html={JSON.stringify(schema)} />
 )}
