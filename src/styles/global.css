@@ -1,0 +1,186 @@
+@import "tailwindcss";
+
+/*
+  Sistema de diseno: "Tierra de Morochucos"
+  Inspirado en las pampas de Cangallo, el cielo andino y los tejidos de Ayacucho.
+  Cada token tiene un origen real, no es un color generico.
+*/
+
+@theme {
+  /* Pampa - Tonos tierra, la columna vertebral de la identidad */
+  --color-pampa-50: #FAF6ED;
+  --color-pampa-100: #F2EBD9;
+  --color-pampa-200: #E3D6B8;
+  --color-pampa-300: #C4A94D;
+  --color-pampa-400: #A8892A;
+  --color-pampa-500: #8B6914;
+  --color-pampa-600: #6B5010;
+  --color-pampa-700: #4A380C;
+  --color-pampa-800: #2C2418;
+  --color-pampa-900: #1A1408;
+
+  /* Cielo - Azul profundo de altitud, 3500 msnm */
+  --color-cielo-50: #EDF3FA;
+  --color-cielo-100: #D0DFF0;
+  --color-cielo-200: #A3BFE0;
+  --color-cielo-300: #6B96C7;
+  --color-cielo-400: #4B78AA;
+  --color-cielo-500: #3A5F94;
+  --color-cielo-600: #2B4A75;
+  --color-cielo-700: #1B3A5C;
+  --color-cielo-800: #122840;
+  --color-cielo-900: #0D1E30;
+
+  /* Poncho - Carmesi de los textiles morochucos */
+  --color-poncho-400: #B53A1A;
+  --color-poncho-500: #8B2500;
+  --color-poncho-600: #6B1D00;
+
+  /* Quebrada - Verde oscuro de los valles entre montanias */
+  --color-quebrada-400: #4A7A46;
+  --color-quebrada-500: #3D5C3A;
+  --color-quebrada-600: #2D4A2B;
+
+  /* Tipografia */
+  --font-headline: 'DM Serif Display', Georgia, serif;
+  --font-body: 'Manrope', system-ui, sans-serif;
+
+  /* Sombras - Estrategia: sombras sutiles con tinte calido */
+  --shadow-soft: 0 1px 3px rgba(44, 36, 24, 0.06);
+  --shadow-card: 0 4px 16px rgba(44, 36, 24, 0.07);
+  --shadow-elevated: 0 12px 32px rgba(44, 36, 24, 0.10);
+  --shadow-float: 0 20px 48px rgba(44, 36, 24, 0.14);
+}
+
+@layer base {
+  /* Base */
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-body);
+    color: var(--color-pampa-800);
+    background: var(--color-pampa-50);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Tipografia base */
+  h1, h2, h3 {
+    font-family: var(--font-headline);
+    line-height: 1.1;
+    margin: 0;
+    color: var(--color-pampa-900);
+  }
+
+  p {
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  a {
+    color: inherit;
+  }
+}
+
+/* Material Symbols */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Skip link accesibilidad */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+  width: auto;
+  height: auto;
+  padding: 0.6rem 0.85rem;
+  border-radius: 0.5rem;
+  background: var(--color-cielo-700);
+  color: white;
+  z-index: 50;
+}
+
+/* Patron andino SVG como separador de secciones */
+.andean-divider {
+  width: 100%;
+  height: 6px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='6' viewBox='0 0 24 6'%3E%3Cpath d='M0 6L3 0L6 6M6 6L9 0L12 6M12 6L15 0L18 6M18 6L21 0L24 6' fill='none' stroke='%238B6914' stroke-width='1' opacity='0.35'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-position: center;
+}
+
+/* Patron andino como borde superior decorativo (firma visual) */
+.andean-border-top {
+  position: relative;
+}
+.andean-border-top::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='3' viewBox='0 0 16 3'%3E%3Cpath d='M0 3L2 0L4 3M4 3L6 0L8 3M8 3L10 0L12 3M12 3L14 0L16 3' fill='none' stroke='%238B6914' stroke-width='0.8' opacity='0.4'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+}
+
+@layer utilities {
+  .noise-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.12;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+}
+
+/* Animaciones de entrada (Fase 3, preparamos las clases) */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fade-in-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger para cards */
+.stagger-1 { transition-delay: 50ms; }
+.stagger-2 { transition-delay: 150ms; }
+.stagger-3 { transition-delay: 250ms; }
+
+/* Prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .fade-in-up {
+    opacity: 1;
+    transform: none;
+  }
+}
