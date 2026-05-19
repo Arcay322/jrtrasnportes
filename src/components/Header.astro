@@ -65,7 +65,7 @@ const isActive = (item: typeof menuLinks[0]) => {
       ))}
     </nav>
 
-    <div class="flex items-center gap-3">
+    <div class="flex items-center gap-2">
       <a
         class="hidden rounded-lg bg-logo-500 px-4 py-2 text-sm font-bold text-white no-underline transition-all duration-150 hover:-translate-y-0.5 hover:bg-logo-600 hover:shadow-elevated sm:inline-flex"
         href={ctaHref}
@@ -74,6 +74,16 @@ const isActive = (item: typeof menuLinks[0]) => {
       >
         {ctaText}
       </a>
+
+      <!-- Theme toggle -->
+      <button
+        id="theme-toggle"
+        type="button"
+        class="inline-flex items-center justify-center rounded-lg p-2 text-pampa-600 transition-colors hover:bg-pampa-200/50"
+        aria-label="Cambiar tema"
+      >
+        <span class="material-symbols-outlined" id="theme-icon">light_mode</span>
+      </button>
 
       <!-- Boton hamburguesa movil -->
       <button

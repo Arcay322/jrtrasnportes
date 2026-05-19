@@ -291,3 +291,6 @@
     transform: none;
   }
 }
+
+/* Dark mode styles moved to <style is:inline> in Layout.astro
+   to prevent Lightning CSS from purging them. */

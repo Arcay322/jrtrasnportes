@@ -62,6 +62,17 @@ const {
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <!-- Pre-hidratacion de tema: debe ir PRIMERO para evitar flash -->
+  <script is:inline>
+    (function() {
+      const saved = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const isDark = saved === 'dark' || (!saved && prefersDark);
+      if (isDark) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
   <SEO
     title={title}
     description={description}
@@ -81,6 +92,52 @@ const {
     noIndex={noIndex}
     preloadFonts={preloadFonts}
   />
+  <script is:inline>
+    (function() {
+      const meta = document.getElementById('theme-color-meta');
+      if (meta) {
+        meta.content = document.documentElement.getAttribute('data-theme') === 'dark' ? '#0D1E30' : '#8B6914';
+      }
+    })();
+  </script>
+
+  <style is:inline>
+    /* Dark Mode — "La noche cae sobre la pampa" */
+    [data-theme="dark"] { color-scheme: dark; }
+    [data-theme="dark"] img:not([src*="google.com/maps"]) { filter: brightness(0.88) saturate(0.92); }
+    [data-theme="dark"] iframe[src*="google.com/maps"] { filter: invert(0.88) hue-rotate(180deg) contrast(0.85); }
+    [data-theme="dark"] :is(.bg-pampa-50) { background-color: #0D1E30; }
+    [data-theme="dark"] :is(.bg-pampa-50\/80) { background-color: rgba(13, 30, 48, 0.80); }
+    [data-theme="dark"] :is(.bg-pampa-50\/95) { background-color: rgba(13, 30, 48, 0.95); }
+    [data-theme="dark"] :is(.bg-pampa-100) { background-color: #122840; }
+    [data-theme="dark"] :is(.bg-white) { background-color: #1B3A5C; }
+    [data-theme="dark"] :is(.bg-white\/95) { background-color: rgba(27, 58, 92, 0.95); }
+    [data-theme="dark"] :is(.text-pampa-900) { color: #F2EBD9; }
+    [data-theme="dark"] :is(.text-pampa-800) { color: #E3D6B8; }
+    [data-theme="dark"] :is(.text-pampa-700) { color: #C4A94D; }
+    [data-theme="dark"] :is(.text-pampa-700\/70) { color: rgba(196, 169, 77, 0.70); }
+    [data-theme="dark"] :is(.text-pampa-700\/80) { color: rgba(196, 169, 77, 0.80); }
+    [data-theme="dark"] :is(.text-pampa-600) { color: #A8892A; }
+    [data-theme="dark"] :is(.text-pampa-500) { color: #C4A94D; }
+    [data-theme="dark"] :is(.text-cielo-500) { color: #6B96C7; }
+    [data-theme="dark"] :is(.text-cielo-700) { color: #A3BFE0; }
+    [data-theme="dark"] :is(.border-pampa-200\/50) { border-color: rgba(27, 58, 92, 0.50); }
+    [data-theme="dark"] :is(.border-pampa-200\/60) { border-color: rgba(27, 58, 92, 0.60); }
+    [data-theme="dark"] :is(.border-pampa-200\/70) { border-color: rgba(27, 58, 92, 0.70); }
+    [data-theme="dark"] :is(.border-pampa-200\/40) { border-color: rgba(27, 58, 92, 0.40); }
+    [data-theme="dark"] [class*="hover:bg-pampa-100"]:hover { background-color: #2B4A75; }
+    [data-theme="dark"] [class*="hover:bg-pampa-200/50"]:hover { background-color: rgba(43, 74, 117, 0.50); }
+    [data-theme="dark"] [class*="hover:bg-pampa-200"]:hover { background-color: #2B4A75; }
+    [data-theme="dark"] [class*="hover:bg-white"]:hover { background-color: #2B4A75; }
+    [data-theme="dark"] [class*="hover:text-pampa-500"]:hover { color: #E3D6B8; }
+    [data-theme="dark"] [class*="hover:text-pampa-700"]:hover { color: #F2EBD9; }
+    [data-theme="dark"] [class*="hover:text-cielo-700"]:hover { color: #D0DFF0; }
+    [data-theme="dark"] [class*="focus:border-pampa-300"]:focus { border-color: #6B96C7; }
+    [data-theme="dark"] [class*="focus:ring-pampa-500/50"]:focus { --tw-ring-color: rgba(107, 150, 199, 0.50); }
+    [data-theme="dark"] ::selection { background-color: #3A5F94; color: #F2EBD9; }
+    [data-theme="dark"] .noise-overlay { mix-blend-mode: overlay; opacity: 0.08; }
+    [data-theme="dark"] .andean-divider { opacity: 0.6; }
+  </style>
 </head>
 <body class={bodyClass}>
   <div class="noise-overlay"></div>
@@ -99,6 +156,44 @@ const {
   <MobileMenuScript />
 
   <slot name="scripts" />
+
+  <!-- Theme toggle script -->
+  <script is:inline>
+    (function() {
+      const toggle = document.getElementById('theme-toggle');
+      const html = document.documentElement;
+      const icon = document.getElementById('theme-icon');
+      const metaTheme = document.querySelector('meta[name="theme-color"]');
+
+      function updateThemeIcon() {
+        if (icon) {
+          icon.textContent = html.getAttribute('data-theme') === 'dark' ? 'dark_mode' : 'light_mode';
+        }
+      }
+
+      function updateMetaTheme() {
+        if (metaTheme) {
+          metaTheme.content = html.getAttribute('data-theme') === 'dark' ? '#0D1E30' : '#8B6914';
+        }
+      }
+
+      toggle?.addEventListener('click', () => {
+        const isDark = html.getAttribute('data-theme') === 'dark';
+        if (isDark) {
+          html.removeAttribute('data-theme');
+          localStorage.setItem('theme', 'light');
+        } else {
+          html.setAttribute('data-theme', 'dark');
+          localStorage.setItem('theme', 'dark');
+        }
+        updateThemeIcon();
+        updateMetaTheme();
+      });
+
+      updateThemeIcon();
+      updateMetaTheme();
+    })();
+  </script>
 
   <!-- Scroll-triggering para animaciones fade-in-up -->
   <script>
