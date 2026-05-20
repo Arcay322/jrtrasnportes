@@ -155,10 +155,15 @@ const {
     [data-theme="dark"] :is(.bg-quebrada-500) { background-color: #5A8A56; }
     [data-theme="dark"] :is(.text-quebrada-500) { color: #5A8A56; }
 
-    /* HERO: el overlay usa pampa-900 que ahora es blanco.
-       Forzar a un gradiente oscuro coherente en dark mode. */
+    /* HERO index: overlay con gradiente oscuro */
     [data-theme="dark"] .hero-overlay {
       background: linear-gradient(to right, rgba(13, 30, 48, 0.92), rgba(18, 40, 64, 0.75), rgba(13, 30, 48, 0.50)) !important;
+    }
+
+    /* HERO destinos: gradiente from-pampa-900 se vuelve blanco en dark.
+       Forzar a oscuro para que el texto blanco sea legible. */
+    [data-theme="dark"] .destination-hero-overlay {
+      background: linear-gradient(to top, rgba(13, 30, 48, 0.92), rgba(18, 40, 64, 0.55), transparent) !important;
     }
 
     /* Footer: fondo mas oscuro para separacion clara */
