@@ -214,13 +214,15 @@ const localBusinessSchema = {
 
       <!-- Card flotante superpuesta (Layout balanceado) -->
       <div class="relative z-20 lg:translate-y-4 lg:col-span-2">
-        <div class="overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-4 shadow-float backdrop-blur-md transition-transform duration-500 hover:-rotate-1 hover:scale-[1.02]">
-          <img
-            class="h-48 w-full rounded-xl object-cover sm:h-56"
-            src="/images/avanzarojo.webp"
-            alt="Vehiculos modernos en ruta andina"
-            loading="lazy"
-          />
+        <div class="group overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-4 shadow-float backdrop-blur-md transition-transform duration-500 hover:-rotate-1 hover:scale-[1.02]">
+          <div class="overflow-hidden rounded-xl">
+            <img
+              class="h-48 w-full object-cover sm:h-56 transition-transform duration-700 group-hover:scale-105"
+              src="/images/avanzarojo.webp"
+              alt="Vehiculos modernos en ruta andina"
+              loading="lazy"
+            />
+          </div>
           <h2 class="mt-3.5 font-headline text-xl text-white">Flota de Vehiculos Modernos</h2>
           <p class="mt-1 text-sm text-white/75">Unidades equipadas para viajes comodos y seguros por las rutas de Ayacucho.</p>
         </div>

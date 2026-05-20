@@ -171,7 +171,7 @@ const articleSchema = {
               {recentPosts.map((relatedPost: any) => (
                 <a href={`/blog/${relatedPost.frontmatter.slug}`} class="group flex gap-3 no-underline">
                   <div class="h-16 w-20 shrink-0 overflow-hidden rounded-md">
-                    <img src={relatedPost.frontmatter.image} alt={relatedPost.frontmatter.title} class="h-full w-full object-cover transition-transform group-hover:scale-110" />
+                    <img src={relatedPost.frontmatter.image} alt={relatedPost.frontmatter.title} class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
                   </div>
                   <div class="flex flex-1 flex-col justify-center">
                     <h4 class="line-clamp-2 text-sm font-bold leading-tight text-pampa-800 transition-colors group-hover:text-cielo-700">
