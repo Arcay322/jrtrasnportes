@@ -46,6 +46,10 @@
   --color-logo-500: #D62828;
   --color-logo-600: #B51F1F;
 
+  /* Colores constantes que no se invierten en modo oscuro (para contenedores oscuros estaticos) */
+  --color-cream-light: #FAF6ED;
+  --color-cream-warm: #F2EBD9;
+
   /* Tipografia */
   --font-headline: 'DM Serif Display', Georgia, serif;
   --font-body: 'Manrope', system-ui, sans-serif;
@@ -141,7 +145,7 @@
 .btn-primary:hover {
   transform: translateY(-2px);
   background: var(--color-logo-600);
-  box-shadow: var(--shadow-elevated);
+  box-shadow: 0 12px 32px rgba(44, 36, 24, 0.10), 0 0 16px rgba(214, 40, 40, 0.38);
 }
 
 .btn-primary:active {

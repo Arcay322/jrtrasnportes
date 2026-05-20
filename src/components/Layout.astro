@@ -145,12 +145,13 @@ const {
       --color-logo-500: #D62828;
       --color-logo-600: #B51F1F;
 
-      /* Blanco → azul oscuro para superficies */
-      --color-white: #1B3A5C;
     }
 
+    /* Correccion del color blanco en superficies y opacidades */
+    [data-theme="dark"] :is(.bg-white) { background-color: #1B3A5C !important; }
+    [data-theme="dark"] :is(.bg-white\/95) { background-color: #1B3A5C !important; }
+
     /* Fallbacks estaticos que no usan variables */
-    [data-theme="dark"] :is(.text-white) { color: #D0DFF0; }
     [data-theme="dark"] :is(.bg-logo-500) { background-color: #D62828; }
     [data-theme="dark"] :is(.bg-quebrada-500) { background-color: #5A8A56; }
     [data-theme="dark"] :is(.text-quebrada-500) { color: #5A8A56; }
@@ -183,28 +184,19 @@ const {
       border-color: rgba(107, 150, 199, 0.20) !important;
     }
 
-    /* Textos claros sobre fondos oscuros: forzar a beige
-       !important necesario porque Tailwind v4 utilities
-       estan en @layer con mayor precedencia */
-    [data-theme="dark"] :is(.text-pampa-50) { color: #F2EBD9 !important; }
-    [data-theme="dark"] :is(.text-pampa-50\/60) { color: rgba(242, 235, 217, 0.60) !important; }
-    [data-theme="dark"] :is(.text-pampa-50\/75) { color: rgba(242, 235, 217, 0.75) !important; }
-    [data-theme="dark"] :is(.text-pampa-50\/80) { color: rgba(242, 235, 217, 0.80) !important; }
-    [data-theme="dark"] :is(.text-pampa-50\/95) { color: rgba(242, 235, 217, 0.95) !important; }
-    [data-theme="dark"] :is(.text-pampa-100) { color: #E3D6B8 !important; }
-    [data-theme="dark"] :is(.text-pampa-100\/70) { color: rgba(227, 214, 184, 0.70) !important; }
-    [data-theme="dark"] :is(.text-pampa-100\/75) { color: rgba(227, 214, 184, 0.75) !important; }
-    [data-theme="dark"] :is(.text-pampa-100\/80) { color: rgba(227, 214, 184, 0.80) !important; }
-    [data-theme="dark"] :is(.text-pampa-100\/85) { color: rgba(227, 214, 184, 0.85) !important; }
-    [data-theme="dark"] :is(.text-pampa-100\/90) { color: rgba(227, 214, 184, 0.90) !important; }
-
-    /* text-white con opacidades en hero y cards */
-    [data-theme="dark"] :is(.text-white) { color: #F2EBD9 !important; }
-    [data-theme="dark"] :is(.text-white\/60) { color: rgba(242, 235, 217, 0.60) !important; }
-    [data-theme="dark"] :is(.text-white\/70) { color: rgba(242, 235, 217, 0.70) !important; }
-    [data-theme="dark"] :is(.text-white\/75) { color: rgba(242, 235, 217, 0.75) !important; }
-    [data-theme="dark"] :is(.text-white\/80) { color: rgba(242, 235, 217, 0.80) !important; }
-    [data-theme="dark"] :is(.text-white\/90) { color: rgba(242, 235, 217, 0.90) !important; }
+    /* Correccion de contrastes en modo oscuro */
+    [data-theme="dark"] :is(.hover\:text-cielo-700:hover) {
+      color: var(--color-cielo-300) !important;
+    }
+    [data-theme="dark"] .group:hover .group-hover\:text-cielo-700 {
+      color: var(--color-cielo-300) !important;
+    }
+    [data-theme="dark"] :is(.bg-cielo-50) {
+      background-color: rgba(107, 150, 199, 0.15) !important;
+    }
+    [data-theme="dark"] :is(.text-cielo-500) {
+      color: var(--color-cielo-300) !important;
+    }
 
     /* Imagenes y mapa */
     [data-theme="dark"] img:not([src*="google.com/maps"]) { filter: brightness(0.88) saturate(0.92); }
@@ -256,7 +248,7 @@ const {
 
       function disableTransitionsTemporarily() {
         const css = document.createElement('style');
-        css.textContent = '*, *::before, *::after { transition: none !important; animation: none !important; }';
+        css.textContent = '*:not(#theme-icon) { transition: none !important; animation: none !important; }';
         css.id = 'no-theme-transition';
         document.head.appendChild(css);
         // Forzar reflow para que el browser aplique el estilo
@@ -270,17 +262,59 @@ const {
       }
 
       toggle?.addEventListener('click', () => {
-        disableTransitionsTemporarily();
-        const isDark = html.getAttribute('data-theme') === 'dark';
-        if (isDark) {
-          html.removeAttribute('data-theme');
-          localStorage.setItem('theme', 'light');
+        if (icon) {
+          // 1. Desvanecer e inclinar el icono
+          icon.style.transform = 'rotate(180deg) scale(0)';
+          icon.style.opacity = '0';
+          
+          setTimeout(() => {
+            const isDark = html.getAttribute('data-theme') === 'dark';
+            
+            // Cambiar el tema en el DOM desactivando transiciones globales (excepto para el icono)
+            disableTransitionsTemporarily();
+            if (isDark) {
+              html.removeAttribute('data-theme');
+              localStorage.setItem('theme', 'light');
+            } else {
+              html.setAttribute('data-theme', 'dark');
+              localStorage.setItem('theme', 'dark');
+            }
+            
+            // Actualizar la apariencia y el color meta
+            updateThemeIcon();
+            updateMetaTheme();
+            
+            // 2. Volver a mostrarlo rotando en la misma direccion y escalando a 1
+            icon.style.transform = 'rotate(360deg) scale(1)';
+            icon.style.opacity = '1';
+            
+            // Limpiar los estilos en linea despues de la transicion para futuros clicks
+            setTimeout(() => {
+              // Desactivar temporalmente la transicion para resetear la rotacion a 0 sin que se note
+              icon.style.transition = 'none';
+              icon.style.transform = 'rotate(0deg)';
+              // Forzar un reflow
+              void icon.offsetHeight;
+              // Restaurar la transicion
+              icon.style.transition = '';
+              icon.style.transform = '';
+              icon.style.opacity = '';
+            }, 300);
+          }, 150);
         } else {
-          html.setAttribute('data-theme', 'dark');
-          localStorage.setItem('theme', 'dark');
+          // Fallback en caso de que falte la referencia del icono
+          disableTransitionsTemporarily();
+          const isDark = html.getAttribute('data-theme') === 'dark';
+          if (isDark) {
+            html.removeAttribute('data-theme');
+            localStorage.setItem('theme', 'light');
+          } else {
+            html.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+          }
+          updateThemeIcon();
+          updateMetaTheme();
         }
-        updateThemeIcon();
-        updateMetaTheme();
       });
 
       updateThemeIcon();

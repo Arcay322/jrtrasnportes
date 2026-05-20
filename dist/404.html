@@ -58,12 +58,13 @@
       --color-logo-500: #D62828;
       --color-logo-600: #B51F1F;
 
-      /* Blanco → azul oscuro para superficies */
-      --color-white: #1B3A5C;
     }
 
+    /* Correccion del color blanco en superficies y opacidades */
+    [data-theme="dark"] :is(.bg-white) { background-color: #1B3A5C !important; }
+    [data-theme="dark"] :is(.bg-white\/95) { background-color: #1B3A5C !important; }
+
     /* Fallbacks estaticos que no usan variables */
-    [data-theme="dark"] :is(.text-white) { color: #D0DFF0; }
     [data-theme="dark"] :is(.bg-logo-500) { background-color: #D62828; }
     [data-theme="dark"] :is(.bg-quebrada-500) { background-color: #5A8A56; }
     [data-theme="dark"] :is(.text-quebrada-500) { color: #5A8A56; }
@@ -96,28 +97,19 @@
       border-color: rgba(107, 150, 199, 0.20) !important;
     }
 
-    /* Textos claros sobre fondos oscuros: forzar a beige
-       !important necesario porque Tailwind v4 utilities
-       estan en @layer con mayor precedencia */
-    [data-theme="dark"] :is(.text-pampa-50) { color: #F2EBD9 !important; }
-    [data-theme="dark"] :is(.text-pampa-50\/60) { color: rgba(242, 235, 217, 0.60) !important; }
-    [data-theme="dark"] :is(.text-pampa-50\/75) { color: rgba(242, 235, 217, 0.75) !important; }
-    [data-theme="dark"] :is(.text-pampa-50\/80) { color: rgba(242, 235, 217, 0.80) !important; }
-    [data-theme="dark"] :is(.text-pampa-50\/95) { color: rgba(242, 235, 217, 0.95) !important; }
-    [data-theme="dark"] :is(.text-pampa-100) { color: #E3D6B8 !important; }
-    [data-theme="dark"] :is(.text-pampa-100\/70) { color: rgba(227, 214, 184, 0.70) !important; }
-    [data-theme="dark"] :is(.text-pampa-100\/75) { color: rgba(227, 214, 184, 0.75) !important; }
-    [data-theme="dark"] :is(.text-pampa-100\/80) { color: rgba(227, 214, 184, 0.80) !important; }
-    [data-theme="dark"] :is(.text-pampa-100\/85) { color: rgba(227, 214, 184, 0.85) !important; }
-    [data-theme="dark"] :is(.text-pampa-100\/90) { color: rgba(227, 214, 184, 0.90) !important; }
-
-    /* text-white con opacidades en hero y cards */
-    [data-theme="dark"] :is(.text-white) { color: #F2EBD9 !important; }
-    [data-theme="dark"] :is(.text-white\/60) { color: rgba(242, 235, 217, 0.60) !important; }
-    [data-theme="dark"] :is(.text-white\/70) { color: rgba(242, 235, 217, 0.70) !important; }
-    [data-theme="dark"] :is(.text-white\/75) { color: rgba(242, 235, 217, 0.75) !important; }
-    [data-theme="dark"] :is(.text-white\/80) { color: rgba(242, 235, 217, 0.80) !important; }
-    [data-theme="dark"] :is(.text-white\/90) { color: rgba(242, 235, 217, 0.90) !important; }
+    /* Correccion de contrastes en modo oscuro */
+    [data-theme="dark"] :is(.hover\:text-cielo-700:hover) {
+      color: var(--color-cielo-300) !important;
+    }
+    [data-theme="dark"] .group:hover .group-hover\:text-cielo-700 {
+      color: var(--color-cielo-300) !important;
+    }
+    [data-theme="dark"] :is(.bg-cielo-50) {
+      background-color: rgba(107, 150, 199, 0.15) !important;
+    }
+    [data-theme="dark"] :is(.text-cielo-500) {
+      color: var(--color-cielo-300) !important;
+    }
 
     /* Imagenes y mapa */
     [data-theme="dark"] img:not([src*="google.com/maps"]) { filter: brightness(0.88) saturate(0.92); }
@@ -127,19 +119,19 @@
     [data-theme="dark"] .noise-overlay { mix-blend-mode: overlay; opacity: 0.08; }
     [data-theme="dark"] .andean-divider { opacity: 0.6; }
     [data-theme="dark"] ::selection { background-color: #3A5F94; color: #F2EBD9; }
-  </style><link rel="stylesheet" href="/_astro/global.Cv8jKWVv.css"></head> <body class="bg-pampa-50 selection:bg-pampa-300 selection:text-pampa-900"> <div class="noise-overlay"></div> <a class="skip-link" href="#contenido">Saltar al contenido</a> <!-- Header --><header class="andean-border-top sticky top-0 z-50 border-b border-pampa-200/60 bg-pampa-50/80 backdrop-blur-xl"> <div class="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-2"> <a href="/" class="no-underline flex items-center -ml-1"> <img src="/JRlogo.webp" alt="JR Transportes" class="h-14 w-auto object-contain"> </a> <!-- Navegacion desktop --> <nav class="hidden items-center gap-6 md:flex" aria-label="Menu principal"> <a href="/" class="text-sm font-semibold no-underline transition-colors duration-150 text-pampa-700/80 hover:text-pampa-500"> Inicio </a><a href="/#servicios" class="text-sm font-semibold no-underline transition-colors duration-150 text-pampa-700/80 hover:text-pampa-500"> Servicios </a><a href="/destinos" class="text-sm font-semibold no-underline transition-colors duration-150 text-pampa-700/80 hover:text-pampa-500"> Destinos </a><a href="/blog" class="text-sm font-semibold no-underline transition-colors duration-150 text-pampa-700/80 hover:text-pampa-500"> Blog </a> </nav> <div class="flex items-center gap-2"> <a class="hidden rounded-lg bg-logo-500 px-4 py-2 text-sm font-bold text-white no-underline transition-all duration-150 hover:-translate-y-0.5 hover:bg-logo-600 hover:shadow-elevated sm:inline-flex" href="https://wa.me/51928413201?text=Hola%20JR%20Transportes%2C%20deseo%20consultar%20por%20rutas%20y%20horarios." target="_blank" rel="noopener noreferrer"> Contactar </a> <!-- Theme toggle --> <button id="theme-toggle" type="button" class="inline-flex items-center justify-center rounded-lg p-2 text-pampa-600 transition-colors hover:bg-pampa-200/50" aria-label="Cambiar tema"> <span class="material-symbols-outlined" id="theme-icon">light_mode</span> </button> <!-- Boton hamburguesa movil --> <button id="menu-toggle" type="button" class="inline-flex items-center justify-center rounded-lg p-2 text-pampa-600 transition-colors hover:bg-pampa-200/50 md:hidden" aria-controls="mobile-menu" aria-expanded="false" aria-label="Abrir menu"> <span class="material-symbols-outlined" id="menu-icon">menu</span> </button> </div> </div> <!-- Menu movil --> <nav id="mobile-menu" class="hidden border-t border-pampa-200/60 bg-pampa-50 px-5 pb-4 pt-2 md:hidden" aria-label="Menu movil"> <a href="/" class="mobile-link block rounded-lg px-3 py-2.5 text-sm font-semibold text-pampa-700 no-underline transition-colors hover:bg-pampa-100"> Inicio </a><a href="/#servicios" class="mobile-link block rounded-lg px-3 py-2.5 text-sm font-semibold text-pampa-700 no-underline transition-colors hover:bg-pampa-100"> Servicios </a><a href="/destinos" class="mobile-link block rounded-lg px-3 py-2.5 text-sm font-semibold text-pampa-700 no-underline transition-colors hover:bg-pampa-100"> Destinos </a><a href="/blog" class="mobile-link block rounded-lg px-3 py-2.5 text-sm font-semibold text-pampa-700 no-underline transition-colors hover:bg-pampa-100"> Blog </a> <a class="mt-2 block rounded-lg bg-logo-500 px-3 py-2.5 text-center text-sm font-bold text-white no-underline" href="https://wa.me/51928413201?text=Hola%20JR%20Transportes%2C%20deseo%20consultar%20por%20rutas%20y%20horarios." target="_blank" rel="noopener noreferrer"> Contactar </a> </nav> </header> <main id="contenido" class>  <section class="flex min-h-[70vh] items-center justify-center bg-pampa-50 px-5 py-20"> <div class="text-center"> <div class="mb-6 flex items-center justify-center"> <span class="material-symbols-outlined text-8xl text-pampa-300">travel_explore</span> </div> <h1 class="font-headline text-6xl text-pampa-800 sm:text-8xl">404</h1> <p class="mt-4 text-lg text-pampa-600">Destino no encontrado</p> <p class="mt-2 max-w-md mx-auto text-sm text-pampa-500">
+  </style><link rel="stylesheet" href="/_astro/global.BLK1-vcd.css"></head> <body class="bg-pampa-50 selection:bg-pampa-300 selection:text-pampa-900"> <div class="noise-overlay"></div> <a class="skip-link" href="#contenido">Saltar al contenido</a> <!-- Header --><header class="andean-border-top sticky top-0 z-50 border-b border-pampa-200/60 bg-pampa-50/80 backdrop-blur-xl" data-astro-cid-3ef6ksr2> <div class="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-2 sm:py-1.5" data-astro-cid-3ef6ksr2> <a href="/" class="no-underline flex items-center -ml-1 group" data-astro-cid-3ef6ksr2> <img src="/JRlogo.webp" alt="JR Transportes" class="h-16 sm:h-[76px] w-auto object-contain transition-all duration-300 group-hover:scale-105 logo-glow" data-astro-cid-3ef6ksr2> </a> <!-- Navegacion desktop --> <nav class="hidden items-center gap-6 md:flex" aria-label="Menu principal" data-astro-cid-3ef6ksr2> <a href="/" class="text-sm font-semibold no-underline transition-colors duration-150 text-pampa-700/80 hover:text-pampa-500" data-astro-cid-3ef6ksr2> Inicio </a><a href="/#servicios" class="text-sm font-semibold no-underline transition-colors duration-150 text-pampa-700/80 hover:text-pampa-500" data-astro-cid-3ef6ksr2> Servicios </a><a href="/destinos" class="text-sm font-semibold no-underline transition-colors duration-150 text-pampa-700/80 hover:text-pampa-500" data-astro-cid-3ef6ksr2> Destinos </a><a href="/blog" class="text-sm font-semibold no-underline transition-colors duration-150 text-pampa-700/80 hover:text-pampa-500" data-astro-cid-3ef6ksr2> Blog </a> </nav> <div class="flex items-center gap-2" data-astro-cid-3ef6ksr2> <a class="hidden rounded-lg bg-logo-500 px-4 py-2 text-sm font-bold text-white no-underline transition-all duration-150 hover:-translate-y-0.5 hover:bg-logo-600 hover:shadow-elevated sm:inline-flex" href="https://wa.me/51928413201?text=Hola%20JR%20Transportes%2C%20deseo%20consultar%20por%20rutas%20y%20horarios." target="_blank" rel="noopener noreferrer" data-astro-cid-3ef6ksr2> Contactar </a> <!-- Theme toggle --> <button id="theme-toggle" type="button" class="inline-flex items-center justify-center rounded-lg p-2 text-pampa-600 transition-colors hover:bg-pampa-200/50" aria-label="Cambiar tema" data-astro-cid-3ef6ksr2> <span class="material-symbols-outlined transition-all duration-300 ease-out" id="theme-icon" data-astro-cid-3ef6ksr2>light_mode</span> </button> <!-- Boton hamburguesa movil --> <button id="menu-toggle" type="button" class="inline-flex items-center justify-center rounded-lg p-2 text-pampa-600 transition-colors hover:bg-pampa-200/50 md:hidden" aria-controls="mobile-menu" aria-expanded="false" aria-label="Abrir menu" data-astro-cid-3ef6ksr2> <span class="material-symbols-outlined" id="menu-icon" data-astro-cid-3ef6ksr2>menu</span> </button> </div> </div> <!-- Menu movil --> <nav id="mobile-menu" class="hidden border-t border-pampa-200/60 bg-pampa-50 px-5 pb-4 pt-2 md:hidden" aria-label="Menu movil" data-astro-cid-3ef6ksr2> <a href="/" class="mobile-link block rounded-lg px-3 py-2.5 text-sm font-semibold text-pampa-700 no-underline transition-colors hover:bg-pampa-100" data-astro-cid-3ef6ksr2> Inicio </a><a href="/#servicios" class="mobile-link block rounded-lg px-3 py-2.5 text-sm font-semibold text-pampa-700 no-underline transition-colors hover:bg-pampa-100" data-astro-cid-3ef6ksr2> Servicios </a><a href="/destinos" class="mobile-link block rounded-lg px-3 py-2.5 text-sm font-semibold text-pampa-700 no-underline transition-colors hover:bg-pampa-100" data-astro-cid-3ef6ksr2> Destinos </a><a href="/blog" class="mobile-link block rounded-lg px-3 py-2.5 text-sm font-semibold text-pampa-700 no-underline transition-colors hover:bg-pampa-100" data-astro-cid-3ef6ksr2> Blog </a> <a class="mt-2 block rounded-lg bg-logo-500 px-3 py-2.5 text-center text-sm font-bold text-white no-underline" href="https://wa.me/51928413201?text=Hola%20JR%20Transportes%2C%20deseo%20consultar%20por%20rutas%20y%20horarios." target="_blank" rel="noopener noreferrer" data-astro-cid-3ef6ksr2> Contactar </a> </nav> </header> <main id="contenido" class>  <section class="flex min-h-[70vh] items-center justify-center bg-pampa-50 px-5 py-20"> <div class="text-center"> <div class="mb-6 flex items-center justify-center"> <span class="material-symbols-outlined text-8xl text-pampa-300">travel_explore</span> </div> <h1 class="font-headline text-6xl text-pampa-800 sm:text-8xl">404</h1> <p class="mt-4 text-lg text-pampa-600">Destino no encontrado</p> <p class="mt-2 max-w-md mx-auto text-sm text-pampa-500">
 Parece que te perdiste en el camino. No te preocupes, te llevamos de vuelta.
 </p> <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4"> <a href="/" class="inline-flex items-center gap-2 rounded-xl bg-logo-500 px-6 py-3 text-sm font-bold text-white no-underline transition-all hover:-translate-y-0.5 hover:bg-logo-600 hover:shadow-elevated"> <span class="material-symbols-outlined text-lg">home</span>
 Volver al inicio
 </a> <a href="/destinos" class="inline-flex items-center gap-2 rounded-xl border-2 border-pampa-300 px-6 py-3 text-sm font-bold text-pampa-700 no-underline transition-all hover:bg-pampa-100"> <span class="material-symbols-outlined text-lg">map</span>
 Ver destinos
-</a> </div> </div> </section>  </main> <footer class="border-t border-pampa-50/15 bg-cielo-900 py-6"> <div class="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-3 px-5 sm:flex-row"> <div> <p class="font-headline text-base text-pampa-50">JR Transportes</p> <p class="mt-0.5 text-xs text-pampa-50/60">
+</a> </div> </div> </section>  </main> <footer class="border-t border-pampa-50/15 bg-cielo-900 py-6"> <div class="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-3 px-5 sm:flex-row"> <div> <p class="font-headline text-base text-cream-light">JR Transportes</p> <p class="mt-0.5 text-xs text-cream-light/60">
 &copy; 2026 JR Transportes. Ayacucho, Peru.
-</p> </div> <div class="flex gap-5"> <a href="#" class="text-xs font-semibold text-pampa-50/75 no-underline transition-colors hover:text-pampa-50">
+</p> </div> <div class="flex gap-5"> <a href="#" class="text-xs font-semibold text-cream-light/75 no-underline transition-colors hover:text-cream-light">
 Terminos
-</a> <a href="#" class="text-xs font-semibold text-pampa-50/75 no-underline transition-colors hover:text-pampa-50">
+</a> <a href="#" class="text-xs font-semibold text-cream-light/75 no-underline transition-colors hover:text-cream-light">
 Privacidad
-</a> <a href="https://wa.me/51928413201?text=Hola%20JR%20Transportes%2C%20deseo%20consultar%20por%20rutas%20y%20horarios." target="_blank" rel="noopener noreferrer" class="text-xs font-semibold text-pampa-50/75 no-underline transition-colors hover:text-pampa-50">
+</a> <a href="https://wa.me/51928413201?text=Hola%20JR%20Transportes%2C%20deseo%20consultar%20por%20rutas%20y%20horarios." target="_blank" rel="noopener noreferrer" class="text-xs font-semibold text-cream-light/75 no-underline transition-colors hover:text-cream-light">
 WhatsApp
 </a> </div> </div> </footer>  <script type="module">const t=document.getElementById("menu-toggle"),n=document.getElementById("mobile-menu"),o=document.getElementById("menu-icon");t&&n&&o&&(t.addEventListener("click",()=>{const e=n.classList.toggle("hidden");o.textContent=e?"menu":"close",t.setAttribute("aria-expanded",String(!e))}),n.querySelectorAll(".mobile-link").forEach(e=>{e.addEventListener("click",()=>{n.classList.add("hidden"),o.textContent="menu",t.setAttribute("aria-expanded","false")})}));</script>  <!-- Theme toggle script --> <script>
     (function() {
@@ -162,7 +154,7 @@ WhatsApp
 
       function disableTransitionsTemporarily() {
         const css = document.createElement('style');
-        css.textContent = '*, *::before, *::after { transition: none !important; animation: none !important; }';
+        css.textContent = '*:not(#theme-icon) { transition: none !important; animation: none !important; }';
         css.id = 'no-theme-transition';
         document.head.appendChild(css);
         // Forzar reflow para que el browser aplique el estilo
@@ -176,17 +168,59 @@ WhatsApp
       }
 
       toggle?.addEventListener('click', () => {
-        disableTransitionsTemporarily();
-        const isDark = html.getAttribute('data-theme') === 'dark';
-        if (isDark) {
-          html.removeAttribute('data-theme');
-          localStorage.setItem('theme', 'light');
+        if (icon) {
+          // 1. Desvanecer e inclinar el icono
+          icon.style.transform = 'rotate(180deg) scale(0)';
+          icon.style.opacity = '0';
+          
+          setTimeout(() => {
+            const isDark = html.getAttribute('data-theme') === 'dark';
+            
+            // Cambiar el tema en el DOM desactivando transiciones globales (excepto para el icono)
+            disableTransitionsTemporarily();
+            if (isDark) {
+              html.removeAttribute('data-theme');
+              localStorage.setItem('theme', 'light');
+            } else {
+              html.setAttribute('data-theme', 'dark');
+              localStorage.setItem('theme', 'dark');
+            }
+            
+            // Actualizar la apariencia y el color meta
+            updateThemeIcon();
+            updateMetaTheme();
+            
+            // 2. Volver a mostrarlo rotando en la misma direccion y escalando a 1
+            icon.style.transform = 'rotate(360deg) scale(1)';
+            icon.style.opacity = '1';
+            
+            // Limpiar los estilos en linea despues de la transicion para futuros clicks
+            setTimeout(() => {
+              // Desactivar temporalmente la transicion para resetear la rotacion a 0 sin que se note
+              icon.style.transition = 'none';
+              icon.style.transform = 'rotate(0deg)';
+              // Forzar un reflow
+              void icon.offsetHeight;
+              // Restaurar la transicion
+              icon.style.transition = '';
+              icon.style.transform = '';
+              icon.style.opacity = '';
+            }, 300);
+          }, 150);
         } else {
-          html.setAttribute('data-theme', 'dark');
-          localStorage.setItem('theme', 'dark');
+          // Fallback en caso de que falte la referencia del icono
+          disableTransitionsTemporarily();
+          const isDark = html.getAttribute('data-theme') === 'dark';
+          if (isDark) {
+            html.removeAttribute('data-theme');
+            localStorage.setItem('theme', 'light');
+          } else {
+            html.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+          }
+          updateThemeIcon();
+          updateMetaTheme();
         }
-        updateThemeIcon();
-        updateMetaTheme();
       });
 
       updateThemeIcon();

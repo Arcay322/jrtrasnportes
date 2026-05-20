@@ -142,7 +142,7 @@ const localBusinessSchema = {
   mainClass="relative z-0 overflow-x-clip"
 >
   <!-- Hero con CSS nativo restaurado -->
-  <section class="relative flex min-h-screen items-center">
+  <section class="relative flex min-h-[660px] lg:min-h-[82vh] items-center py-12 lg:py-20">
     <img
       class="absolute inset-0 h-full w-full object-cover"
       src="https://lh3.googleusercontent.com/aida-public/AB6AXuDY7u1kL2Z1wZDsppmSkekS25Q5CEUM500ZfM0TwbLpuE9JB1NCTr6Yl8adRmLAk6icC0aC6oCBUzVdrb18-k2Dj6NyJGsrHtHsmsiZ3hVX6zjUx-Zz-oPShMrtGU81Sk4g72Yj2x2vYQeAcsfdzfBdtHDc5oiHmtSnM7WUkSYdrNAXvVAETkwWkgmiFVZuvLk7Dh5AcOTT7GlKyytJrCI_OkgoIxTcpjnCVzL3E4Bv2VGXudL3Y5cV6UilB4F_uGpFfrjEQHG6pw"
@@ -150,7 +150,7 @@ const localBusinessSchema = {
     />
     <div class="hero-overlay absolute inset-0 bg-gradient-to-r from-cielo-900/85 via-pampa-900/60 to-pampa-900/20"></div>
 
-    <div class="relative z-10 mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-8 px-5 py-16 lg:grid-cols-5 lg:py-0">
+    <div class="relative z-10 mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-8 px-5 py-6 lg:grid-cols-5">
       <!-- Texto principal -->
       <div class="lg:col-span-3">
         <p class="mb-4 text-sm font-bold uppercase tracking-[0.15em] text-pampa-300">
@@ -160,7 +160,7 @@ const localBusinessSchema = {
           Conectando Ayacucho
           <span class="block text-pampa-300">con sus pueblos</span>
         </h1>
-        <p class="mt-5 max-w-lg text-base leading-relaxed text-pampa-100/90 sm:text-lg">
+        <p class="mt-5 max-w-xl text-base leading-relaxed text-cream-light/90 sm:text-lg">
           Pampa Cangallo, Cangallo y Huancasancos. Viajes seguros con la
           responsabilidad que tu familia merece.
         </p>
@@ -186,8 +186,8 @@ const localBusinessSchema = {
               {destinations.map((d) => (
                 <li>
                   <button 
-                    type="button"
-                    class="group flex w-full items-center justify-between rounded-md px-3 py-2.5 text-left text-sm font-medium text-pampa-50 transition-all hover:bg-white/10 focus:bg-white/10 focus:outline-none"
+                    type="button" 
+                    class="group flex w-full items-center justify-between rounded-md px-3 py-2.5 text-left text-sm font-medium text-cream-light transition-all hover:bg-white/10 focus:bg-white/10 focus:outline-none"
                     data-value={d.slug}
                     data-name={d.name}
                     data-price={d.price}
@@ -214,13 +214,15 @@ const localBusinessSchema = {
 
       <!-- Card flotante superpuesta (Layout balanceado) -->
       <div class="relative z-20 lg:translate-y-4 lg:col-span-2">
-        <div class="overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-4 shadow-float backdrop-blur-md transition-transform duration-500 hover:-rotate-1 hover:scale-[1.02]">
-          <img
-            class="h-48 w-full rounded-xl object-cover sm:h-56"
-            src="/images/avanzarojo.webp"
-            alt="Vehiculos modernos en ruta andina"
-            loading="lazy"
-          />
+        <div class="group overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-4 shadow-float backdrop-blur-md transition-transform duration-500 hover:-rotate-1 hover:scale-[1.02]">
+          <div class="overflow-hidden rounded-xl">
+            <img
+              class="h-48 w-full object-cover sm:h-56 transition-transform duration-700 group-hover:scale-105"
+              src="/images/avanzarojo.webp"
+              alt="Vehiculos modernos en ruta andina"
+              loading="lazy"
+            />
+          </div>
           <h2 class="mt-3.5 font-headline text-xl text-white">Flota de Vehiculos Modernos</h2>
           <p class="mt-1 text-sm text-white/75">Unidades equipadas para viajes comodos y seguros por las rutas de Ayacucho.</p>
         </div>
@@ -332,33 +334,37 @@ const localBusinessSchema = {
           </div>
 
           <div class="group flex items-center gap-4 rounded-xl border border-pampa-200/60 bg-white p-4 shadow-soft transition-transform duration-300 hover:rotate-1 hover:scale-[1.02] hover:shadow-card">
-            <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-quebrada-500/10 transition-colors group-hover:bg-quebrada-500/20">
-              <span class="material-symbols-outlined text-xl text-quebrada-500">chat</span>
-            </div>
-            <div class="flex-1">
-              <p class="text-[11px] font-bold uppercase tracking-widest text-pampa-600/60">WhatsApp 24/7</p>
-              <strong class="text-base font-extrabold text-pampa-800">{phoneDisplay}</strong>
-            </div>
-            <a
-              href={waRoute}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Ir a WhatsApp"
-              class="flex h-10 w-10 items-center justify-center rounded-lg bg-quebrada-500 text-white no-underline shadow-soft transition-all hover:scale-110 hover:bg-quebrada-400"
-            >
-              <span class="material-symbols-outlined text-lg">send</span>
-            </a>
-          </div>
-
-          <div class="group flex items-center gap-4 rounded-xl border border-pampa-200/60 bg-white p-4 shadow-soft transition-transform duration-300 hover:rotate-1 hover:scale-[1.02] hover:shadow-card">
             <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-cielo-500/10 transition-colors group-hover:bg-cielo-500/20">
               <span class="material-symbols-outlined text-xl text-cielo-500">phone</span>
             </div>
             <div class="flex-1">
               <p class="text-[11px] font-bold uppercase tracking-widest text-pampa-600/60">Telefonos de contacto</p>
-              <div class="flex flex-col gap-0.5">
-                <strong class="text-base font-extrabold text-pampa-800 font-data">918 712 309</strong>
-                <strong class="text-base font-extrabold text-pampa-800 font-data">980 849 165</strong>
+              <div class="flex flex-col gap-2 mt-1.5">
+                <div class="flex items-center justify-between gap-2 border-b border-pampa-100/50 pb-2 last:border-0 last:pb-0">
+                  <div class="flex flex-col">
+                    <strong class="text-base font-extrabold text-pampa-800 font-data">{phoneDisplay}</strong>
+                    <span class="inline-flex items-center gap-1 rounded-full bg-quebrada-500/10 w-fit px-2 py-0.5 text-[9px] font-extrabold text-quebrada-600 uppercase tracking-wide mt-0.5">
+                      <span class="h-1 w-1 rounded-full bg-quebrada-500 animate-pulse"></span> WhatsApp y llamadas
+                    </span>
+                  </div>
+                  <a
+                    href={waRoute}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Ir a WhatsApp"
+                    class="flex h-8 w-8 items-center justify-center rounded-md bg-quebrada-500 text-white no-underline shadow-soft transition-all hover:scale-105 hover:bg-quebrada-400"
+                  >
+                    <span class="material-symbols-outlined text-sm">send</span>
+                  </a>
+                </div>
+                <div class="flex items-center justify-between gap-2 border-b border-pampa-100/50 pb-2 last:border-0 last:pb-0">
+                  <strong class="text-base font-extrabold text-pampa-800 font-data">918 712 309</strong>
+                  <span class="text-[10px] font-bold text-pampa-500/70">Solo llamadas</span>
+                </div>
+                <div class="flex items-center justify-between gap-2">
+                  <strong class="text-base font-extrabold text-pampa-800 font-data">980 849 165</strong>
+                  <span class="text-[10px] font-bold text-pampa-500/70">Solo llamadas</span>
+                </div>
               </div>
             </div>
           </div>
@@ -378,12 +384,12 @@ const localBusinessSchema = {
       <!-- Mapa interactivo -->
       <div class="relative h-80 overflow-hidden rounded-2xl border border-pampa-200/40 shadow-card sm:h-96 lg:h-[420px]">
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3879.279!2d-74.226!3d-13.160!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDA5JzM2LjAiUyA3NMKwMTMnMzMuNiJX!5e0!3m2!1ses!2spe!4v1700000000000"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d429.25729012856885!2d-74.21122213212409!3d-13.169194217734006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x911287646bfc403b%3A0x7f98e4ba8e4a0c2e!2sTerminal%20Sur!5e0!3m2!1ses!2spe!4v1779241583169!5m2!1ses!2spe"
           class="h-full w-full border-0 grayscale-[30%]"
           allowfullscreen=""
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
-          title="Ubicacion de JR Transportes en Ayacucho"
+          title="Ubicacion de JR Transportes en Terminal Sur Ayacucho"
         ></iframe>
         <div class="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-pampa-200/40"></div>
       </div>

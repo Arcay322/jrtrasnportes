@@ -171,7 +171,7 @@ const articleSchema = {
               {recentPosts.map((relatedPost: any) => (
                 <a href={`/blog/${relatedPost.frontmatter.slug}`} class="group flex gap-3 no-underline">
                   <div class="h-16 w-20 shrink-0 overflow-hidden rounded-md">
-                    <img src={relatedPost.frontmatter.image} alt={relatedPost.frontmatter.title} class="h-full w-full object-cover transition-transform group-hover:scale-110" />
+                    <img src={relatedPost.frontmatter.image} alt={relatedPost.frontmatter.title} class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
                   </div>
                   <div class="flex flex-1 flex-col justify-center">
                     <h4 class="line-clamp-2 text-sm font-bold leading-tight text-pampa-800 transition-colors group-hover:text-cielo-700">
@@ -188,36 +188,5 @@ const articleSchema = {
     </div>
   </main>
 
-  <script>
-    // Menu hamburguesa
-    const toggle = document.getElementById('menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const mobileIcon = document.getElementById('menu-icon');
-
-    if (toggle && mobileMenu && mobileIcon) {
-      toggle.addEventListener('click', () => {
-        const open = mobileMenu.classList.toggle('hidden');
-        mobileIcon.textContent = open ? 'menu' : 'close';
-        toggle.setAttribute('aria-expanded', String(!open));
-      });
-
-      mobileMenu.querySelectorAll('.mobile-link').forEach((link) => {
-        link.addEventListener('click', () => {
-          mobileMenu.classList.add('hidden');
-          mobileIcon.textContent = 'menu';
-          toggle.setAttribute('aria-expanded', 'false');
-        });
-      });
-    }
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-    document.querySelectorAll('.fade-in-up').forEach((el) => observer.observe(el));
-  </script>
 </Layout>
+
