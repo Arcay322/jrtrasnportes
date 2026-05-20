@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://jrtours-morochucos.vercel.app/sitemap.xml
+Sitemap: https://jrtransportesmorochucos.com/sitemap.xml

@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { destinations } from '../data/destinations';
 
 export const GET: APIRoute = async ({ site }) => {
-  const baseUrl = site?.origin || 'https://jrtours-morochucos.vercel.app';
+  const baseUrl = site?.origin || 'https://jrtransportesmorochucos.com';
   
   const defaultImage = `${baseUrl}/images/Pampa%20cangallo/pampa-cangallo.webp`;
 
