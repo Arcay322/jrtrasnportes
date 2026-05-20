@@ -18,7 +18,7 @@ export const destinations: Destination[] = [
     slug: 'pampa-cangallo',
     name: 'Pampa Cangallo',
     category: 'destino',
-    price: 'Desde S/ 25',
+    price: 'Desde S/ 20',
     description: 'Tierra morochuca de llanuras altas y tradicion viva.',
     image: '/images/Pampa%20cangallo/pampa-cangallo.webp',
     gallery: [
@@ -37,7 +37,7 @@ export const destinations: Destination[] = [
     slug: 'cangallo',
     name: 'Cangallo',
     category: 'destino',
-    price: 'Desde S/ 30',
+    price: 'Desde S/ 25',
     description: 'La ciudad heroica conectada con viajes seguros y puntuales.',
     image: '/images/Cangallo/Ciudad_de_Cangallo.webp',
     gallery: [
