@@ -43,9 +43,13 @@ const isActive = (item: typeof menuLinks[0]) => {
 
 <!-- Header -->
 <header class="andean-border-top sticky top-0 z-50 border-b border-pampa-200/60 bg-pampa-50/80 backdrop-blur-xl">
-  <div class="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-2">
-    <a href="/" class="no-underline flex items-center -ml-1">
-      <img src="/JRlogo.webp" alt="JR Transportes" class="h-14 w-auto object-contain" />
+  <div class="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-2 sm:py-1.5">
+    <a href="/" class="no-underline flex items-center -ml-1 group">
+      <img
+        src="/JRlogo.webp"
+        alt="JR Transportes"
+        class="h-16 sm:h-[76px] w-auto object-contain transition-all duration-300 group-hover:scale-105 logo-glow"
+      />
     </a>
 
     <!-- Navegacion desktop -->
@@ -123,3 +127,19 @@ const isActive = (item: typeof menuLinks[0]) => {
     </a>
   </nav>
 </header>
+
+<style>
+  .logo-glow {
+    filter: 
+      drop-shadow(0 0 6px rgba(214, 40, 40, 0.65))
+      drop-shadow(0 0 15px rgba(214, 40, 40, 0.4))
+      drop-shadow(0 0 30px rgba(214, 40, 40, 0.2)) !important;
+  }
+  
+  .group:hover .logo-glow {
+    filter: 
+      drop-shadow(0 0 8px rgba(214, 40, 40, 0.8))
+      drop-shadow(0 0 20px rgba(214, 40, 40, 0.55))
+      drop-shadow(0 0 40px rgba(214, 40, 40, 0.3)) !important;
+  }
+</style>

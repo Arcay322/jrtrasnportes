@@ -188,36 +188,5 @@ const articleSchema = {
     </div>
   </main>
 
-  <script>
-    // Menu hamburguesa
-    const toggle = document.getElementById('menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const mobileIcon = document.getElementById('menu-icon');
-
-    if (toggle && mobileMenu && mobileIcon) {
-      toggle.addEventListener('click', () => {
-        const open = mobileMenu.classList.toggle('hidden');
-        mobileIcon.textContent = open ? 'menu' : 'close';
-        toggle.setAttribute('aria-expanded', String(!open));
-      });
-
-      mobileMenu.querySelectorAll('.mobile-link').forEach((link) => {
-        link.addEventListener('click', () => {
-          mobileMenu.classList.add('hidden');
-          mobileIcon.textContent = 'menu';
-          toggle.setAttribute('aria-expanded', 'false');
-        });
-      });
-    }
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-    document.querySelectorAll('.fade-in-up').forEach((el) => observer.observe(el));
-  </script>
 </Layout>
+
