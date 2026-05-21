@@ -124,6 +124,44 @@ const localBusinessSchema = {
     ]
   }
 };
+
+const faqSchema = {
+  "@context": 'https://schema.org',
+  "@type": 'FAQPage',
+  mainEntity: policies.map(p => ({
+    "@type": 'Question',
+    name: p.title,
+    acceptedAnswer: {
+      "@type": 'Answer',
+      text: p.description
+    }
+  }))
+};
+
+const webSiteSchema = {
+  "@context": 'https://schema.org',
+  "@type": 'WebSite',
+  name: companyName,
+  url: 'https://jrtransportesmorochucos.com',
+  description: 'Empresa de transporte interprovincial en Ayacucho. Pasajeros, giros, encomiendas y tours turisticos.',
+  inLanguage: 'es-PE'
+};
+
+const organizationSchema = {
+  "@context": 'https://schema.org',
+  "@type": 'Organization',
+  name: companyName,
+  url: 'https://jrtransportesmorochucos.com',
+  logo: 'https://jrtransportesmorochucos.com/JRlogo.webp',
+  contactPoint: {
+    "@type": 'ContactPoint',
+    telephone: `+${phoneRaw}`,
+    contactType: 'customer service',
+    availableLanguage: ['Spanish']
+  }
+};
+
+const schemas = [localBusinessSchema, faqSchema, webSiteSchema, organizationSchema];
 ---
 
 <Layout
@@ -135,7 +173,7 @@ const localBusinessSchema = {
   ogType="website"
   ogImage="https://jrtransportesmorochucos.com/images/Pampa%20cangallo/pampa-cangallo.webp"
   ogLocale="es_PE"
-  schema={localBusinessSchema}
+  schema={schemas}
   activePage="index"
   ctaText="Reservar ahora"
   ctaHref={waRoute}

@@ -1,5 +1,6 @@
 ---
 import Layout from '../../components/Layout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 import '../../styles/global.css';
 
 const rawPosts = import.meta.glob('../../data/blog/*.md', { eager: true });
@@ -12,6 +13,17 @@ const whatsappBase = `https://wa.me/${phoneRaw}`;
 const waRoute = `${whatsappBase}?text=${encodeURIComponent(
   'Hola JR Transportes'
 )}`;
+
+const baseUrl = 'https://jrtransportesmorochucos.com';
+
+const breadcrumbSchema = {
+  "@context": 'https://schema.org',
+  "@type": 'BreadcrumbList',
+  itemListElement: [
+    { "@type": 'ListItem', position: 1, name: 'Inicio', item: baseUrl },
+    { "@type": 'ListItem', position: 2, name: 'Blog', item: `${baseUrl}/blog` }
+  ]
+};
 ---
 
 <Layout
@@ -22,10 +34,14 @@ const waRoute = `${whatsappBase}?text=${encodeURIComponent(
   ogDescription="Blog de viajes con guias, reportajes y consejos para explorar Ayacucho. Descubre destinos turisticos y experiencias autenticas."
   ogType="website"
   ogImage="https://jrtransportesmorochucos.com/images/Pampa%20cangallo/pampa-cangallo.webp"
+  schema={breadcrumbSchema}
   activePage="blog"
   ctaText="Contactar"
   ctaHref={waRoute}
 >
+  <div class="mx-auto w-full max-w-6xl px-5 pt-4">
+    <Breadcrumb items={[{ label: 'Blog' }]} />
+  </div>
   <!-- Hero Blog -->
   <section class="relative flex h-[280px] w-full items-end overflow-hidden sm:h-[320px] lg:h-[380px]">
     <img

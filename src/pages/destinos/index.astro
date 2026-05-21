@@ -1,5 +1,6 @@
 ---
 import Layout from '../../components/Layout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 import '../../styles/global.css';
 import { destinations } from '../../data/destinations';
 
@@ -13,6 +14,17 @@ const waRoute = `${whatsappBase}?text=${encodeURIComponent(
   'Hola JR Transportes, deseo consultar por rutas y horarios.'
 )}`;
 
+const baseUrl = 'https://jrtransportesmorochucos.com';
+
+const breadcrumbSchema = {
+  "@context": 'https://schema.org',
+  "@type": 'BreadcrumbList',
+  itemListElement: [
+    { "@type": 'ListItem', position: 1, name: 'Inicio', item: baseUrl },
+    { "@type": 'ListItem', position: 2, name: 'Destinos y Tours', item: `${baseUrl}/destinos` }
+  ]
+};
+
 const localBusinessSchema = {
   "@context": 'https://schema.org',
   "@type": 'TravelAgency',
@@ -20,6 +32,8 @@ const localBusinessSchema = {
   telephone: `+${phoneRaw}`,
   areaServed: 'Ayacucho, Peru'
 };
+
+const combinedSchema = [breadcrumbSchema, localBusinessSchema];
 ---
 
 <Layout
@@ -30,13 +44,16 @@ const localBusinessSchema = {
   ogDescription="Explora nuestros destinos interprovinciales y tours turisticos en Ayacucho. Cangallo, Pampa Cangallo, Huancasancos y mas."
   ogType="website"
   ogImage="https://jrtransportesmorochucos.com/images/Pampa%20cangallo/pampa-cangallo.webp"
-  schema={localBusinessSchema}
+  schema={combinedSchema}
   activePage="destinos"
   ctaText="Reservar ahora"
   ctaHref={waRoute}
   bodyClass="bg-pampa-100 selection:bg-pampa-300 selection:text-pampa-900"
 >
   <div class="noise-overlay"></div>
+  <div class="mx-auto w-full max-w-6xl px-5 pt-4">
+    <Breadcrumb items={[{ label: 'Destinos y Tours' }]} />
+  </div>
   
   <!-- Hero de Destinos -->
   <section class="relative flex h-[320px] w-full items-end overflow-hidden sm:h-[380px] lg:h-[440px]">

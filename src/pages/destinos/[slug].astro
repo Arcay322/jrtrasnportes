@@ -1,5 +1,6 @@
 ---
 import Layout from '../../components/Layout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 import '../../styles/global.css';
 import { destinations, getDestinationBySlug } from '../../data/destinations';
 
@@ -48,6 +49,18 @@ const detailCopy = destinationCopy[destination.slug] ?? { heroText: destination.
 // Usar el predefinido para tours si es un tour
 const itineraryList = (destination.category === 'tour') ? genericTourItinerary : [];
 
+const baseUrl = 'https://jrtransportesmorochucos.com';
+
+const breadcrumbSchema = {
+  "@context": 'https://schema.org',
+  "@type": 'BreadcrumbList',
+  itemListElement: [
+    { "@type": 'ListItem', position: 1, name: 'Inicio', item: baseUrl },
+    { "@type": 'ListItem', position: 2, name: 'Destinos y Tours', item: `${baseUrl}/destinos` },
+    { "@type": 'ListItem', position: 3, name: destination.name, item: `${baseUrl}/destinos/${destination.slug}` }
+  ]
+};
+
 const localBusinessSchema = {
   "@context": 'https://schema.org',
   "@type": 'TouristAttraction',
@@ -56,6 +69,8 @@ const localBusinessSchema = {
   telephone: `+${phoneRaw}`,
   areaServed: 'Ayacucho, Peru'
 };
+
+const combinedSchema = [breadcrumbSchema, localBusinessSchema];
 ---
 
 <Layout
@@ -66,12 +81,18 @@ const localBusinessSchema = {
   ogDescription={`${destination.description} Tarifas desde ${destination.price}. Reserva ahora por WhatsApp.`}
   ogType="article"
   ogImage={destination.image.startsWith('http') ? destination.image : `https://jrtransportesmorochucos.com${destination.image}`}
-  schema={localBusinessSchema}
+  schema={combinedSchema}
   activePage="destino-detail"
   ctaText="Reservar ahora"
   ctaHref={waLink}
 >
   <div class="bg-pampa-50">
+      <div class="mx-auto w-full max-w-6xl px-5 pt-4">
+        <Breadcrumb items={[
+          { label: 'Destinos y Tours', href: '/destinos' },
+          { label: destination.name }
+        ]} />
+      </div>
       <!-- Hero del destino -->
       <section class="relative flex h-[420px] w-full items-end overflow-hidden sm:h-[480px] lg:h-[540px]">
         <img

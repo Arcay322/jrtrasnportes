@@ -1,5 +1,6 @@
 ---
 import Layout from '../../components/Layout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 import '../../styles/global.css';
 
 export async function getStaticPaths() {
@@ -24,11 +25,25 @@ const waRoute = `${whatsappBase}?text=${encodeURIComponent(
   `Hola JR Transportes, estuve leyendo el articulo "${post.frontmatter.title}" y deseo mas información.`
 )}`;
 
+const baseUrl = 'https://jrtransportesmorochucos.com';
+
+const breadcrumbSchema = {
+  "@context": 'https://schema.org',
+  "@type": 'BreadcrumbList',
+  itemListElement: [
+    { "@type": 'ListItem', position: 1, name: 'Inicio', item: baseUrl },
+    { "@type": 'ListItem', position: 2, name: 'Blog', item: `${baseUrl}/blog` },
+    { "@type": 'ListItem', position: 3, name: post.frontmatter.title, item: `${baseUrl}/blog/${post.frontmatter.slug}` }
+  ]
+};
+
 const articleSchema = {
   "@context": 'https://schema.org',
   "@type": 'BlogPosting',
   headline: post.frontmatter.title,
   description: post.frontmatter.description,
+  image: post.frontmatter.image.startsWith('http') ? post.frontmatter.image : `${baseUrl}${post.frontmatter.image}`,
+  url: `${baseUrl}/blog/${post.frontmatter.slug}`,
   author: {
     "@type": 'Organization',
     name: 'JR Transportes'
@@ -39,6 +54,8 @@ const articleSchema = {
     name: 'JR Transportes'
   }
 };
+
+const combinedSchema = [breadcrumbSchema, articleSchema];
 ---
 
 <style is:global>
@@ -82,7 +99,7 @@ const articleSchema = {
   ogDescription={post.frontmatter.description}
   ogType="article"
   ogImage={post.frontmatter.image.startsWith('http') ? post.frontmatter.image : `https://jrtransportesmorochucos.com${post.frontmatter.image}`}
-  schema={articleSchema}
+  schema={combinedSchema}
   activePage="blog-detail"
   ctaText="Contactar"
   ctaHref={waRoute}
@@ -92,6 +109,12 @@ const articleSchema = {
 
   <main class="min-h-screen pb-16 pt-4 mt-2">
     <div class="mx-auto flex max-w-6xl flex-col items-start gap-10 px-5 lg:flex-row lg:gap-12">
+      <div class="w-full">
+        <Breadcrumb items={[
+          { label: 'Blog', href: '/blog' },
+          { label: post.frontmatter.title }
+        ]} />
+      </div>
       <!-- Contenido Principal -->
       <article class="w-full flex-1 max-w-3xl">
         
