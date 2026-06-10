@@ -22,17 +22,20 @@ const services = [
   {
     icon: 'directions_bus',
     title: 'Transporte de pasajeros',
-    description: 'Viajes seguros, puntuales y confortables entre provincias, garantizando siempre la maxima responsabilidad.'
+    description:
+      'Viajes seguros, puntuales y confortables entre provincias, garantizando siempre la maxima responsabilidad.'
   },
   {
     icon: 'explore',
     title: 'Servicio turistico',
-    description: 'Traslados regionales y nacionales para grupos, paseos y experiencias locales.'
+    description:
+      'Traslados regionales y nacionales para grupos, paseos y experiencias locales.'
   },
   {
     icon: 'package_2',
     title: 'Encomiendas a domicilio',
-    description: 'Entrega confiable de paquetes con seguimiento y coordinacion por WhatsApp.'
+    description:
+      'Entrega confiable de paquetes con seguimiento y coordinacion por WhatsApp.'
   }
 ];
 
@@ -40,49 +43,54 @@ const policies = [
   {
     icon: 'verified_user',
     title: 'Politicas de viaje',
-    description: 'El pasajero debe presentarse con anticipacion en la Terminal Terrestre de Ayacucho. Salidas sujetas a disponibilidad y coordinacion previa.'
+    description:
+      'El pasajero debe presentarse con anticipacion en la Terminal Terrestre de Ayacucho. Salidas sujetas a disponibilidad y coordinacion previa.'
   },
   {
     icon: 'luggage',
     title: 'Equipaje',
-    description: 'El equipaje debe estar identificado y en buen estado. Equipaje especial o voluminoso se coordina antes de la salida.'
+    description:
+      'El equipaje debe estar identificado y en buen estado. Equipaje especial o voluminoso se coordina antes de la salida.'
   },
   {
     icon: 'inventory_2',
     title: 'Encomiendas',
-    description: 'Se reciben encomiendas correctamente embaladas y con datos de remitente/destinatario. Entrega y recojo se coordinan por WhatsApp.'
+    description:
+      'Se reciben encomiendas correctamente embaladas y con datos de remitente/destinatario. Entrega y recojo se coordinan por WhatsApp.'
   }
 ];
 
 const paymentMethods = ['Yape', 'Plin'];
 
 const localBusinessSchema = {
-  "@context": 'https://schema.org',
-  "@type": 'TravelAgency',
+  '@context': 'https://schema.org',
+  '@type': 'TravelAgency',
   name: companyName,
-  description: 'Empresa de transporte interprovincial en Ayacucho. Servicio de pasajeros, giros, encomiendas y traslado turistico.',
+  description:
+    'Empresa de transporte interprovincial en Ayacucho. Servicio de pasajeros, giros, encomiendas y traslado turistico.',
   telephone: `+${phoneRaw}`,
   url: 'https://jrtransportesmorochucos.com',
   logo: 'https://jrtransportesmorochucos.com/JRlogo.webp',
-  image: 'https://jrtransportesmorochucos.com/images/Pampa%20cangallo/pampa-cangallo.webp',
+  image:
+    'https://jrtransportesmorochucos.com/images/Pampa%20cangallo/pampa-cangallo.webp',
   areaServed: {
-    "@type": 'City',
+    '@type': 'City',
     name: 'Ayacucho',
     address: {
-      "@type": 'PostalAddress',
+      '@type': 'PostalAddress',
       addressLocality: 'Ayacucho',
       addressRegion: 'Ayacucho',
       addressCountry: 'PE'
     }
   },
   address: {
-    "@type": 'PostalAddress',
+    '@type': 'PostalAddress',
     addressLocality: 'Ayacucho',
     addressRegion: 'Ayacucho',
     addressCountry: 'PE'
   },
   geo: {
-    "@type": 'GeoCoordinates',
+    '@type': 'GeoCoordinates',
     latitude: '-13.1631',
     longitude: '-74.2244'
   },
@@ -90,33 +98,31 @@ const localBusinessSchema = {
   currenciesAccepted: 'PEN',
   paymentAccepted: 'Yape, Plin, Efectivo',
   openingHours: 'Mo-Su 05:00-19:00',
-  sameAs: [
-    'https://wa.me/51928413201'
-  ],
+  sameAs: ['https://wa.me/51928413201'],
   hasOfferCatalog: {
-    "@type": 'OfferCatalog',
+    '@type': 'OfferCatalog',
     name: 'Servicios de Transporte',
     itemListElement: [
       {
-        "@type": 'Offer',
+        '@type': 'Offer',
         itemOffered: {
-          "@type": 'Service',
+          '@type': 'Service',
           name: 'Transporte de Pasajeros',
           description: 'Viajes interprovinciales seguros y puntuales'
         }
       },
       {
-        "@type": 'Offer',
+        '@type': 'Offer',
         itemOffered: {
-          "@type": 'Service',
+          '@type': 'Service',
           name: 'Servicio Turistico',
           description: 'Traslados y tours por Ayacucho'
         }
       },
       {
-        "@type": 'Offer',
+        '@type': 'Offer',
         itemOffered: {
-          "@type": 'Service',
+          '@type': 'Service',
           name: 'Encomiendas',
           description: 'Envio de paquetes y giros'
         }
@@ -126,42 +132,48 @@ const localBusinessSchema = {
 };
 
 const faqSchema = {
-  "@context": 'https://schema.org',
-  "@type": 'FAQPage',
-  mainEntity: policies.map(p => ({
-    "@type": 'Question',
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: policies.map((p) => ({
+    '@type': 'Question',
     name: p.title,
     acceptedAnswer: {
-      "@type": 'Answer',
+      '@type': 'Answer',
       text: p.description
     }
   }))
 };
 
 const webSiteSchema = {
-  "@context": 'https://schema.org',
-  "@type": 'WebSite',
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
   name: companyName,
   url: 'https://jrtransportesmorochucos.com',
-  description: 'Empresa de transporte interprovincial en Ayacucho. Pasajeros, giros, encomiendas y tours turisticos.',
+  description:
+    'Empresa de transporte interprovincial en Ayacucho. Pasajeros, giros, encomiendas y tours turisticos.',
   inLanguage: 'es-PE'
 };
 
 const organizationSchema = {
-  "@context": 'https://schema.org',
-  "@type": 'Organization',
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
   name: companyName,
   url: 'https://jrtransportesmorochucos.com',
   logo: 'https://jrtransportesmorochucos.com/JRlogo.webp',
   contactPoint: {
-    "@type": 'ContactPoint',
+    '@type': 'ContactPoint',
     telephone: `+${phoneRaw}`,
     contactType: 'customer service',
     availableLanguage: ['Spanish']
   }
 };
 
-const schemas = [localBusinessSchema, faqSchema, webSiteSchema, organizationSchema];
+const schemas = [
+  localBusinessSchema,
+  faqSchema,
+  webSiteSchema,
+  organizationSchema
+];
 ---
 
 <Layout
@@ -180,25 +192,38 @@ const schemas = [localBusinessSchema, faqSchema, webSiteSchema, organizationSche
   mainClass="relative z-0 overflow-x-clip"
 >
   <!-- Hero con CSS nativo restaurado -->
-  <section class="relative flex min-h-[660px] lg:min-h-[82vh] items-center py-12 lg:py-20">
+  <section
+    class="relative flex min-h-[660px] lg:min-h-[82vh] items-center py-12 lg:py-20"
+  >
     <img
       class="absolute inset-0 h-full w-full object-cover"
       src="https://lh3.googleusercontent.com/aida-public/AB6AXuDY7u1kL2Z1wZDsppmSkekS25Q5CEUM500ZfM0TwbLpuE9JB1NCTr6Yl8adRmLAk6icC0aC6oCBUzVdrb18-k2Dj6NyJGsrHtHsmsiZ3hVX6zjUx-Zz-oPShMrtGU81Sk4g72Yj2x2vYQeAcsfdzfBdtHDc5oiHmtSnM7WUkSYdrNAXvVAETkwWkgmiFVZuvLk7Dh5AcOTT7GlKyytJrCI_OkgoIxTcpjnCVzL3E4Bv2VGXudL3Y5cV6UilB4F_uGpFfrjEQHG6pw"
       alt="Paisaje andino de las pampas de Ayacucho"
     />
-    <div class="hero-overlay absolute inset-0 bg-gradient-to-r from-cielo-900/85 via-pampa-900/60 to-pampa-900/20"></div>
+    <div
+      class="hero-overlay absolute inset-0 bg-gradient-to-r from-cielo-900/85 via-pampa-900/60 to-pampa-900/20"
+    >
+    </div>
 
-    <div class="relative z-10 mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-8 px-5 py-6 lg:grid-cols-5">
+    <div
+      class="relative z-10 mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-8 px-5 py-6 lg:grid-cols-5"
+    >
       <!-- Texto principal -->
       <div class="lg:col-span-3">
-        <p class="mb-4 text-sm font-bold uppercase tracking-[0.15em] text-pampa-300">
+        <p
+          class="mb-4 text-sm font-bold uppercase tracking-[0.15em] text-pampa-300"
+        >
           Transporte interprovincial en Ayacucho
         </p>
-        <h1 class="font-headline text-4xl font-normal text-white sm:text-5xl lg:text-6xl">
+        <h1
+          class="font-headline text-4xl font-normal text-white sm:text-5xl lg:text-6xl"
+        >
           Conectando Ayacucho
           <span class="block text-pampa-300">con sus pueblos</span>
         </h1>
-        <p class="mt-5 max-w-xl text-base leading-relaxed text-cream-light/90 sm:text-lg">
+        <p
+          class="mt-5 max-w-xl text-base leading-relaxed text-cream-light/90 sm:text-lg"
+        >
           Pampa Cangallo, Cangallo y Huancasancos. Viajes seguros con la
           responsabilidad que tu familia merece.
         </p>
@@ -207,34 +232,43 @@ const schemas = [localBusinessSchema, faqSchema, webSiteSchema, organizationSche
         <div class="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
           <div class="relative" id="custom-dropdown">
             <input type="hidden" id="route-select" value="" />
-            <button 
-              type="button" 
+            <button
+              type="button"
               id="dropdown-button"
               class="flex h-12 w-full sm:w-64 cursor-pointer items-center justify-between rounded-lg border border-white/20 bg-white/10 px-4 text-sm font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/20 focus:border-pampa-300 focus:outline-none focus:ring-2 focus:ring-pampa-500/50"
             >
-              <span id="dropdown-selected-text" class="truncate">Elige tu destino</span>
-              <span class="material-symbols-outlined text-pampa-300 transition-transform duration-200" id="dropdown-icon">expand_more</span>
+              <span id="dropdown-selected-text" class="truncate"
+                >Elige tu destino</span
+              >
+              <span
+                class="material-symbols-outlined text-pampa-300 transition-transform duration-200"
+                id="dropdown-icon">expand_more</span
+              >
             </button>
 
             <!-- Dropdown Menu Custom -->
-            <ul 
+            <ul
               id="dropdown-menu"
               class="absolute left-0 right-0 top-[calc(100%+8px)] z-50 hidden max-h-60 overflow-y-auto rounded-xl border border-white/10 bg-cielo-900/95 p-1.5 shadow-float backdrop-blur-xl transition-all"
             >
-              {destinations.map((d) => (
-                <li>
-                  <button 
-                    type="button" 
-                    class="group flex w-full items-center justify-between rounded-md px-3 py-2.5 text-left text-sm font-medium text-cream-light transition-all hover:bg-white/10 focus:bg-white/10 focus:outline-none"
-                    data-value={d.slug}
-                    data-name={d.name}
-                    data-price={d.price}
-                  >
-                    <span class="group-hover:text-white">{d.name}</span>
-                    <span class="text-[11px] font-extrabold tracking-wide text-pampa-300 group-hover:text-pampa-200">{d.price}</span>
-                  </button>
-                </li>
-              ))}
+              {
+                destinations.map((d) => (
+                  <li>
+                    <button
+                      type="button"
+                      class="group flex w-full items-center justify-between rounded-md px-3 py-2.5 text-left text-sm font-medium text-cream-light transition-all hover:bg-white/10 focus:bg-white/10 focus:outline-none"
+                      data-value={d.slug}
+                      data-name={d.name}
+                      data-price={d.price}
+                    >
+                      <span class="group-hover:text-white">{d.name}</span>
+                      <span class="text-[11px] font-extrabold tracking-wide text-pampa-300 group-hover:text-pampa-200">
+                        {d.price}
+                      </span>
+                    </button>
+                  </li>
+                ))
+              }
             </ul>
           </div>
           <a
@@ -252,7 +286,9 @@ const schemas = [localBusinessSchema, faqSchema, webSiteSchema, organizationSche
 
       <!-- Card flotante superpuesta (Layout balanceado) -->
       <div class="relative z-20 lg:translate-y-4 lg:col-span-2">
-        <div class="group overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-4 shadow-float backdrop-blur-md transition-transform duration-500 hover:-rotate-1 hover:scale-[1.02]">
+        <div
+          class="group overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-4 shadow-float backdrop-blur-md transition-transform duration-500 hover:-rotate-1 hover:scale-[1.02]"
+        >
           <div class="overflow-hidden rounded-xl">
             <img
               class="h-48 w-full object-cover sm:h-56 transition-transform duration-700 group-hover:scale-105"
@@ -261,35 +297,57 @@ const schemas = [localBusinessSchema, faqSchema, webSiteSchema, organizationSche
               loading="lazy"
             />
           </div>
-          <h2 class="mt-3.5 font-headline text-xl text-white">Flota de Vehiculos Modernos</h2>
-          <p class="mt-1 text-sm text-white/75">Unidades equipadas para viajes comodos y seguros por las rutas de Ayacucho.</p>
+          <h2 class="mt-3.5 font-headline text-xl text-white">
+            Flota de Vehiculos Modernos
+          </h2>
+          <p class="mt-1 text-sm text-white/75">
+            Unidades equipadas para viajes comodos y seguros por las rutas de
+            Ayacucho.
+          </p>
         </div>
       </div>
     </div>
 
     <!-- Franja andina sutil al fondo del hero -->
-    <div class="andean-divider absolute bottom-0 left-0 right-0 opacity-50"></div>
+    <div class="andean-divider absolute bottom-0 left-0 right-0 opacity-50">
+    </div>
   </section>
 
   <!-- Servicios -->
   <section class="py-20 sm:py-24" id="servicios">
     <div class="mx-auto w-full max-w-6xl px-5">
       <div class="mb-10 text-center">
-        <p class="mb-2 text-xs font-bold uppercase tracking-[0.15em] text-pampa-500">Lo que hacemos</p>
-        <h2 class="font-headline text-3xl text-pampa-900 sm:text-4xl">Servicios integrales</h2>
+        <p
+          class="mb-2 text-xs font-bold uppercase tracking-[0.15em] text-pampa-500"
+        >
+          Lo que hacemos
+        </p>
+        <h2 class="font-headline text-3xl text-pampa-900 sm:text-4xl">
+          Servicios integrales
+        </h2>
         <div class="andean-divider mx-auto mt-4 max-w-[120px]"></div>
       </div>
 
       <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {services.map((service, i) => (
-          <article class={`fade-in-up stagger-${i + 1} group rounded-xl border border-pampa-200/70 bg-white/95 p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-2 hover:rotate-1 hover:scale-[1.01] hover:border-pampa-300 hover:shadow-float`}>
-            <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-pampa-100 text-pampa-500">
-              <span class="material-symbols-outlined text-2xl">{service.icon}</span>
-            </div>
-            <h3 class="font-headline text-xl text-pampa-800">{service.title}</h3>
-            <p class="mt-2 text-sm leading-relaxed text-pampa-700/70">{service.description}</p>
-          </article>
-        ))}
+        {
+          services.map((service, i) => (
+            <article
+              class={`fade-in-up stagger-${i + 1} group rounded-xl border border-pampa-200/70 bg-white/95 p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-2 hover:rotate-1 hover:scale-[1.01] hover:border-pampa-300 hover:shadow-float`}
+            >
+              <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-pampa-100 text-pampa-500">
+                <span class="material-symbols-outlined text-2xl">
+                  {service.icon}
+                </span>
+              </div>
+              <h3 class="font-headline text-xl text-pampa-800">
+                {service.title}
+              </h3>
+              <p class="mt-2 text-sm leading-relaxed text-pampa-700/70">
+                {service.description}
+              </p>
+            </article>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -297,12 +355,18 @@ const schemas = [localBusinessSchema, faqSchema, webSiteSchema, organizationSche
   <!-- Destinos -->
   <section class="bg-pampa-100 py-20 sm:py-24" id="destinos">
     <div class="mx-auto w-full max-w-6xl px-5">
-      <div class="mb-8 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+      <div
+        class="mb-8 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end"
+      >
         <div>
-          <p class="mb-1 text-xs font-bold uppercase tracking-[0.15em] text-pampa-500">
+          <p
+            class="mb-1 text-xs font-bold uppercase tracking-[0.15em] text-pampa-500"
+          >
             Explora el corazon de Ayacucho
           </p>
-          <h2 class="font-headline text-3xl text-pampa-900 sm:text-4xl">Destinos destacados</h2>
+          <h2 class="font-headline text-3xl text-pampa-900 sm:text-4xl">
+            Destinos destacados
+          </h2>
         </div>
         <a
           href="/destinos"
@@ -313,74 +377,128 @@ const schemas = [localBusinessSchema, faqSchema, webSiteSchema, organizationSche
       </div>
 
       <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {destinations.map((destination, i) => (
-          <article class={`fade-in-up stagger-${i + 1} group flex flex-col overflow-hidden rounded-xl border border-pampa-200/50 bg-white shadow-soft transition-all duration-300 hover:-translate-y-2 hover:shadow-float`}>
-            <div class="relative h-56 overflow-hidden">
-              <img
-                src={destination.image}
-                alt={destination.name}
-                class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-                loading="lazy"
-              />
-              <span class="absolute right-3 top-3 z-10 rounded-full bg-pampa-50/95 px-3 py-1 text-xs font-extrabold text-pampa-600 shadow-soft backdrop-blur-md font-data">
-                {destination.price}
-              </span>
-            </div>
-            <div class="flex flex-col justify-center p-5">
-              <div>
-                <h3 class="font-headline text-xl text-pampa-800">{destination.name}</h3>
-                <p class="mt-2 text-sm leading-relaxed text-pampa-700/70">{destination.description}</p>
-              </div>
-              <a
-                class="mt-4 inline-flex w-fit items-center gap-1 text-sm font-bold text-cielo-500 no-underline transition-all hover:gap-2 hover:text-cielo-700"
-                href={`/destinos/${destination.slug}`}
-              >
-                Ver detalle
-                <span class="material-symbols-outlined text-base">
-                  arrow_forward
+        {
+          destinations.map((destination, i) => (
+            <article
+              class={`fade-in-up stagger-${i + 1} group flex flex-col overflow-hidden rounded-xl border border-pampa-200/50 bg-white shadow-soft transition-all duration-300 hover:-translate-y-2 hover:shadow-float`}
+            >
+              <div class="relative h-56 overflow-hidden">
+                <img
+                  src={destination.image}
+                  alt={destination.name}
+                  class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                />
+                <span class="absolute right-3 top-3 z-10 rounded-full bg-pampa-50/95 px-3 py-1 text-xs font-extrabold text-pampa-600 shadow-soft backdrop-blur-md font-data">
+                  {destination.price}
                 </span>
-              </a>
-            </div>
-          </article>
-        ))}
+              </div>
+              <div class="flex flex-1 flex-col justify-between p-5">
+                <div>
+                  <h3 class="font-headline text-xl text-pampa-800">
+                    {destination.name}
+                  </h3>
+                  <p class="mt-2 text-sm leading-relaxed text-pampa-700/70">
+                    {destination.description}
+                  </p>
+                </div>
+                <div class="mt-5 flex items-center justify-between gap-4 border-t border-pampa-100/60 pt-4">
+                  <a
+                    class="inline-flex items-center gap-0.5 text-xs font-bold text-pampa-600 hover:text-pampa-800 transition-all"
+                    href={`/destinos/${destination.slug}`}
+                  >
+                    Ver info
+                    <span class="material-symbols-outlined text-sm">info</span>
+                  </a>
+                  <a
+                    class="rounded-lg bg-logo-500 px-3.5 py-2 text-center text-xs font-bold text-white transition-all hover:bg-logo-600 hover:shadow-soft"
+                    href={`/reservar?route=${destination.slug}`}
+                  >
+                    {destination.category === 'tour' ? 'Reservar Tour' : 'Comprar Pasaje'}
+                  </a>
+                </div>
+              </div>
+            </article>
+          ))
+        }
       </div>
     </div>
   </section>
 
   <!-- Contacto -->
   <section class="py-20 sm:py-24" id="contacto">
-    <div class="mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-8 px-5 lg:grid-cols-2">
+    <div
+      class="mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-8 px-5 lg:grid-cols-2"
+    >
       <div>
-        <p class="mb-2 text-xs font-bold uppercase tracking-[0.15em] text-pampa-500">Desde el corazon de Huamanga</p>
-        <h2 class="font-headline text-3xl text-pampa-900 sm:text-4xl">Dudas o reservas?</h2>
+        <p
+          class="mb-2 text-xs font-bold uppercase tracking-[0.15em] text-pampa-500"
+        >
+          Desde el corazon de Huamanga
+        </p>
+        <h2 class="font-headline text-3xl text-pampa-900 sm:text-4xl">
+          Dudas o reservas?
+        </h2>
         <p class="mt-3 max-w-lg text-sm leading-relaxed text-pampa-700/70">
-          Estamos listos para llevarte a tu proximo destino. Te atendemos por WhatsApp o llamada.
+          Estamos listos para llevarte a tu proximo destino. Te atendemos por
+          WhatsApp o llamada.
         </p>
 
         <!-- Tarjetas de contacto con micro-animaciones BOLD -->
         <div class="mt-6 space-y-3">
-          <div class="group flex items-center gap-4 rounded-xl border border-pampa-200/60 bg-white p-4 shadow-soft transition-transform duration-300 hover:-rotate-1 hover:scale-[1.02] hover:shadow-card">
-            <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-pampa-100 transition-colors group-hover:bg-pampa-200">
-              <span class="material-symbols-outlined text-xl text-pampa-500">schedule</span>
+          <div
+            class="group flex items-center gap-4 rounded-xl border border-pampa-200/60 bg-white p-4 shadow-soft transition-transform duration-300 hover:-rotate-1 hover:scale-[1.02] hover:shadow-card"
+          >
+            <div
+              class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-pampa-100 transition-colors group-hover:bg-pampa-200"
+            >
+              <span class="material-symbols-outlined text-xl text-pampa-500"
+                >schedule</span
+              >
             </div>
             <div>
-              <p class="text-[11px] font-bold uppercase tracking-widest text-pampa-600/60">Horario de atencion</p>
-              <strong class="text-base font-extrabold text-pampa-800">5:00 am - 7:00 pm</strong>
+              <p
+                class="text-[11px] font-bold uppercase tracking-widest text-pampa-600/60"
+              >
+                Horario de atencion
+              </p>
+              <strong class="text-base font-extrabold text-pampa-800"
+                >5:00 am - 7:00 pm</strong
+              >
             </div>
           </div>
 
-          <div class="group flex items-center gap-4 rounded-xl border border-pampa-200/60 bg-white p-4 shadow-soft transition-transform duration-300 hover:rotate-1 hover:scale-[1.02] hover:shadow-card">
-            <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-cielo-500/10 transition-colors group-hover:bg-cielo-500/20">
-              <span class="material-symbols-outlined text-xl text-cielo-500">phone</span>
+          <div
+            class="group flex items-center gap-4 rounded-xl border border-pampa-200/60 bg-white p-4 shadow-soft transition-transform duration-300 hover:rotate-1 hover:scale-[1.02] hover:shadow-card"
+          >
+            <div
+              class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-cielo-500/10 transition-colors group-hover:bg-cielo-500/20"
+            >
+              <span class="material-symbols-outlined text-xl text-cielo-500"
+                >phone</span
+              >
             </div>
             <div class="flex-1">
-              <p class="text-[11px] font-bold uppercase tracking-widest text-pampa-600/60">Telefonos de contacto</p>
+              <p
+                class="text-[11px] font-bold uppercase tracking-widest text-pampa-600/60"
+              >
+                Telefonos de contacto
+              </p>
               <div class="flex flex-col gap-2 mt-1.5">
-                <div class="flex items-center justify-between gap-2 border-b border-pampa-100/50 pb-2 last:border-0 last:pb-0">
+                <div
+                  class="flex items-center justify-between gap-2 border-b border-pampa-100/50 pb-2 last:border-0 last:pb-0"
+                >
                   <div class="flex flex-col">
-                    <strong class="text-base font-extrabold text-pampa-800 font-data">{phoneDisplay}</strong>
-                    <span class="inline-flex items-center gap-1 rounded-full bg-quebrada-500/10 w-fit px-2 py-0.5 text-[9px] font-extrabold text-quebrada-600 uppercase tracking-wide mt-0.5">
-                      <span class="h-1 w-1 rounded-full bg-quebrada-500 animate-pulse"></span> WhatsApp y llamadas
+                    <strong
+                      class="text-base font-extrabold text-pampa-800 font-data"
+                      >{phoneDisplay}</strong
+                    >
+                    <span
+                      class="inline-flex items-center gap-1 rounded-full bg-quebrada-500/10 w-fit px-2 py-0.5 text-[9px] font-extrabold text-quebrada-600 uppercase tracking-wide mt-0.5"
+                    >
+                      <span
+                        class="h-1 w-1 rounded-full bg-quebrada-500 animate-pulse"
+                      ></span> WhatsApp y llamadas
                     </span>
                   </div>
                   <a
@@ -393,41 +511,69 @@ const schemas = [localBusinessSchema, faqSchema, webSiteSchema, organizationSche
                     <span class="material-symbols-outlined text-sm">send</span>
                   </a>
                 </div>
-                <div class="flex items-center justify-between gap-2 border-b border-pampa-100/50 pb-2 last:border-0 last:pb-0">
-                  <strong class="text-base font-extrabold text-pampa-800 font-data">918 712 309</strong>
-                  <span class="text-[10px] font-bold text-pampa-500/70">Solo llamadas</span>
+                <div
+                  class="flex items-center justify-between gap-2 border-b border-pampa-100/50 pb-2 last:border-0 last:pb-0"
+                >
+                  <strong
+                    class="text-base font-extrabold text-pampa-800 font-data"
+                    >918 712 309</strong
+                  >
+                  <span class="text-[10px] font-bold text-pampa-500/70"
+                    >Solo llamadas</span
+                  >
                 </div>
                 <div class="flex items-center justify-between gap-2">
-                  <strong class="text-base font-extrabold text-pampa-800 font-data">980 849 165</strong>
-                  <span class="text-[10px] font-bold text-pampa-500/70">Solo llamadas</span>
+                  <strong
+                    class="text-base font-extrabold text-pampa-800 font-data"
+                    >980 849 165</strong
+                  >
+                  <span class="text-[10px] font-bold text-pampa-500/70"
+                    >Solo llamadas</span
+                  >
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="group flex items-center gap-4 rounded-xl border border-pampa-200/60 bg-white p-4 shadow-soft transition-transform duration-300 hover:-rotate-1 hover:scale-[1.02] hover:shadow-card">
-            <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-pampa-100 transition-colors group-hover:bg-pampa-200">
-              <span class="material-symbols-outlined text-xl text-pampa-500">location_on</span>
+          <div
+            class="group flex items-center gap-4 rounded-xl border border-pampa-200/60 bg-white p-4 shadow-soft transition-transform duration-300 hover:-rotate-1 hover:scale-[1.02] hover:shadow-card"
+          >
+            <div
+              class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-pampa-100 transition-colors group-hover:bg-pampa-200"
+            >
+              <span class="material-symbols-outlined text-xl text-pampa-500"
+                >location_on</span
+              >
             </div>
             <div>
-              <p class="text-[11px] font-bold uppercase tracking-widest text-pampa-600/60">Punto de salida</p>
-              <strong class="text-base font-extrabold text-pampa-800">Terminal Sur de Ayacucho</strong>
+              <p
+                class="text-[11px] font-bold uppercase tracking-widest text-pampa-600/60"
+              >
+                Punto de salida
+              </p>
+              <strong class="text-base font-extrabold text-pampa-800"
+                >Terminal Sur de Ayacucho</strong
+              >
             </div>
           </div>
         </div>
       </div>
 
       <!-- Mapa interactivo -->
-      <div class="relative h-80 overflow-hidden rounded-2xl border border-pampa-200/40 shadow-card sm:h-96 lg:h-[420px]">
+      <div
+        class="relative h-80 overflow-hidden rounded-2xl border border-pampa-200/40 shadow-card sm:h-96 lg:h-[420px]"
+      >
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d429.25729012856885!2d-74.21122213212409!3d-13.169194217734006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x911287646bfc403b%3A0x7f98e4ba8e4a0c2e!2sTerminal%20Sur!5e0!3m2!1ses!2spe!4v1779241583169!5m2!1ses!2spe"
           class="h-full w-full border-0 grayscale-[30%]"
           allowfullscreen=""
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
-          title="Ubicacion de JR Transportes en Terminal Sur Ayacucho"
-        ></iframe>
-        <div class="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-pampa-200/40"></div>
+          title="Ubicacion de JR Transportes en Terminal Sur Ayacucho"></iframe>
+        <div
+          class="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-pampa-200/40"
+        >
+        </div>
       </div>
     </div>
   </section>
@@ -436,33 +582,56 @@ const schemas = [localBusinessSchema, faqSchema, webSiteSchema, organizationSche
   <section class="bg-pampa-100 py-20 sm:py-24" id="politicas">
     <div class="mx-auto w-full max-w-6xl px-5">
       <div class="mb-10 text-center">
-        <p class="mb-2 text-xs font-bold uppercase tracking-[0.15em] text-pampa-500">Informacion importante</p>
-        <h2 class="font-headline text-3xl text-pampa-900 sm:text-4xl">Politicas del servicio</h2>
+        <p
+          class="mb-2 text-xs font-bold uppercase tracking-[0.15em] text-pampa-500"
+        >
+          Informacion importante
+        </p>
+        <h2 class="font-headline text-3xl text-pampa-900 sm:text-4xl">
+          Politicas del servicio
+        </h2>
         <div class="andean-divider mx-auto mt-4 max-w-[120px]"></div>
       </div>
 
       <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {policies.map((policy, i) => (
-          <article class={`fade-in-up stagger-${i + 1} rounded-xl border border-pampa-200/70 bg-white p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-card`}>
-            <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-pampa-100 text-pampa-500">
-              <span class="material-symbols-outlined text-2xl">{policy.icon}</span>
-            </div>
-            <h3 class="font-headline text-xl text-pampa-800">{policy.title}</h3>
-            <p class="mt-2 text-sm leading-relaxed text-pampa-700/70">{policy.description}</p>
-          </article>
-        ))}
+        {
+          policies.map((policy, i) => (
+            <article
+              class={`fade-in-up stagger-${i + 1} rounded-xl border border-pampa-200/70 bg-white p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-card`}
+            >
+              <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-pampa-100 text-pampa-500">
+                <span class="material-symbols-outlined text-2xl">
+                  {policy.icon}
+                </span>
+              </div>
+              <h3 class="font-headline text-xl text-pampa-800">
+                {policy.title}
+              </h3>
+              <p class="mt-2 text-sm leading-relaxed text-pampa-700/70">
+                {policy.description}
+              </p>
+            </article>
+          ))
+        }
       </div>
     </div>
   </section>
 
   <!-- Metodos de pago -->
-  <section class="border-y border-pampa-200/60 bg-pampa-50 py-4" aria-label="Medios de pago">
-    <div class="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-center gap-6 px-5 sm:gap-10">
-      {paymentMethods.map((method) => (
-        <span class="text-sm font-extrabold uppercase tracking-widest text-pampa-400">
-          {method}
-        </span>
-      ))}
+  <section
+    class="border-y border-pampa-200/60 bg-pampa-50 py-4"
+    aria-label="Medios de pago"
+  >
+    <div
+      class="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-center gap-6 px-5 sm:gap-10"
+    >
+      {
+        paymentMethods.map((method) => (
+          <span class="text-sm font-extrabold uppercase tracking-widest text-pampa-400">
+            {method}
+          </span>
+        ))
+      }
     </div>
   </section>
 
@@ -476,7 +645,14 @@ const schemas = [localBusinessSchema, faqSchema, webSiteSchema, organizationSche
     const selectedText = document.getElementById('dropdown-selected-text');
     const routeCta = document.getElementById('route-cta');
 
-    if (dropdown && dropdownButton && customMenu && customIcon && routeSelect && routeCta) {
+    if (
+      dropdown &&
+      dropdownButton &&
+      customMenu &&
+      customIcon &&
+      routeSelect &&
+      routeCta
+    ) {
       // Estado inicial: CTA deshabilitado hasta seleccion
       routeCta.setAttribute('disabled', 'true');
       routeCta.setAttribute('aria-disabled', 'true');
@@ -502,16 +678,16 @@ const schemas = [localBusinessSchema, faqSchema, webSiteSchema, organizationSche
 
       // Seleccionar opcion
       const options = customMenu.querySelectorAll('button[data-value]');
-      options.forEach(option => {
+      options.forEach((option) => {
         option.addEventListener('click', () => {
           const value = option.getAttribute('data-value');
           const name = option.getAttribute('data-name');
           const price = option.getAttribute('data-price');
-          
+
           if (value) {
             routeSelect.value = value;
             if (selectedText) selectedText.textContent = `${name} — ${price}`;
-            
+
             // Activar CTA
             routeCta.removeAttribute('disabled');
             routeCta.removeAttribute('aria-disabled');
@@ -519,7 +695,7 @@ const schemas = [localBusinessSchema, faqSchema, webSiteSchema, organizationSche
             routeCta.removeAttribute('target');
             routeCta.removeAttribute('rel');
           }
-          
+
           // Cerrar dropdown
           customMenu.classList.add('hidden');
           customIcon.classList.remove('rotate-180');

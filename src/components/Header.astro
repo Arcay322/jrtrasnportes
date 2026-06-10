@@ -1,4 +1,6 @@
 ---
+import { auth, db } from '../lib/firebaseAdmin';
+
 export interface Props {
   activePage?: string;
   ctaText?: string;
@@ -8,42 +10,78 @@ export interface Props {
 const {
   activePage = '',
   ctaText = 'Reservar ahora',
-  ctaHref = 'https://wa.me/51928413201?text=Hola%20JR%20Transportes%2C%20deseo%20consultar%20por%20rutas%20y%20horarios.',
+  ctaHref = 'https://wa.me/51928413201?text=Hola%20JR%20Transportes%2C%20deseo%20consultar%20por%20rutas%20y%20horarios.'
 } = Astro.props;
+
+// Obtener datos del usuario logueado en el servidor
+const sessionCookie = Astro.cookies.get('__session')?.value;
+let user: any = null;
+
+if (sessionCookie) {
+  try {
+    const decodedClaims = await auth.verifySessionCookie(sessionCookie, true);
+    try {
+      const userDoc = await db.collection('users').doc(decodedClaims.uid).get();
+      user = userDoc.exists ? { ...decodedClaims, ...userDoc.data() } : decodedClaims;
+    } catch (e) {
+      user = decodedClaims;
+    }
+  } catch (error) {
+    // Ignorar cookie no válida o expirada
+  }
+}
 
 const baseMenu = [
   { label: 'Inicio', href: '/' },
   { label: 'Servicios', href: '/#servicios' },
   { label: 'Destinos', href: '/destinos' },
-  { label: 'Blog', href: '/blog' },
+  { label: 'Blog', href: '/blog' }
 ];
 
-const menuLinks = activePage === 'index'
-  ? [
-      { label: 'Inicio', href: '#contenido' },
-      { label: 'Servicios', href: '#servicios' },
-      { label: 'Destinos', href: '/destinos' },
-      { label: 'Blog', href: '/blog' },
-      { label: 'Politicas', href: '#politicas' },
-      { label: 'Contacto', href: '#contacto' },
-    ]
-  : baseMenu.concat(activePage === 'destinos' || activePage === 'destino-detail'
-      ? [{ label: 'Contacto', href: '/#contacto' }]
-      : []);
+const menuLinks =
+  activePage === 'index'
+    ? [
+        { label: 'Inicio', href: '#contenido' },
+        { label: 'Servicios', href: '#servicios' },
+        { label: 'Destinos', href: '/destinos' },
+        { label: 'Blog', href: '/blog' },
+        { label: 'Politicas', href: '#politicas' },
+        { label: 'Contacto', href: '#contacto' }
+      ]
+    : baseMenu.concat(
+        activePage === 'destinos' || activePage === 'destino-detail'
+          ? [{ label: 'Contacto', href: '/#contacto' }]
+          : []
+      );
 
-const isActive = (item: typeof menuLinks[0]) => {
+// Agregar dinámicamente enlaces basados en autenticación
+const dynamicLinks = [...menuLinks];
+if (user) {
+  dynamicLinks.push({ label: 'Mis Reservas', href: '/mis-reservas' });
+  if (user.role === 'admin' || user.role === 'operator') {
+    dynamicLinks.push({ label: 'Panel Admin', href: '/admin' });
+  }
+}
+
+const isActive = (item: (typeof menuLinks)[0]) => {
   if (activePage === 'index' && item.href.startsWith('#')) return false;
   if (activePage === 'destinos' && item.label === 'Destinos') return true;
   if (activePage === 'blog' && item.label === 'Blog') return true;
   if (activePage === 'destino-detail' && item.label === 'Destinos') return true;
   if (activePage === 'blog-detail' && item.label === 'Blog') return true;
+  if (activePage === 'mis-reservas' && item.label === 'Mis Reservas') return true;
+  if (activePage === 'admin' && item.label === 'Panel Admin') return true;
   return false;
 };
 ---
 
 <!-- Header -->
-<header class="andean-border-top sticky top-0 z-50 border-b border-pampa-200/60 bg-pampa-50/80 backdrop-blur-xl">
-  <div class="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-2 sm:py-1.5">
+<header
+  class="andean-border-top sticky top-0 z-50 border-b border-pampa-200/60 bg-pampa-50/80 backdrop-blur-xl"
+>
+  <div
+    class="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-2 sm:py-1.5"
+  >
     <a href="/" class="no-underline flex items-center -ml-1 group">
       <img
         src="/JRlogo.webp"
@@ -54,22 +92,50 @@ const isActive = (item: typeof menuLinks[0]) => {
 
     <!-- Navegacion desktop -->
     <nav class="hidden items-center gap-6 md:flex" aria-label="Menu principal">
-      {menuLinks.map((item) => (
-        <a
-          href={item.href}
-          class:list={[
-            "text-sm font-semibold no-underline transition-colors duration-150",
-            isActive(item)
-              ? "text-pampa-500 border-b border-pampa-500 pb-0.5"
-              : "text-pampa-700/80 hover:text-pampa-500"
-          ]}
-        >
-          {item.label}
-        </a>
-      ))}
+      {
+        dynamicLinks.map((item) => (
+          <a
+            href={item.href}
+            class:list={[
+              'text-sm font-semibold no-underline transition-colors duration-150',
+              isActive(item)
+                ? 'text-pampa-500 border-b border-pampa-500 pb-0.5'
+                : 'text-pampa-700/80 hover:text-pampa-500'
+            ]}
+          >
+            {item.label}
+          </a>
+        ))
+      }
     </nav>
 
     <div class="flex items-center gap-2">
+      <!-- Widget de Usuario Desktop o Botón Iniciar Sesión -->
+      {
+        user ? (
+          <div class="hidden items-center gap-2 bg-pampa-100/50 border border-pampa-200/60 rounded-lg px-3 py-1.5 sm:flex">
+            <span class="material-symbols-outlined text-pampa-600 text-sm">person</span>
+            <span class="text-xs font-bold text-pampa-800 max-w-[100px] truncate" title={user.displayName || user.email}>
+              {user.displayName || user.email?.split('@')[0]}
+            </span>
+            <button
+              id="logout-btn-desktop"
+              type="button"
+              class="text-xs font-bold text-logo-500 hover:text-logo-600 border-l border-pampa-200/80 pl-2 cursor-pointer transition-colors"
+            >
+              Salir
+            </button>
+          </div>
+        ) : (
+          <a
+            href="/login"
+            class="hidden rounded-lg border border-pampa-300/80 px-4 py-2 text-sm font-bold text-pampa-700 no-underline transition-all duration-150 hover:bg-pampa-200/40 hover:text-pampa-900 sm:inline-flex"
+          >
+            Iniciar Sesión
+          </a>
+        )
+      }
+
       <a
         class="hidden rounded-lg bg-logo-500 px-4 py-2 text-sm font-bold text-white no-underline transition-all duration-150 hover:-translate-y-0.5 hover:bg-logo-600 hover:shadow-elevated sm:inline-flex"
         href={ctaHref}
@@ -86,7 +152,10 @@ const isActive = (item: typeof menuLinks[0]) => {
         class="inline-flex items-center justify-center rounded-lg p-2 text-pampa-600 transition-colors hover:bg-pampa-200/50"
         aria-label="Cambiar tema"
       >
-        <span class="material-symbols-outlined transition-all duration-300 ease-out" id="theme-icon">light_mode</span>
+        <span
+          class="material-symbols-outlined transition-all duration-300 ease-out"
+          id="theme-icon">light_mode</span
+        >
       </button>
 
       <!-- Boton hamburguesa movil -->
@@ -109,14 +178,43 @@ const isActive = (item: typeof menuLinks[0]) => {
     class="hidden border-t border-pampa-200/60 bg-pampa-50 px-5 pb-4 pt-2 md:hidden"
     aria-label="Menu movil"
   >
-    {menuLinks.map((item) => (
-      <a
-        href={item.href}
-        class="mobile-link block rounded-lg px-3 py-2.5 text-sm font-semibold text-pampa-700 no-underline transition-colors hover:bg-pampa-100"
-      >
-        {item.label}
-      </a>
-    ))}
+    {
+      dynamicLinks.map((item) => (
+        <a
+          href={item.href}
+          class="mobile-link block rounded-lg px-3 py-2.5 text-sm font-semibold text-pampa-700 no-underline transition-colors hover:bg-pampa-100"
+        >
+          {item.label}
+        </a>
+      ))
+    }
+    
+    <!-- Widget de Usuario Móvil o Iniciar Sesión móvil -->
+    {
+      user ? (
+        <div class="mt-2 border-t border-pampa-200/60 pt-2.5 pb-1 flex items-center justify-between px-3 text-sm text-pampa-800">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-sm text-pampa-600">person</span>
+            <span class="font-bold truncate max-w-[150px]">{user.displayName || user.email}</span>
+          </div>
+          <button
+            id="logout-btn-mobile"
+            type="button"
+            class="text-xs font-bold text-logo-500 hover:text-logo-600 cursor-pointer"
+          >
+            Cerrar Sesión
+          </button>
+        </div>
+      ) : (
+        <a
+          href="/login"
+          class="mobile-link mt-2 block rounded-lg border border-pampa-200/60 bg-pampa-100/50 px-3 py-2.5 text-center text-sm font-bold text-pampa-800 no-underline transition-colors hover:bg-pampa-100"
+        >
+          Iniciar Sesión
+        </a>
+      )
+    }
+
     <a
       class="mt-2 block rounded-lg bg-logo-500 px-3 py-2.5 text-center text-sm font-bold text-white no-underline"
       href={ctaHref}
@@ -128,17 +226,47 @@ const isActive = (item: typeof menuLinks[0]) => {
   </nav>
 </header>
 
+<script>
+  // Script para manejar el Cierre de Sesión (Logout)
+  const handleLogout = async () => {
+    try {
+      const { auth } = await import('../lib/firebaseClient');
+      if (auth) {
+        const { signOut } = await import('firebase/auth');
+        await signOut(auth);
+      }
+    } catch (e) {
+      console.warn('Error client-side auth logout, continuando con server delete:', e);
+    }
+    
+    const res = await fetch('/api/auth/session', {
+      method: 'DELETE'
+    });
+    if (res.ok) {
+      window.location.href = '/login';
+    }
+  };
+
+  const desktopBtn = document.getElementById('logout-btn-desktop');
+  if (desktopBtn) {
+    desktopBtn.addEventListener('click', handleLogout);
+  }
+
+  const mobileBtn = document.getElementById('logout-btn-mobile');
+  if (mobileBtn) {
+    mobileBtn.addEventListener('click', handleLogout);
+  }
+</script>
+
 <style>
   .logo-glow {
-    filter: 
-      drop-shadow(0 0 6px rgba(214, 40, 40, 0.65))
+    filter: drop-shadow(0 0 6px rgba(214, 40, 40, 0.65))
       drop-shadow(0 0 15px rgba(214, 40, 40, 0.4))
       drop-shadow(0 0 30px rgba(214, 40, 40, 0.2)) !important;
   }
-  
+
   .group:hover .logo-glow {
-    filter: 
-      drop-shadow(0 0 8px rgba(214, 40, 40, 0.8))
+    filter: drop-shadow(0 0 8px rgba(214, 40, 40, 0.8))
       drop-shadow(0 0 20px rgba(214, 40, 40, 0.55))
       drop-shadow(0 0 40px rgba(214, 40, 40, 0.3)) !important;
   }

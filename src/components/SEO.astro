@@ -36,21 +36,32 @@ const {
   twitterCreator = '@jrtransportes',
   schema,
   noIndex = false,
-  preloadFonts = true,
+  preloadFonts = true
 } = Astro.props;
 
 const canonicalUrl = canonical || Astro.url.href;
-const defaultOgImage = 'https://jrtransportesmorochucos.com/images/Pampa%20cangallo/pampa-cangallo.webp';
+const defaultOgImage =
+  'https://jrtransportesmorochucos.com/images/Pampa%20cangallo/pampa-cangallo.webp';
 const finalOgImage = ogImage || defaultOgImage;
 const finalTwitterImage = twitterImage || finalOgImage;
 ---
 
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
+/>
 <meta name="generator" content={Astro.generator} />
 
 {noIndex && <meta name="robots" content="noindex, nofollow" />}
-{!noIndex && <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />}
+{
+  !noIndex && (
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
+  )
+}
 
 <title>{title}</title>
 <meta name="description" content={description} />
@@ -70,18 +81,41 @@ const finalTwitterImage = twitterImage || finalOgImage;
 <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
 <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
 
-{preloadFonts && (
-  <>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700;800&display=swap" as="style" />
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@200..700&display=block" as="style" />
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" as="style" />
-  </>
-)}
+{
+  preloadFonts && (
+    <>
+      <link
+        rel="preload"
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700;800&display=swap"
+        as="style"
+      />
+      <link
+        rel="preload"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@200..700&display=block"
+        as="style"
+      />
+      <link
+        rel="preload"
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap"
+        as="style"
+      />
+    </>
+  )
+}
 
 <!-- Fonts -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700;800&display=swap" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@200..700&display=block" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700;800&display=swap"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@200..700&display=block"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap"
+/>
 
 <!-- Open Graph -->
 <meta property="og:title" content={ogTitle} />
@@ -112,6 +146,8 @@ const finalTwitterImage = twitterImage || finalOgImage;
 <meta name="msapplication-TileColor" content="#8B6914" />
 
 <!-- Schema.org JSON-LD -->
-{schema && (
-  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
-)}
+{
+  schema && (
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  )
+}

@@ -16,15 +16,19 @@ const { items } = Astro.props;
     <li>
       <a href="/" class="transition-colors hover:text-pampa-500">Inicio</a>
     </li>
-    {items.map((item, i) => (
-      <li class="flex items-center gap-1.5">
-        <span class="text-pampa-400">/</span>
-        {item.href && i < items.length - 1 ? (
-          <a href={item.href} class="transition-colors hover:text-pampa-500">{item.label}</a>
-        ) : (
-          <span class="font-semibold text-pampa-800">{item.label}</span>
-        )}
-      </li>
-    ))}
+    {
+      items.map((item, i) => (
+        <li class="flex items-center gap-1.5">
+          <span class="text-pampa-400">/</span>
+          {item.href && i < items.length - 1 ? (
+            <a href={item.href} class="transition-colors hover:text-pampa-500">
+              {item.label}
+            </a>
+          ) : (
+            <span class="font-semibold text-pampa-800">{item.label}</span>
+          )}
+        </li>
+      ))
+    }
   </ol>
 </nav>

@@ -1,0 +1,64 @@
+---
+import Layout from '../components/Layout.astro';
+import MyBookings from '../components/MyBookings.tsx';
+import { auth } from '../lib/firebaseAdmin';
+import '../styles/global.css';
+
+const schemas = [
+  {
+    "@context": 'https://schema.org',
+    "@type": 'WebPage',
+    name: 'Mis Reservas - JR Transportes',
+    description: 'Consulta tus boletos comprados, descarga tus tickets en PDF y gestiona tus viajes.'
+  }
+];
+
+// Validar sesión del lado del servidor
+const sessionCookie = Astro.cookies.get('__session')?.value;
+
+if (!sessionCookie) {
+  return Astro.redirect('/login?redirect=/mis-reservas');
+}
+
+try {
+  // Verificar que la cookie sea válida y no haya expirado
+  await auth.verifySessionCookie(sessionCookie, true);
+} catch (error) {
+  console.warn('Sesión no válida o expirada. Redirigiendo a Login.', error);
+  // Limpiar cookie corrupta/expirada
+  Astro.cookies.delete('__session', { path: '/' });
+  return Astro.redirect('/login?redirect=/mis-reservas');
+}
+---
+
+<Layout
+  title="Mis Reservas | JR Transportes"
+  description="Accede a tu panel personal de ViajaAyacucho para revisar tus boletos, descargar tickets PDF y contactar a soporte."
+  keywords="mis reservas, mis boletos, descargar pasajes, panel cliente, JR transportes"
+  ogTitle="Mis Reservas | JR Transportes"
+  ogDescription="Accede a tu panel personal para gestionar tus boletos y descargar comprobantes."
+  ogType="website"
+  schema={schemas}
+  activePage="mis-reservas"
+  ctaText="Comprar Pasajes"
+  ctaHref="/reservar"
+  mainClass="relative z-0 overflow-x-clip bg-pampa-50/20 py-12"
+>
+  <div class="mx-auto w-full max-w-6xl px-5 py-8">
+    <div class="mb-10 text-center">
+      <p class="mb-2 text-xs font-bold uppercase tracking-[0.15em] text-pampa-500 font-data">
+        Área de Pasajeros
+      </p>
+      <h1 class="font-headline text-4xl text-pampa-900 sm:text-5xl">
+        Mi Panel de Reservas
+      </h1>
+      <p class="mt-3 text-sm text-pampa-700/70">
+        Revisa tus boletos vigentes, descarga tus comprobantes en PDF e inicia tus consultas directamente con soporte.
+      </p>
+      <div class="andean-divider mx-auto mt-6 max-w-[120px]"></div>
+    </div>
+
+    {/* Renderizar el panel interactivo del cliente en React */}
+    <MyBookings client:load />
+  </div>
+</Layout>

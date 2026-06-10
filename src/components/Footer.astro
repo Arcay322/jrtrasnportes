@@ -5,45 +5,54 @@ export interface Props {
   variant?: 'dark' | 'blue';
 }
 
-const {
-  showLinks = true,
-  showLogo = true,
-  variant = 'dark',
-} = Astro.props;
+const { showLinks = true, showLogo = true, variant = 'dark' } = Astro.props;
 
-const waRoute = 'https://wa.me/51928413201?text=Hola%20JR%20Transportes%2C%20deseo%20consultar%20por%20rutas%20y%20horarios.';
+const waRoute =
+  'https://wa.me/51928413201?text=Hola%20JR%20Transportes%2C%20deseo%20consultar%20por%20rutas%20y%20horarios.';
 
 const bgClass = variant === 'blue' ? 'bg-cielo-900' : 'bg-cielo-900';
 const borderClass = 'border-pampa-50/15';
 ---
 
 <footer class={`border-t ${borderClass} ${bgClass} py-6`}>
-  <div class="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-3 px-5 sm:flex-row">
+  <div
+    class="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-3 px-5 sm:flex-row"
+  >
     <div>
-      {showLogo && (
-        <p class="font-headline text-base text-cream-light">JR Transportes</p>
-      )}
+      {
+        showLogo && (
+          <p class="font-headline text-base text-cream-light">JR Transportes</p>
+        )
+      }
       <p class="mt-0.5 text-xs text-cream-light/60">
         &copy; {new Date().getFullYear()} JR Transportes. Ayacucho, Peru.
       </p>
     </div>
-    {showLinks && (
-      <div class="flex gap-5">
-        <a href="#" class="text-xs font-semibold text-cream-light/75 no-underline transition-colors hover:text-cream-light">
-          Terminos
-        </a>
-        <a href="#" class="text-xs font-semibold text-cream-light/75 no-underline transition-colors hover:text-cream-light">
-          Privacidad
-        </a>
-        <a
-          href={waRoute}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-xs font-semibold text-cream-light/75 no-underline transition-colors hover:text-cream-light"
-        >
-          WhatsApp
-        </a>
-      </div>
-    )}
+    {
+      showLinks && (
+        <div class="flex gap-5">
+          <a
+            href="#"
+            class="text-xs font-semibold text-cream-light/75 no-underline transition-colors hover:text-cream-light"
+          >
+            Terminos
+          </a>
+          <a
+            href="#"
+            class="text-xs font-semibold text-cream-light/75 no-underline transition-colors hover:text-cream-light"
+          >
+            Privacidad
+          </a>
+          <a
+            href={waRoute}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-xs font-semibold text-cream-light/75 no-underline transition-colors hover:text-cream-light"
+          >
+            WhatsApp
+          </a>
+        </div>
+      )
+    }
   </div>
 </footer>

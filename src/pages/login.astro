@@ -1,0 +1,38 @@
+---
+import Layout from '../components/Layout.astro';
+import LoginForm from '../components/LoginForm.tsx';
+import '../styles/global.css';
+
+const schemas = [
+  {
+    "@context": 'https://schema.org',
+    "@type": 'LoginPage',
+    name: 'Iniciar Sesión - JR Transportes',
+    description: 'Inicia sesión en la plataforma de ViajaAyacucho para gestionar tus pasajes, boletos y reservas.'
+  }
+];
+
+// Redirigir al inicio si ya está autenticado
+const sessionCookie = Astro.cookies.get('__session')?.value;
+if (sessionCookie) {
+  return Astro.redirect('/mis-reservas');
+}
+---
+
+<Layout
+  title="Iniciar Sesión | JR Transportes"
+  description="Accede a tu cuenta de JR Transportes para gestionar tus reservas de viajes y tours en Ayacucho."
+  keywords="iniciar sesion, login, pasajes ayacucho, mis reservas, JR transportes"
+  ogTitle="Iniciar Sesión | JR Transportes"
+  ogDescription="Accede a tu cuenta de JR Transportes para gestionar tus reservas de viajes y tours."
+  ogType="website"
+  schema={schemas}
+  activePage="login"
+  ctaText="Volver al Inicio"
+  ctaHref="/"
+  mainClass="relative z-0 overflow-x-clip bg-pampa-50/30 py-16 flex items-center justify-center min-h-[70vh]"
+>
+  <div class="w-full px-5 py-4">
+    <LoginForm client:load />
+  </div>
+</Layout>

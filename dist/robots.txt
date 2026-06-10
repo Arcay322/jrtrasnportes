@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://jrtransportesmorochucos.com/sitemap.xml

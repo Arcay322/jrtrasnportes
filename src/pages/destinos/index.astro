@@ -4,7 +4,9 @@ import Breadcrumb from '../../components/Breadcrumb.astro';
 import '../../styles/global.css';
 import { destinations } from '../../data/destinations';
 
-const destinosList = destinations.filter((d) => d.category === 'destino' || !d.category);
+const destinosList = destinations.filter(
+  (d) => d.category === 'destino' || !d.category
+);
 const toursList = destinations.filter((d) => d.category === 'tour');
 
 const phoneRaw = '51928413201';
@@ -17,17 +19,22 @@ const waRoute = `${whatsappBase}?text=${encodeURIComponent(
 const baseUrl = 'https://jrtransportesmorochucos.com';
 
 const breadcrumbSchema = {
-  "@context": 'https://schema.org',
-  "@type": 'BreadcrumbList',
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
   itemListElement: [
-    { "@type": 'ListItem', position: 1, name: 'Inicio', item: baseUrl },
-    { "@type": 'ListItem', position: 2, name: 'Destinos y Tours', item: `${baseUrl}/destinos` }
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: baseUrl },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Destinos y Tours',
+      item: `${baseUrl}/destinos`
+    }
   ]
 };
 
 const localBusinessSchema = {
-  "@context": 'https://schema.org',
-  "@type": 'TravelAgency',
+  '@context': 'https://schema.org',
+  '@type': 'TravelAgency',
   name: 'JR Transportes',
   telephone: `+${phoneRaw}`,
   areaServed: 'Ayacucho, Peru'
@@ -54,72 +61,104 @@ const combinedSchema = [breadcrumbSchema, localBusinessSchema];
   <div class="mx-auto w-full max-w-6xl px-5 pt-4">
     <Breadcrumb items={[{ label: 'Destinos y Tours' }]} />
   </div>
-  
+
   <!-- Hero de Destinos -->
-  <section class="relative flex h-[320px] w-full items-end overflow-hidden sm:h-[380px] lg:h-[440px]">
+  <section
+    class="relative flex h-[320px] w-full items-end overflow-hidden sm:h-[380px] lg:h-[440px]"
+  >
     <img
       src="https://lh3.googleusercontent.com/aida-public/AB6AXuDY7u1kL2Z1wZDsppmSkekS25Q5CEUM500ZfM0TwbLpuE9JB1NCTr6Yl8adRmLAk6icC0aC6oCBUzVdrb18-k2Dj6NyJGsrHtHsmsiZ3hVX6zjUx-Zz-oPShMrtGU81Sk4g72Yj2x2vYQeAcsfdzfBdtHDc5oiHmtSnM7WUkSYdrNAXvVAETkwWkgmiFVZuvLk7Dh5AcOTT7GlKyytJrCI_OkgoIxTcpjnCVzL3E4Bv2VGXudL3Y5cV6UilB4F_uGpFfrjEQHG6pw"
       alt="Paisaje andino de Ayacucho"
       class="absolute inset-0 h-full w-full object-cover"
     />
-    <div class="page-hero-overlay absolute inset-0 bg-gradient-to-t from-pampa-900/85 via-pampa-900/30 to-transparent"></div>
+    <div
+      class="page-hero-overlay absolute inset-0 bg-gradient-to-t from-pampa-900/85 via-pampa-900/30 to-transparent"
+    >
+    </div>
 
     <div class="relative z-10 mx-auto w-full max-w-6xl px-5 pb-14 sm:pb-16">
-      <span class="mb-3 inline-block rounded-full bg-pampa-300 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-pampa-800">
+      <span
+        class="mb-3 inline-block rounded-full bg-pampa-300 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-pampa-800"
+      >
         Nuestras rutas
       </span>
       <h1 class="font-headline text-4xl text-white sm:text-5xl lg:text-6xl">
         Destinos y Tours
       </h1>
       <p class="mt-3 max-w-lg text-base leading-relaxed text-cream-light/85">
-        Descubre cada rincón de Ayacucho con nosotros. Rutas interprovinciales y experiencias turísticas únicas.
+        Descubre cada rincón de Ayacucho con nosotros. Rutas interprovinciales y
+        experiencias turísticas únicas.
       </p>
     </div>
 
-    <div class="andean-divider absolute bottom-0 left-0 right-0 opacity-40"></div>
+    <div class="andean-divider absolute bottom-0 left-0 right-0 opacity-40">
+    </div>
   </section>
 
   <!-- Seccion Destinos Interprovinciales -->
   <section class="py-16 sm:py-20">
     <div class="mx-auto w-full max-w-6xl px-5">
       <div class="mb-10 text-center">
-        <p class="mb-2 text-xs font-bold uppercase tracking-[0.15em] text-pampa-500">Transporte regular</p>
-        <h2 class="font-headline text-3xl text-pampa-900 sm:text-4xl">Destinos interprovinciales</h2>
+        <p
+          class="mb-2 text-xs font-bold uppercase tracking-[0.15em] text-pampa-500"
+        >
+          Transporte regular
+        </p>
+        <h2 class="font-headline text-3xl text-pampa-900 sm:text-4xl">
+          Destinos interprovinciales
+        </h2>
         <div class="andean-divider mx-auto mt-4 max-w-[120px]"></div>
       </div>
 
       <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {destinosList.map((destination, i) => (
-          <article class={`fade-in-up stagger-${i + 1} group flex flex-col overflow-hidden rounded-xl border border-pampa-200/50 bg-white shadow-soft transition-all duration-300 hover:-translate-y-2 hover:shadow-float`}>
-            <div class="relative h-52 overflow-hidden">
-              <img
-                src={destination.image}
-                alt={destination.name}
-                class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-                loading="lazy"
-              />
-              <span class="absolute right-3 top-3 z-10 rounded-full bg-pampa-50/95 px-3 py-1 text-xs font-extrabold text-pampa-600 shadow-soft backdrop-blur-md">
-                {destination.price}
-              </span>
-            </div>
-            <div class="flex flex-1 flex-col justify-between p-5">
-              <div>
-                <h3 class="font-headline text-xl text-pampa-800">{destination.name}</h3>
-                <p class="mt-2 text-sm leading-relaxed text-pampa-700/70">{destination.description}</p>
+        {
+          destinosList.map((destination, i) => (
+            <article
+              class={`fade-in-up stagger-${i + 1} group flex flex-col overflow-hidden rounded-xl border border-pampa-200/50 bg-white shadow-soft transition-all duration-300 hover:-translate-y-2 hover:shadow-float`}
+            >
+              <div class="relative h-52 overflow-hidden">
+                <img
+                  src={destination.image}
+                  alt={destination.name}
+                  class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                />
+                <span class="absolute right-3 top-3 z-10 rounded-full bg-pampa-50/95 px-3 py-1 text-xs font-extrabold text-pampa-600 shadow-soft backdrop-blur-md">
+                  {destination.price}
+                </span>
               </div>
-              <div class="mt-4 flex items-center justify-between">
-                <span class="text-xs font-bold uppercase tracking-widest text-pampa-500">{destination.travelTime}</span>
-                <a
-                  class="inline-flex items-center gap-1 text-sm font-bold text-cielo-500 no-underline transition-all hover:gap-2 hover:text-cielo-700"
-                  href={`/destinos/${destination.slug}`}
-                >
-                  Ver detalle
-                  <span class="material-symbols-outlined text-base">arrow_forward</span>
-                </a>
+              <div class="flex flex-1 flex-col justify-between p-5">
+                <div>
+                  <h3 class="font-headline text-xl text-pampa-800">
+                    {destination.name}
+                  </h3>
+                  <p class="mt-2 text-sm leading-relaxed text-pampa-700/70">
+                    {destination.description}
+                  </p>
+                  <p class="mt-3 text-[10px] font-bold uppercase tracking-widest text-pampa-500/80 flex items-center gap-1">
+                    <span class="material-symbols-outlined text-sm">schedule</span>
+                    {destination.travelTime}
+                  </p>
+                </div>
+                <div class="mt-5 flex items-center justify-between gap-4 border-t border-pampa-100/60 pt-4">
+                  <a
+                    class="inline-flex items-center gap-0.5 text-xs font-bold text-pampa-600 hover:text-pampa-800 transition-all"
+                    href={`/destinos/${destination.slug}`}
+                  >
+                    Ver detalle
+                    <span class="material-symbols-outlined text-sm">info</span>
+                  </a>
+                  <a
+                    class="rounded-lg bg-logo-500 px-3.5 py-2 text-center text-xs font-bold text-white transition-all hover:bg-logo-600 hover:shadow-soft"
+                    href={`/reservar?route=${destination.slug}`}
+                  >
+                    Comprar Pasaje
+                  </a>
+                </div>
               </div>
-            </div>
-          </article>
-        ))}
+            </article>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -128,43 +167,66 @@ const combinedSchema = [breadcrumbSchema, localBusinessSchema];
   <section class="bg-white py-16 sm:py-20">
     <div class="mx-auto w-full max-w-6xl px-5">
       <div class="mb-10 text-center">
-        <p class="mb-2 text-xs font-bold uppercase tracking-[0.15em] text-pampa-500">Experiencias</p>
-        <h2 class="font-headline text-3xl text-pampa-900 sm:text-4xl">Tours turisticos</h2>
+        <p
+          class="mb-2 text-xs font-bold uppercase tracking-[0.15em] text-pampa-500"
+        >
+          Experiencias
+        </p>
+        <h2 class="font-headline text-3xl text-pampa-900 sm:text-4xl">
+          Tours turisticos
+        </h2>
         <div class="andean-divider mx-auto mt-4 max-w-[120px]"></div>
       </div>
 
       <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {toursList.map((tour, i) => (
-          <article class={`fade-in-up stagger-${i + 1} group flex flex-col overflow-hidden rounded-xl border border-pampa-200/50 bg-pampa-50 shadow-soft transition-all duration-300 hover:-translate-y-2 hover:shadow-float`}>
-            <div class="relative h-52 overflow-hidden">
-              <img
-                src={tour.image}
-                alt={tour.name}
-                class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-                loading="lazy"
-              />
-              <span class="absolute left-3 top-3 z-10 rounded-full bg-cielo-700/90 px-3 py-1 text-xs font-extrabold text-white shadow-soft backdrop-blur-md">
-                Tour
-              </span>
-            </div>
-            <div class="flex flex-1 flex-col justify-between p-5">
-              <div>
-                <h3 class="font-headline text-xl text-pampa-800">{tour.name}</h3>
-                <p class="mt-2 text-sm leading-relaxed text-pampa-700/70 line-clamp-3">{tour.description}</p>
+        {
+          toursList.map((tour, i) => (
+            <article
+              class={`fade-in-up stagger-${i + 1} group flex flex-col overflow-hidden rounded-xl border border-pampa-200/50 bg-pampa-50 shadow-soft transition-all duration-300 hover:-translate-y-2 hover:shadow-float`}
+            >
+              <div class="relative h-52 overflow-hidden">
+                <img
+                  src={tour.image}
+                  alt={tour.name}
+                  class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                />
+                <span class="absolute left-3 top-3 z-10 rounded-full bg-cielo-700/90 px-3 py-1 text-xs font-extrabold text-white shadow-soft backdrop-blur-md">
+                  Tour
+                </span>
               </div>
-              <div class="mt-4 flex items-center justify-between">
-                <span class="text-xs font-bold uppercase tracking-widest text-pampa-500">{tour.travelTime}</span>
-                <a
-                  class="inline-flex items-center gap-1 text-sm font-bold text-cielo-500 no-underline transition-all hover:gap-2 hover:text-cielo-700"
-                  href={`/destinos/${tour.slug}`}
-                >
-                  Ver tour
-                  <span class="material-symbols-outlined text-base">arrow_forward</span>
-                </a>
+              <div class="flex flex-1 flex-col justify-between p-5">
+                <div>
+                  <h3 class="font-headline text-xl text-pampa-800">
+                    {tour.name}
+                  </h3>
+                  <p class="mt-2 text-sm leading-relaxed text-pampa-700/70 line-clamp-3">
+                    {tour.description}
+                  </p>
+                  <p class="mt-3 text-[10px] font-bold uppercase tracking-widest text-pampa-500/80 flex items-center gap-1">
+                    <span class="material-symbols-outlined text-sm">schedule</span>
+                    {tour.travelTime}
+                  </p>
+                </div>
+                <div class="mt-5 flex items-center justify-between gap-4 border-t border-pampa-200/50 pt-4">
+                  <a
+                    class="inline-flex items-center gap-0.5 text-xs font-bold text-pampa-600 hover:text-pampa-800 transition-all"
+                    href={`/destinos/${tour.slug}`}
+                  >
+                    Ver tour
+                    <span class="material-symbols-outlined text-sm">info</span>
+                  </a>
+                  <a
+                    class="rounded-lg bg-logo-500 px-3.5 py-2 text-center text-xs font-bold text-white transition-all hover:bg-logo-600 hover:shadow-soft"
+                    href={`/reservar?route=${tour.slug}`}
+                  >
+                    Reservar Tour
+                  </a>
+                </div>
               </div>
-            </div>
-          </article>
-        ))}
+            </article>
+          ))
+        }
       </div>
     </div>
   </section>

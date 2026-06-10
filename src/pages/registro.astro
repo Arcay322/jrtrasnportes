@@ -1,0 +1,38 @@
+---
+import Layout from '../components/Layout.astro';
+import RegisterForm from '../components/RegisterForm.tsx';
+import '../styles/global.css';
+
+const schemas = [
+  {
+    "@context": 'https://schema.org',
+    "@type": 'RegisterPage',
+    name: 'Registro de Pasajeros - JR Transportes',
+    description: 'Crea tu cuenta en ViajaAyacucho para comprar boletos en línea y descargar comprobantes.'
+  }
+];
+
+// Redirigir si ya tiene sesión activa
+const sessionCookie = Astro.cookies.get('__session')?.value;
+if (sessionCookie) {
+  return Astro.redirect('/mis-reservas');
+}
+---
+
+<Layout
+  title="Crear Cuenta | JR Transportes"
+  description="Regístrate en JR Transportes para comprar pasajes en minivan y tours de manera más rápida y segura."
+  keywords="crear cuenta, registro, pasajes ayacucho, comprar pasajes, JR transportes"
+  ogTitle="Crear Cuenta | JR Transportes"
+  ogDescription="Regístrate en JR Transportes para comprar pasajes en minivan y tours."
+  ogType="website"
+  schema={schemas}
+  activePage="registro"
+  ctaText="Volver al Inicio"
+  ctaHref="/"
+  mainClass="relative z-0 overflow-x-clip bg-pampa-50/30 py-16 flex items-center justify-center min-h-[75vh]"
+>
+  <div class="w-full px-5 py-4">
+    <RegisterForm client:load />
+  </div>
+</Layout>

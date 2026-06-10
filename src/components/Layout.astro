@@ -2,6 +2,7 @@
 import SEO from './SEO.astro';
 import Header from './Header.astro';
 import Footer from './Footer.astro';
+import ChatWidget from './ChatWidget.tsx';
 import MobileMenuScript from './MobileMenuScript.astro';
 
 export interface Props {
@@ -52,226 +53,311 @@ const {
   ctaHref,
   showFooterLinks = true,
   footerVariant = 'dark',
-  bodyClass = 'bg-pampa-50 selection:bg-pampa-300 selection:text-pampa-900',
+  bodyClass = 'bg-pampa-50 selection:bg-pampa-300 selection:text-pampa-900 flex flex-col min-h-screen',
   mainClass = '',
   noIndex = false,
-  preloadFonts = true,
+  preloadFonts = true
 } = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-  <!-- Pre-hidratacion de tema: debe ir PRIMERO para evitar flash -->
-  <script is:inline>
-    (function() {
-      const saved = localStorage.getItem('theme');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const isDark = saved === 'dark' || (!saved && prefersDark);
-      if (isDark) {
-        document.documentElement.setAttribute('data-theme', 'dark');
-      }
-    })();
-  </script>
-  <SEO
-    title={title}
-    description={description}
-    keywords={keywords}
-    author={author}
-    canonical={canonical}
-    ogTitle={ogTitle}
-    ogDescription={ogDescription}
-    ogType={ogType}
-    ogImage={ogImage}
-    ogLocale={ogLocale}
-    ogSiteName={ogSiteName}
-    twitterCard={twitterCard}
-    twitterImage={twitterImage}
-    twitterCreator={twitterCreator}
-    schema={schema}
-    noIndex={noIndex}
-    preloadFonts={preloadFonts}
-  />
-  <script is:inline>
-    (function() {
-      const meta = document.getElementById('theme-color-meta');
-      if (meta) {
-        meta.content = document.documentElement.getAttribute('data-theme') === 'dark' ? '#0D1E30' : '#8B6914';
-      }
-    })();
-  </script>
+  <head>
+    <!-- Pre-hidratacion de tema: debe ir PRIMERO para evitar flash -->
+    <script is:inline>
+      (function () {
+        const saved = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia(
+          '(prefers-color-scheme: dark)'
+        ).matches;
+        const isDark = saved === 'dark' || (!saved && prefersDark);
+        if (isDark) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
+    </script>
+    <SEO
+      title={title}
+      description={description}
+      keywords={keywords}
+      author={author}
+      canonical={canonical}
+      ogTitle={ogTitle}
+      ogDescription={ogDescription}
+      ogType={ogType}
+      ogImage={ogImage}
+      ogLocale={ogLocale}
+      ogSiteName={ogSiteName}
+      twitterCard={twitterCard}
+      twitterImage={twitterImage}
+      twitterCreator={twitterCreator}
+      schema={schema}
+      noIndex={noIndex}
+      preloadFonts={preloadFonts}
+    />
+    <script is:inline>
+      (function () {
+        const meta = document.getElementById('theme-color-meta');
+        if (meta) {
+          meta.content =
+            document.documentElement.getAttribute('data-theme') === 'dark'
+              ? '#0D1E30'
+              : '#8B6914';
+        }
+      })();
+    </script>
 
-  <style is:inline>
-    /* ============================================
+    <style is:inline>
+      /* ============================================
        DARK MODE — "La noche cae sobre la pampa"
        ============================================ */
 
-    [data-theme="dark"] { color-scheme: dark; }
+      [data-theme='dark'] {
+        color-scheme: dark;
+      }
 
-    html[data-theme="dark"] {
-      /* Pampa: tierra → nocturno. 50/100 oscuros para fondos.
+      html[data-theme='dark'] {
+        /* Pampa: tierra → nocturno. 50/100 oscuros para fondos.
          600-900 iluminados para textos. */
-      --color-pampa-50:  #0D1E30;
-      --color-pampa-100: #122840;
-      --color-pampa-200: #1B3A5C;
-      --color-pampa-300: #6B96C7;
-      --color-pampa-400: #A3BFE0;
-      --color-pampa-500: #D0DFF0;
-      --color-pampa-600: #E3D6B8;
-      --color-pampa-700: #F2EBD9;
-      --color-pampa-800: #FAF6ED;
-      --color-pampa-900: #FFFFFF;
+        --color-pampa-50: #0d1e30;
+        --color-pampa-100: #122840;
+        --color-pampa-200: #1b3a5c;
+        --color-pampa-300: #6b96c7;
+        --color-pampa-400: #a3bfe0;
+        --color-pampa-500: #d0dff0;
+        --color-pampa-600: #e3d6b8;
+        --color-pampa-700: #f2ebd9;
+        --color-pampa-800: #faf6ed;
+        --color-pampa-900: #ffffff;
 
-      /* Cielo: 700/800/900 MANTENER oscuros para gradientes y fondos.
+        /* Cielo: 700/800/900 MANTENER oscuros para gradientes y fondos.
          500/600 iluminados para links y acentos. */
-      --color-cielo-50:  #EDF3FA;
-      --color-cielo-100: #D0DFF0;
-      --color-cielo-200: #A3BFE0;
-      --color-cielo-300: #6B96C7;
-      --color-cielo-400: #4B78AA;
-      --color-cielo-500: #6B96C7;
-      --color-cielo-600: #A3BFE0;
-      --color-cielo-700: #1B3A5C;
-      --color-cielo-800: #122840;
-      --color-cielo-900: #0D1E30;
+        --color-cielo-50: #edf3fa;
+        --color-cielo-100: #d0dff0;
+        --color-cielo-200: #a3bfe0;
+        --color-cielo-300: #6b96c7;
+        --color-cielo-400: #4b78aa;
+        --color-cielo-500: #6b96c7;
+        --color-cielo-600: #a3bfe0;
+        --color-cielo-700: #1b3a5c;
+        --color-cielo-800: #122840;
+        --color-cielo-900: #0d1e30;
 
-      /* Quebrada */
-      --color-quebrada-400: #6B9E67;
-      --color-quebrada-500: #5A8A56;
-      --color-quebrada-600: #4A7A46;
+        /* Quebrada */
+        --color-quebrada-400: #6b9e67;
+        --color-quebrada-500: #5a8a56;
+        --color-quebrada-600: #4a7a46;
 
-      /* Logo */
-      --color-logo-400: #E85D5D;
-      --color-logo-500: #D62828;
-      --color-logo-600: #B51F1F;
+        /* Logo */
+        --color-logo-400: #e85d5d;
+        --color-logo-500: #d62828;
+        --color-logo-600: #b51f1f;
+      }
 
-    }
+      /* Correccion del color blanco en superficies y opacidades */
+      [data-theme='dark'] :is(.bg-white) {
+        background-color: #1b3a5c !important;
+      }
+      [data-theme='dark'] :is(.bg-white\/95) {
+        background-color: #1b3a5c !important;
+      }
 
-    /* Correccion del color blanco en superficies y opacidades */
-    [data-theme="dark"] :is(.bg-white) { background-color: #1B3A5C !important; }
-    [data-theme="dark"] :is(.bg-white\/95) { background-color: #1B3A5C !important; }
+      /* Fallbacks estaticos que no usan variables */
+      [data-theme='dark'] :is(.bg-logo-500) {
+        background-color: #d62828;
+      }
+      [data-theme='dark'] :is(.bg-quebrada-500) {
+        background-color: #5a8a56;
+      }
+      [data-theme='dark'] :is(.text-quebrada-500) {
+        color: #5a8a56;
+      }
 
-    /* Fallbacks estaticos que no usan variables */
-    [data-theme="dark"] :is(.bg-logo-500) { background-color: #D62828; }
-    [data-theme="dark"] :is(.bg-quebrada-500) { background-color: #5A8A56; }
-    [data-theme="dark"] :is(.text-quebrada-500) { color: #5A8A56; }
+      /* HERO index: overlay con gradiente oscuro */
+      [data-theme='dark'] .hero-overlay {
+        background: linear-gradient(
+          to right,
+          rgba(13, 30, 48, 0.92),
+          rgba(18, 40, 64, 0.75),
+          rgba(13, 30, 48, 0.5)
+        ) !important;
+      }
 
-    /* HERO index: overlay con gradiente oscuro */
-    [data-theme="dark"] .hero-overlay {
-      background: linear-gradient(to right, rgba(13, 30, 48, 0.92), rgba(18, 40, 64, 0.75), rgba(13, 30, 48, 0.50)) !important;
-    }
-
-    /* HERO destinos: gradiente from-pampa-900 se vuelve blanco en dark.
+      /* HERO destinos: gradiente from-pampa-900 se vuelve blanco en dark.
        Forzar a oscuro para que el texto blanco sea legible. */
-    [data-theme="dark"] .destination-hero-overlay {
-      background: linear-gradient(to top, rgba(13, 30, 48, 0.92), rgba(18, 40, 64, 0.55), transparent) !important;
-    }
+      [data-theme='dark'] .destination-hero-overlay {
+        background: linear-gradient(
+          to top,
+          rgba(13, 30, 48, 0.92),
+          rgba(18, 40, 64, 0.55),
+          transparent
+        ) !important;
+      }
 
-    /* HERO paginas de listado (destinos/index, blog/index):
+      /* HERO paginas de listado (destinos/index, blog/index):
        mismo problema, mismo fix. */
-    [data-theme="dark"] .page-hero-overlay {
-      background: linear-gradient(to top, rgba(13, 30, 48, 0.92), rgba(18, 40, 64, 0.55), transparent) !important;
-    }
-
-    /* Footer: fondo mas oscuro para separacion clara */
-    [data-theme="dark"] footer {
-      background-color: #0D1E30 !important;
-    }
-    [data-theme="dark"] footer .border-pampa-50\/10 {
-      border-color: rgba(107, 150, 199, 0.15) !important;
-    }
-    [data-theme="dark"] footer .border-pampa-50\/15 {
-      border-color: rgba(107, 150, 199, 0.20) !important;
-    }
-
-    /* Correccion de contrastes en modo oscuro */
-    [data-theme="dark"] :is(.hover\:text-cielo-700:hover) {
-      color: var(--color-cielo-300) !important;
-    }
-    [data-theme="dark"] .group:hover .group-hover\:text-cielo-700 {
-      color: var(--color-cielo-300) !important;
-    }
-    [data-theme="dark"] :is(.bg-cielo-50) {
-      background-color: rgba(107, 150, 199, 0.15) !important;
-    }
-    [data-theme="dark"] :is(.text-cielo-500) {
-      color: var(--color-cielo-300) !important;
-    }
-
-    /* Imagenes y mapa */
-    [data-theme="dark"] img:not([src*="google.com/maps"]) { filter: brightness(0.88) saturate(0.92); }
-    [data-theme="dark"] iframe[src*="google.com/maps"] { filter: invert(0.88) hue-rotate(180deg) contrast(0.85); }
-
-    /* Textura */
-    [data-theme="dark"] .noise-overlay { mix-blend-mode: overlay; opacity: 0.08; }
-    [data-theme="dark"] .andean-divider { opacity: 0.6; }
-    [data-theme="dark"] ::selection { background-color: #3A5F94; color: #F2EBD9; }
-  </style>
-</head>
-<body class={bodyClass}>
-  <div class="noise-overlay"></div>
-  <a class="skip-link" href="#contenido">Saltar al contenido</a>
-
-  <Header activePage={activePage} ctaText={ctaText} ctaHref={ctaHref} />
-
-  <main id="contenido" class={mainClass}>
-    <slot />
-  </main>
-
-  <Footer showLinks={showFooterLinks} variant={footerVariant} />
-
-  <slot name="after-footer" />
-
-  <MobileMenuScript />
-
-  <slot name="scripts" />
-
-  <!-- Theme toggle script -->
-  <script is:inline>
-    (function() {
-      const toggle = document.getElementById('theme-toggle');
-      const html = document.documentElement;
-      const icon = document.getElementById('theme-icon');
-      const metaTheme = document.querySelector('meta[name="theme-color"]');
-
-      function updateThemeIcon() {
-        if (icon) {
-          icon.textContent = html.getAttribute('data-theme') === 'dark' ? 'dark_mode' : 'light_mode';
-        }
+      [data-theme='dark'] .page-hero-overlay {
+        background: linear-gradient(
+          to top,
+          rgba(13, 30, 48, 0.92),
+          rgba(18, 40, 64, 0.55),
+          transparent
+        ) !important;
       }
 
-      function updateMetaTheme() {
-        if (metaTheme) {
-          metaTheme.content = html.getAttribute('data-theme') === 'dark' ? '#0D1E30' : '#8B6914';
-        }
+      /* Footer: fondo mas oscuro para separacion clara */
+      [data-theme='dark'] footer {
+        background-color: #0d1e30 !important;
+      }
+      [data-theme='dark'] footer .border-pampa-50\/10 {
+        border-color: rgba(107, 150, 199, 0.15) !important;
+      }
+      [data-theme='dark'] footer .border-pampa-50\/15 {
+        border-color: rgba(107, 150, 199, 0.2) !important;
       }
 
-      function disableTransitionsTemporarily() {
-        const css = document.createElement('style');
-        css.textContent = '*:not(#theme-icon) { transition: none !important; animation: none !important; }';
-        css.id = 'no-theme-transition';
-        document.head.appendChild(css);
-        // Forzar reflow para que el browser aplique el estilo
-        void document.documentElement.offsetHeight;
-        // Quitar en el siguiente frame (despues del cambio de tema)
-        requestAnimationFrame(() => {
+      /* Correccion de contrastes en modo oscuro */
+      [data-theme='dark'] :is(.hover\:text-cielo-700:hover) {
+        color: var(--color-cielo-300) !important;
+      }
+      [data-theme='dark'] .group:hover .group-hover\:text-cielo-700 {
+        color: var(--color-cielo-300) !important;
+      }
+      [data-theme='dark'] :is(.bg-cielo-50) {
+        background-color: rgba(107, 150, 199, 0.15) !important;
+      }
+      [data-theme='dark'] :is(.text-cielo-500) {
+        color: var(--color-cielo-300) !important;
+      }
+
+      /* Imagenes y mapa */
+      [data-theme='dark'] img:not([src*='google.com/maps']) {
+        filter: brightness(0.88) saturate(0.92);
+      }
+      [data-theme='dark'] iframe[src*='google.com/maps'] {
+        filter: invert(0.88) hue-rotate(180deg) contrast(0.85);
+      }
+
+      /* Textura */
+      [data-theme='dark'] .noise-overlay {
+        mix-blend-mode: overlay;
+        opacity: 0.08;
+      }
+      [data-theme='dark'] .andean-divider {
+        opacity: 0.6;
+      }
+      [data-theme='dark'] ::selection {
+        background-color: #3a5f94;
+        color: #f2ebd9;
+      }
+    </style>
+  </head>
+  <body class={bodyClass}>
+    <div class="noise-overlay"></div>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+    <Header activePage={activePage} ctaText={ctaText} ctaHref={ctaHref} />
+
+    <main id="contenido" class:list={['flex-grow', mainClass]}>
+      <slot />
+    </main>
+
+    <Footer showLinks={showFooterLinks} variant={footerVariant} />
+
+    <ChatWidget client:load />
+
+    <slot name="after-footer" />
+
+    <MobileMenuScript />
+
+    <slot name="scripts" />
+
+    <!-- Theme toggle script -->
+    <script is:inline>
+      (function () {
+        const toggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        const icon = document.getElementById('theme-icon');
+        const metaTheme = document.querySelector('meta[name="theme-color"]');
+
+        function updateThemeIcon() {
+          if (icon) {
+            icon.textContent =
+              html.getAttribute('data-theme') === 'dark'
+                ? 'dark_mode'
+                : 'light_mode';
+          }
+        }
+
+        function updateMetaTheme() {
+          if (metaTheme) {
+            metaTheme.content =
+              html.getAttribute('data-theme') === 'dark'
+                ? '#0D1E30'
+                : '#8B6914';
+          }
+        }
+
+        function disableTransitionsTemporarily() {
+          const css = document.createElement('style');
+          css.textContent =
+            '*:not(#theme-icon) { transition: none !important; animation: none !important; }';
+          css.id = 'no-theme-transition';
+          document.head.appendChild(css);
+          // Forzar reflow para que el browser aplique el estilo
+          void document.documentElement.offsetHeight;
+          // Quitar en el siguiente frame (despues del cambio de tema)
           requestAnimationFrame(() => {
-            css.remove();
+            requestAnimationFrame(() => {
+              css.remove();
+            });
           });
-        });
-      }
+        }
 
-      toggle?.addEventListener('click', () => {
-        if (icon) {
-          // 1. Desvanecer e inclinar el icono
-          icon.style.transform = 'rotate(180deg) scale(0)';
-          icon.style.opacity = '0';
-          
-          setTimeout(() => {
-            const isDark = html.getAttribute('data-theme') === 'dark';
-            
-            // Cambiar el tema en el DOM desactivando transiciones globales (excepto para el icono)
+        toggle?.addEventListener('click', () => {
+          if (icon) {
+            // 1. Desvanecer e inclinar el icono
+            icon.style.transform = 'rotate(180deg) scale(0)';
+            icon.style.opacity = '0';
+
+            setTimeout(() => {
+              const isDark = html.getAttribute('data-theme') === 'dark';
+
+              // Cambiar el tema en el DOM desactivando transiciones globales (excepto para el icono)
+              disableTransitionsTemporarily();
+              if (isDark) {
+                html.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+              } else {
+                html.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+              }
+
+              // Actualizar la apariencia y el color meta
+              updateThemeIcon();
+              updateMetaTheme();
+
+              // 2. Volver a mostrarlo rotando en la misma direccion y escalando a 1
+              icon.style.transform = 'rotate(360deg) scale(1)';
+              icon.style.opacity = '1';
+
+              // Limpiar los estilos en linea despues de la transicion para futuros clicks
+              setTimeout(() => {
+                // Desactivar temporalmente la transicion para resetear la rotacion a 0 sin que se note
+                icon.style.transition = 'none';
+                icon.style.transform = 'rotate(0deg)';
+                // Forzar un reflow
+                void icon.offsetHeight;
+                // Restaurar la transicion
+                icon.style.transition = '';
+                icon.style.transform = '';
+                icon.style.opacity = '';
+              }, 300);
+            }, 150);
+          } else {
+            // Fallback en caso de que falte la referencia del icono
             disableTransitionsTemporarily();
+            const isDark = html.getAttribute('data-theme') === 'dark';
             if (isDark) {
               html.removeAttribute('data-theme');
               localStorage.setItem('theme', 'light');
@@ -279,68 +365,38 @@ const {
               html.setAttribute('data-theme', 'dark');
               localStorage.setItem('theme', 'dark');
             }
-            
-            // Actualizar la apariencia y el color meta
             updateThemeIcon();
             updateMetaTheme();
-            
-            // 2. Volver a mostrarlo rotando en la misma direccion y escalando a 1
-            icon.style.transform = 'rotate(360deg) scale(1)';
-            icon.style.opacity = '1';
-            
-            // Limpiar los estilos en linea despues de la transicion para futuros clicks
-            setTimeout(() => {
-              // Desactivar temporalmente la transicion para resetear la rotacion a 0 sin que se note
-              icon.style.transition = 'none';
-              icon.style.transform = 'rotate(0deg)';
-              // Forzar un reflow
-              void icon.offsetHeight;
-              // Restaurar la transicion
-              icon.style.transition = '';
-              icon.style.transform = '';
-              icon.style.opacity = '';
-            }, 300);
-          }, 150);
-        } else {
-          // Fallback en caso de que falte la referencia del icono
-          disableTransitionsTemporarily();
-          const isDark = html.getAttribute('data-theme') === 'dark';
-          if (isDark) {
-            html.removeAttribute('data-theme');
-            localStorage.setItem('theme', 'light');
-          } else {
-            html.setAttribute('data-theme', 'dark');
-            localStorage.setItem('theme', 'dark');
-          }
-          updateThemeIcon();
-          updateMetaTheme();
-        }
-      });
-
-      updateThemeIcon();
-      updateMetaTheme();
-    })();
-  </script>
-
-  <!-- Scroll-triggering para animaciones fade-in-up -->
-  <script>
-    (function() {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
           }
         });
-      }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -40px 0px'
-      });
 
-      document.querySelectorAll('.fade-in-up').forEach((el) => {
-        observer.observe(el);
-      });
-    })();
-  </script>
-</body>
+        updateThemeIcon();
+        updateMetaTheme();
+      })();
+    </script>
+
+    <!-- Scroll-triggering para animaciones fade-in-up -->
+    <script>
+      (function () {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          {
+            threshold: 0.1,
+            rootMargin: '0px 0px -40px 0px'
+          }
+        );
+
+        document.querySelectorAll('.fade-in-up').forEach((el) => {
+          observer.observe(el);
+        });
+      })();
+    </script>
+  </body>
 </html>
