@@ -15,7 +15,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
     ssr: {
-      noExternal: ['jwks-rsa', 'firebase-admin']
+      noExternal: ['jwks-rsa', 'firebase-admin', 'jose']
     }
   },
 
