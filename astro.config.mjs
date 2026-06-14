@@ -13,7 +13,10 @@ export default defineConfig({
   output: 'server',
 
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    ssr: {
+      noExternal: ['jwks-rsa', 'firebase-admin']
+    }
   },
 
   adapter: vercel(),
