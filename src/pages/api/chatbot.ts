@@ -90,31 +90,76 @@ Instrucciones de comportamiento:
 5. Mantén tus respuestas relativamente cortas (máximo 2 párrafos) para que sean fáciles de leer en un chat widget o WhatsApp.
 `;
 
-    // 3. Llamada a la API de DeepSeek (Compatible con OpenAI)
-    const response = await fetch('https://api.deepseek.com/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${deepseekApiKey}`
-      },
-      body: JSON.stringify({
-        model: 'deepseek-chat', // Mapea al modelo DeepSeek-V3 / DeepSeek-R1
-        messages: [
-          { role: 'system', content: systemPrompt },
-          { role: 'user', content: message }
-        ],
-        temperature: 0.3,
-        max_tokens: 300
-      })
-    });
+    // Helper para respuestas de respaldo instantáneas locales
+    const getLocalAnswer = (msgText: string): string => {
+      const msg = msgText.toLowerCase();
+      if (msg.includes('precio') || msg.includes('tarifa') || msg.includes('costo') || msg.includes('cuanto') || msg.includes('cuánto') || msg.includes('pasaje')) {
+        return "Nuestras tarifas actuales de pasajes son:\n- Pampa Cangallo: S/ 20\n- Cangallo: S/ 25\n- Huancasancos: S/ 45\n\n¿Deseas reservar tus boletos en línea? Puedes hacerlo en: https://jrtransportesmorochucos.com/reservar";
+      }
+      if (msg.includes('horario') || msg.includes('hora') || msg.includes('salida') || msg.includes('salen') || msg.includes('frecuencia')) {
+        return "Salimos todos los días desde el Terminal Sur de Ayacucho (San Juan Bautista).\nNuestros horarios de salida son continuos cada 30 minutos, desde las 5:00 AM hasta las 7:00 PM.";
+      }
+      if (msg.includes('donde') || msg.includes('dónde') || msg.includes('terminal') || msg.includes('embarque') || msg.includes('paradero') || msg.includes('ubicacion') || msg.includes('ubicación')) {
+        return "Todas nuestras unidades salen del Terminal Sur de Ayacucho, ubicado en el distrito de San Juan Bautista. Nos encontrarás en el counter presencial de JR Transportes.";
+      }
+      if (msg.includes('encomienda') || msg.includes('giro') || msg.includes('envio') || msg.includes('envío') || msg.includes('paquete')) {
+        return "Sí, realizamos envíos de encomiendas y giros. Se reciben en nuestras oficinas del Terminal Sur de Ayacucho y se entregan a lo largo de nuestras rutas autorizadas (Cangallo, Pampa Cangallo, Huancasancos).";
+      }
+      if (msg.includes('tour') || msg.includes('turismo') || msg.includes('millpu') || msg.includes('pachapupum') || msg.includes('viaje')) {
+        return "Ofrecemos tours de Full Day saliendo desde Ayacucho:\n- Aguas Turquesas de Millpu: S/ 80\n- Cañón de Pachapupum: S/ 110\n\n¡Puedes reservar tu tour en línea en nuestra sección de Reservas!";
+      }
+      return "¡Hola! Soy Mateo, el asistente virtual de JR Transportes. Actualmente nuestro canal de IA tiene una alta demanda, pero puedo ayudarte con información de pasajes, rutas (Cangallo, Pampa Cangallo, Huancasancos), horarios de salida (5 AM - 7 PM), envío de encomiendas o tours. ¿De qué te gustaría recibir información?";
+    };
 
-    if (!response.ok) {
-      const errText = await response.text();
-      throw new Error(`API de DeepSeek respondió con código ${response.status}: ${errText}`);
+    // 3. Llamada a la API de DeepSeek con un Timeout de 7.0 segundos
+    const fetchWithTimeout = async () => {
+      const controller = new AbortController();
+      const id = setTimeout(() => controller.abort(), 7000);
+
+      try {
+        const response = await fetch('https://api.deepseek.com/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${deepseekApiKey}`
+          },
+          body: JSON.stringify({
+            model: 'deepseek-chat',
+            messages: [
+              { role: 'system', content: systemPrompt },
+              { role: 'user', content: message }
+            ],
+            temperature: 0.3,
+            max_tokens: 300
+          }),
+          signal: controller.signal
+        });
+
+        clearTimeout(id);
+
+        if (!response.ok) {
+          const errText = await response.text();
+          throw new Error(`API de DeepSeek respondió con código ${response.status}: ${errText}`);
+        }
+
+        const data = await response.json();
+        return data.choices[0]?.message?.content || '';
+      } catch (err) {
+        clearTimeout(id);
+        throw err;
+      }
+    };
+
+    let answer = '';
+    try {
+      answer = await fetchWithTimeout();
+      if (!answer) {
+        answer = getLocalAnswer(message);
+      }
+    } catch (apiError) {
+      console.warn('⚠️ Error o Timeout en API de DeepSeek. Activando fallback local instantáneo:', apiError);
+      answer = getLocalAnswer(message);
     }
-
-    const data = await response.json();
-    const answer = data.choices[0]?.message?.content || 'Lo siento, no pude procesar tu respuesta en este momento.';
 
     return new Response(JSON.stringify({ answer }), {
       status: 200,
