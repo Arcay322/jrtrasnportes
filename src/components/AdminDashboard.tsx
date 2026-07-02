@@ -53,9 +53,9 @@ const MOCK_RESERVATIONS: Reservation[] = [
 ];
 
 const MOCK_FLEET: Vehicle[] = [
-  { id: 'fleet-01', plate: 'V3X-982', type: 'H1 Minivan', capacity: 15, driverName: 'Juan Carlos Quispe', status: 'activo' },
-  { id: 'fleet-02', plate: 'F4T-811', type: 'Mercedes Sprinter', capacity: 19, driverName: 'Pedro Mendoza', status: 'activo' },
-  { id: 'fleet-03', plate: 'A9B-122', type: 'H1 Minivan', capacity: 15, driverName: 'Arnie Calderón', status: 'activo' }
+  { id: 'fleet-01', plate: 'V3X-982', type: 'Toyota Avanza (Camioneta)', capacity: 6, driverName: 'Juan Carlos Quispe', status: 'activo' },
+  { id: 'fleet-02', plate: 'F4T-811', type: 'Toyota Yaris (Sedán)', capacity: 4, driverName: 'Pedro Mendoza', status: 'activo' },
+  { id: 'fleet-03', plate: 'A9B-122', type: 'Toyota Avanza (Camioneta)', capacity: 6, driverName: 'Arnie Calderón', status: 'activo' }
 ];
 
 export default function AdminDashboard() {
@@ -67,8 +67,8 @@ export default function AdminDashboard() {
 
   // Formulario de flota nuevo vehículo
   const [newPlate, setNewPlate] = useState('');
-  const [newType, setNewType] = useState('H1 Minivan');
-  const [newCapacity, setNewCapacity] = useState(15);
+  const [newType, setNewType] = useState('Toyota Avanza (Camioneta)');
+  const [newCapacity, setNewCapacity] = useState(6);
   const [newDriver, setNewDriver] = useState('');
 
   useEffect(() => {
@@ -401,12 +401,18 @@ export default function AdminDashboard() {
                   <label className="block text-xs font-extrabold uppercase tracking-wider text-pampa-600 mb-1.5">Tipo</label>
                   <select
                     value={newType}
-                    onChange={(e) => setNewType(e.target.value)}
+                    onChange={(e) => {
+                      setNewType(e.target.value);
+                      if (e.target.value === 'Toyota Yaris (Sedán)') {
+                        setNewCapacity(4);
+                      } else if (e.target.value === 'Toyota Avanza (Camioneta)') {
+                        setNewCapacity(6);
+                      }
+                    }}
                     className="h-10 w-full rounded-lg border border-pampa-200 dark:border-pampa-200/30 bg-white dark:bg-pampa-950/40 px-3 font-semibold text-pampa-800 dark:text-pampa-900 focus:outline-none focus:border-cielo-500 dark:focus:border-pampa-300"
                   >
-                    <option value="H1 Minivan">H1 Minivan (15 as.)</option>
-                    <option value="Mercedes Sprinter">Mercedes Sprinter (19 as.)</option>
-                    <option value="Bus Interprovincial">Bus Interprovincial (32 as.)</option>
+                    <option value="Toyota Avanza (Camioneta)">Toyota Avanza (Camioneta) (6 as.)</option>
+                    <option value="Toyota Yaris (Sedán)">Toyota Yaris (Sedán) (4 as.)</option>
                   </select>
                 </div>
 

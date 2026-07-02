@@ -6,15 +6,17 @@ type Destination = {
   category: 'destino' | 'tour';
   price: string;
   travelTime: string;
+  capacity?: number;
+  vehicleType?: string;
 };
 
 // Fallback por si la API aún no está activa (robustez de código)
 const DEFAULT_DESTINATIONS: Destination[] = [
-  { slug: 'pampa-cangallo', name: 'Pampa Cangallo', category: 'destino', price: 'Desde S/ 20', travelTime: '2h aprox.' },
-  { slug: 'cangallo', name: 'Cangallo', category: 'destino', price: 'Desde S/ 25', travelTime: '2h 30m aprox.' },
-  { slug: 'huancasancos', name: 'Huancasancos', category: 'destino', price: 'Desde S/ 45', travelTime: '4h aprox.' },
-  { slug: 'tour-millpu', name: 'Aguas Turquesas de Millpu', category: 'tour', price: 'S/ 80', travelTime: 'Full Day' },
-  { slug: 'tour-pachapupum', name: 'Pachapupum (Huanca Sancos)', category: 'tour', price: 'S/ 110', travelTime: 'Full Day' }
+  { slug: 'pampa-cangallo', name: 'Pampa Cangallo', category: 'destino', price: 'Desde S/ 20', travelTime: '2h aprox.', capacity: 6, vehicleType: 'Toyota Avanza (Camioneta)' },
+  { slug: 'cangallo', name: 'Cangallo', category: 'destino', price: 'Desde S/ 25', travelTime: '2h 30m aprox.', capacity: 4, vehicleType: 'Toyota Yaris (Sedán)' },
+  { slug: 'huancasancos', name: 'Huancasancos', category: 'destino', price: 'Desde S/ 45', travelTime: '4h aprox.', capacity: 6, vehicleType: 'Toyota Avanza (Camioneta)' },
+  { slug: 'tour-millpu', name: 'Aguas Turquesas de Millpu', category: 'tour', price: 'S/ 80', travelTime: 'Full Day', capacity: 6, vehicleType: 'Toyota Avanza (Camioneta)' },
+  { slug: 'tour-pachapupum', name: 'Pachapupum (Huanca Sancos)', category: 'tour', price: 'S/ 110', travelTime: 'Full Day', capacity: 6, vehicleType: 'Toyota Avanza (Camioneta)' }
 ];
 
 const SCHEDULES = ['06:00 AM', '08:30 AM', '11:00 AM', '01:30 PM', '04:30 PM', '07:00 PM'];
@@ -37,7 +39,7 @@ export default function BookingEngine() {
   const [errorMessage, setErrorMessage] = useState('');
   
   // Asientos ocupados simulados / obtenidos de la API
-  const [occupiedSeats, setOccupiedSeats] = useState<number[]>([3, 7, 12]);
+  const [occupiedSeats, setOccupiedSeats] = useState<number[]>([3]);
 
   // Cargar destinos reales desde Firestore en el montaje
   useEffect(() => {
@@ -77,27 +79,44 @@ export default function BookingEngine() {
         })
         .catch(() => {
           // Fallback a mock en desarrollo si no hay backend activo
-          setOccupiedSeats([2, 5, 11]);
+          setOccupiedSeats([2]);
           setLoading(false);
         });
     }
   }, [selectedSlug, selectedDate, selectedSchedule]);
 
   const selectedDestination = destinations.find((d) => d.slug === selectedSlug);
+  
+  // Determinar tipo de vehículo y capacidad basado en el destino
+  const getVehicleConfig = (slug: string) => {
+    const dest = destinations.find(d => d.slug === slug);
+    if (dest && dest.capacity && dest.vehicleType) {
+      return { type: dest.vehicleType, capacity: dest.capacity };
+    }
+    // Fallback por slug
+    if (slug === 'cangallo') {
+      return { type: 'Toyota Yaris (Sedán)', capacity: 4 };
+    }
+    return { type: 'Toyota Avanza (Camioneta)', capacity: 6 };
+  };
+
+  const { type: vehicleType, capacity: vehicleCapacity } = getVehicleConfig(selectedSlug);
+
   const numericPrice = selectedDestination 
     ? parseInt(selectedDestination.price.replace(/[^\d]/g, '')) || 25 
     : 25;
   const totalPrice = selectedSeats.length * numericPrice;
 
-  // Manejo de la selección de asientos (máximo 5 por persona)
+  // Manejo de la selección de asientos (máximo 5 por persona o el límite de capacidad)
   const handleSeatClick = (seatNumber: number) => {
     if (occupiedSeats.includes(seatNumber)) return; // Asiento ocupado
 
     if (selectedSeats.includes(seatNumber)) {
       setSelectedSeats(selectedSeats.filter((s) => s !== seatNumber));
     } else {
-      if (selectedSeats.length >= 5) {
-        alert('Puedes reservar un máximo de 5 asientos por transacción.');
+      const maxSeats = Math.min(5, vehicleCapacity);
+      if (selectedSeats.length >= maxSeats) {
+        alert(`Puedes reservar un máximo de ${maxSeats} asientos por transacción para este vehículo.`);
         return;
       }
       setSelectedSeats([...selectedSeats, seatNumber]);
@@ -265,10 +284,10 @@ export default function BookingEngine() {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           {/* Mapa de Asientos */}
           <div className="md:col-span-2">
-            <h3 className="mb-4 text-base font-bold text-pampa-800">Mapa de Asientos (Minivan H1)</h3>
+            <h3 className="mb-4 text-base font-bold text-pampa-800">Mapa de Asientos ({vehicleType})</h3>
             
             {/* Cabina */}
-            <div className="mx-auto max-w-[280px] rounded-t-3xl border-2 border-dashed border-pampa-300/40 p-4">
+            <div className={`mx-auto ${vehicleCapacity === 4 ? 'max-w-[210px]' : 'max-w-[250px]'} rounded-t-3xl border-2 border-dashed border-pampa-300/40 p-5 bg-pampa-50/5`}>
               <div className="flex justify-between items-center mb-6 px-4">
                 <span className="text-xs font-bold text-pampa-400">Parabrisas</span>
                 <span className="material-symbols-outlined text-pampa-400 rotate-90">navigation</span>
@@ -295,88 +314,72 @@ export default function BookingEngine() {
                 </button>
               </div>
 
-              {/* Distribución asientos de Minivan H1 */}
-              <div className="space-y-4">
-                {/* Fila 2: [2, 3, 4] */}
-                <div className="flex justify-between">
-                  {[2, 3, 4].map((num) => (
-                    <button
-                      key={num}
-                      type="button"
-                      onClick={() => handleSeatClick(num)}
-                      className={`flex h-11 w-11 items-center justify-center rounded-lg text-xs font-bold transition-all ${
-                        occupiedSeats.includes(num)
-                          ? 'bg-logo-500/80 text-white cursor-not-allowed'
-                          : selectedSeats.includes(num)
-                          ? 'bg-cielo-500 text-white shadow-soft'
-                          : 'bg-pampa-100 text-pampa-700 hover:bg-pampa-200'
-                      }`}
-                    >
-                      {num}
-                    </button>
-                  ))}
+              {/* Distribución de asientos dinámica */}
+              {vehicleCapacity === 4 ? (
+                /* Toyota Yaris (Sedán): Fila trasera única de 3 asientos [2, 3, 4] */
+                <div className="space-y-4">
+                  <div className="flex justify-between">
+                    {[2, 3, 4].map((num) => (
+                      <button
+                        key={num}
+                        type="button"
+                        onClick={() => handleSeatClick(num)}
+                        className={`flex h-11 w-11 items-center justify-center rounded-lg text-xs font-bold transition-all ${
+                          occupiedSeats.includes(num)
+                            ? 'bg-logo-500/80 text-white cursor-not-allowed'
+                            : selectedSeats.includes(num)
+                            ? 'bg-cielo-500 text-white shadow-soft'
+                            : 'bg-pampa-100 text-pampa-700 hover:bg-pampa-200'
+                        }`}
+                      >
+                        {num}
+                      </button>
+                    ))}
+                  </div>
                 </div>
-
-                {/* Fila 3: [5, 6, 7] */}
-                <div className="flex justify-between">
-                  {[5, 6, 7].map((num) => (
-                    <button
-                      key={num}
-                      type="button"
-                      onClick={() => handleSeatClick(num)}
-                      className={`flex h-11 w-11 items-center justify-center rounded-lg text-xs font-bold transition-all ${
-                        occupiedSeats.includes(num)
-                          ? 'bg-logo-500/80 text-white cursor-not-allowed'
-                          : selectedSeats.includes(num)
-                          ? 'bg-cielo-500 text-white shadow-soft'
-                          : 'bg-pampa-100 text-pampa-700 hover:bg-pampa-200'
-                      }`}
-                    >
-                      {num}
-                    </button>
-                  ))}
+              ) : (
+                /* Toyota Avanza (Camioneta): Fila 2 de 3 asientos [2, 3, 4] y Fila 3 de 2 asientos [5, 6] */
+                <div className="space-y-5">
+                  {/* Fila 2: [2, 3, 4] */}
+                  <div className="flex justify-between">
+                    {[2, 3, 4].map((num) => (
+                      <button
+                        key={num}
+                        type="button"
+                        onClick={() => handleSeatClick(num)}
+                        className={`flex h-11 w-11 items-center justify-center rounded-lg text-xs font-bold transition-all ${
+                          occupiedSeats.includes(num)
+                            ? 'bg-logo-500/80 text-white cursor-not-allowed'
+                            : selectedSeats.includes(num)
+                            ? 'bg-cielo-500 text-white shadow-soft'
+                            : 'bg-pampa-100 text-pampa-700 hover:bg-pampa-200'
+                        }`}
+                      >
+                        {num}
+                      </button>
+                    ))}
+                  </div>
+                  {/* Fila 3: [5, 6] */}
+                  <div className="flex justify-between px-4">
+                    {[5, 6].map((num) => (
+                      <button
+                        key={num}
+                        type="button"
+                        onClick={() => handleSeatClick(num)}
+                        className={`flex h-11 w-11 items-center justify-center rounded-lg text-xs font-bold transition-all ${
+                          occupiedSeats.includes(num)
+                            ? 'bg-logo-500/80 text-white cursor-not-allowed'
+                            : selectedSeats.includes(num)
+                            ? 'bg-cielo-500 text-white shadow-soft'
+                            : 'bg-pampa-100 text-pampa-700 hover:bg-pampa-200'
+                        }`}
+                      >
+                        {num}
+                      </button>
+                    ))}
+                  </div>
                 </div>
-
-                {/* Fila 4: [8, 9, 10] */}
-                <div className="flex justify-between">
-                  {[8, 9, 10].map((num) => (
-                    <button
-                      key={num}
-                      type="button"
-                      onClick={() => handleSeatClick(num)}
-                      className={`flex h-11 w-11 items-center justify-center rounded-lg text-xs font-bold transition-all ${
-                        occupiedSeats.includes(num)
-                          ? 'bg-logo-500/80 text-white cursor-not-allowed'
-                          : selectedSeats.includes(num)
-                          ? 'bg-cielo-500 text-white shadow-soft'
-                          : 'bg-pampa-100 text-pampa-700 hover:bg-pampa-200'
-                      }`}
-                    >
-                      {num}
-                    </button>
-                  ))}
-                </div>
-
-                {/* Fila 5: [11, 12, 13, 14, 15] */}
-                <div className="flex justify-between gap-1">
-                  {[11, 12, 13, 14, 15].map((num) => (
-                    <button
-                      key={num}
-                      type="button"
-                      onClick={() => handleSeatClick(num)}
-                      className={`flex h-10 w-10 items-center justify-center rounded-lg text-[10px] font-bold transition-all ${
-                        occupiedSeats.includes(num)
-                          ? 'bg-logo-500/80 text-white cursor-not-allowed'
-                          : selectedSeats.includes(num)
-                          ? 'bg-cielo-500 text-white shadow-soft'
-                          : 'bg-pampa-100 text-pampa-700 hover:bg-pampa-200'
-                      }`}
-                    >
-                      {num}
-                    </button>
-                  ))}
-                </div>
-              </div>
+              )}
             </div>
 
             {/* Leyenda */}

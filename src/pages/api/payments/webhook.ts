@@ -3,7 +3,7 @@ import { db } from '../../../lib/firebaseAdmin';
 import { MercadoPagoConfig, Payment } from 'mercadopago';
 import { sendTicketNotification } from '../../../lib/notifications';
 
-const mpToken = process.env.MERCADOPAGO_ACCESS_TOKEN || 'TEST-8739191024340798-020516-70e28f3a3880816cf6179bc3ebff99bd-161678122';
+const mpToken = import.meta.env.MERCADOPAGO_ACCESS_TOKEN || process.env.MERCADOPAGO_ACCESS_TOKEN || 'TEST-8739191024340798-020516-70e28f3a3880816cf6179bc3ebff99bd-161678122';
 const client = new MercadoPagoConfig({ accessToken: mpToken });
 const payment = new Payment(client);
 

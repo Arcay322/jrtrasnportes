@@ -31,7 +31,7 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
-    const deepseekApiKey = process.env.DEEPSEEK_API_KEY;
+    const deepseekApiKey = import.meta.env.DEEPSEEK_API_KEY || process.env.DEEPSEEK_API_KEY;
 
     if (!deepseekApiKey) {
       console.warn('⚠️ Advertencia: Falta DEEPSEEK_API_KEY en las variables de entorno. El bot responderá en modo simulación.');

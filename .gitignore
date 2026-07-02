@@ -26,3 +26,4 @@ Thumbs.db
 
 # sensitive files
 firebase-key.json
+.vercel

@@ -10,7 +10,7 @@ type Message = {
 const QUICK_QUESTIONS = [
   '¿Cuáles son los horarios de salida?',
   '¿Cuáles son los precios de los pasajes?',
-  '¿De dónde salen las minivans?',
+  '¿De dónde salen los vehículos?',
   '¿Realizan envíos de encomiendas?'
 ];
 

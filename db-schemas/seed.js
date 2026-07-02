@@ -1,4 +1,5 @@
-import admin from 'firebase-admin';
+import { initializeApp, cert } from 'firebase-admin/app';
+import { getFirestore } from 'firebase-admin/firestore';
 import fs from 'fs';
 import path from 'path';
 
@@ -19,11 +20,11 @@ if (!fs.existsSync(serviceAccountPath)) {
 
 const serviceAccount = JSON.parse(fs.readFileSync(serviceAccountPath, 'utf8'));
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
+initializeApp({
+  credential: cert(serviceAccount)
 });
 
-const db = admin.firestore();
+const db = getFirestore();
 
 // 1. Datos semilla de Rutas y Tours (extraídos de destinations.ts)
 const routes = [
@@ -48,7 +49,9 @@ const routes = [
       'Salidas frecuentes',
       'Atencion por WhatsApp',
       'Encomiendas en ruta'
-    ]
+    ],
+    capacity: 6,
+    vehicleType: 'Toyota Avanza (Camioneta)'
   },
   {
     slug: 'cangallo',
@@ -71,7 +74,9 @@ const routes = [
       'Ruta interprovincial segura',
       'Coordinacion de equipaje',
       'Soporte por llamada'
-    ]
+    ],
+    capacity: 4,
+    vehicleType: 'Toyota Yaris (Sedán)'
   },
   {
     slug: 'huancasancos',
@@ -94,7 +99,9 @@ const routes = [
       'Cobertura de zonas altas',
       'Servicio turistico disponible',
       'Atencion personalizada'
-    ]
+    ],
+    capacity: 6,
+    vehicleType: 'Toyota Avanza (Camioneta)'
   },
   {
     slug: 'tour-millpu',
@@ -114,7 +121,9 @@ const routes = [
       'Son unas famosas piscinas naturales escalonadas que se forman a lo largo de un cañón en la comunidad de Circamarca. El color del agua es espectacular, sobre todo si vas entre mayo y noviembre, cuando las lluvias disminuyen.',
     travelTime: 'Full Day (3h a 4h de viaje solo ida)',
     fareNote: 'Consultar tarifas y horarios de salidas.',
-    highlights: ['Paisaje único', 'Caminata', 'Fotografía']
+    highlights: ['Paisaje único', 'Caminata', 'Fotografía'],
+    capacity: 6,
+    vehicleType: 'Toyota Avanza (Camioneta)'
   },
   {
     slug: 'tour-pachapupum',
@@ -134,7 +143,9 @@ const routes = [
       'Es un monumento natural fascinante. Se trata de un cono volcánico de piedra caliza rodeado de pozas rústicas de aguas termales a las que se les atribuyen propiedades medicinales.',
     travelTime: 'Full Day',
     fareNote: 'Consultar tarifas.',
-    highlights: ['Aguas termales', 'Cono volcánico', 'Relajación']
+    highlights: ['Aguas termales', 'Cono volcánico', 'Relajación'],
+    capacity: 6,
+    vehicleType: 'Toyota Avanza (Camioneta)'
   }
 ];
 
@@ -143,32 +154,32 @@ const fleet = [
   {
     id: 'fleet-01',
     plate: 'V3X-982',
-    type: 'H1 Minivan',
-    capacity: 15,
+    type: 'Toyota Avanza (Camioneta)',
+    capacity: 6,
     driverName: 'Juan Carlos Quispe',
     status: 'activo'
   },
   {
     id: 'fleet-02',
     plate: 'F4T-811',
-    type: 'Mercedes Sprinter',
-    capacity: 19,
+    type: 'Toyota Yaris (Sedán)',
+    capacity: 4,
     driverName: 'Pedro Mendoza',
     status: 'activo'
   },
   {
     id: 'fleet-03',
     plate: 'A9B-122',
-    type: 'H1 Minivan',
-    capacity: 15,
+    type: 'Toyota Avanza (Camioneta)',
+    capacity: 6,
     driverName: 'Arnie Calderón',
     status: 'activo'
   },
   {
     id: 'fleet-04',
     plate: 'W5V-304',
-    type: 'Bus Interprovincial',
-    capacity: 32,
+    type: 'Toyota Yaris (Sedán)',
+    capacity: 4,
     driverName: 'Lucho Fernández',
     status: 'mantenimiento'
   }

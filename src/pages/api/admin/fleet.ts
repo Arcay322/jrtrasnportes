@@ -2,9 +2,9 @@ import type { APIRoute } from 'astro';
 import { db } from '../../../lib/firebaseAdmin';
 
 const STATIC_FLEET = [
-  { id: 'fleet-01', plate: 'V3X-982', type: 'H1 Minivan', capacity: 15, driverName: 'Juan Carlos Quispe', status: 'activo' },
-  { id: 'fleet-02', plate: 'F4T-811', type: 'Mercedes Sprinter', capacity: 19, driverName: 'Pedro Mendoza', status: 'activo' },
-  { id: 'fleet-03', plate: 'A9B-122', type: 'H1 Minivan', capacity: 15, driverName: 'Arnie Calderón', status: 'activo' }
+  { id: 'fleet-01', plate: 'V3X-982', type: 'Toyota Avanza (Camioneta)', capacity: 6, driverName: 'Juan Carlos Quispe', status: 'activo' },
+  { id: 'fleet-02', plate: 'F4T-811', type: 'Toyota Yaris (Sedán)', capacity: 4, driverName: 'Pedro Mendoza', status: 'activo' },
+  { id: 'fleet-03', plate: 'A9B-122', type: 'Toyota Avanza (Camioneta)', capacity: 6, driverName: 'Arnie Calderón', status: 'activo' }
 ];
 
 // 1. GET: Listar todos los vehículos de la flota

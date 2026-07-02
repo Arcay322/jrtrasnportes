@@ -7,35 +7,45 @@ const STATIC_ROUTES = [
     name: 'Pampa Cangallo',
     category: 'destino',
     price: 'Desde S/ 20',
-    travelTime: '2h aprox.'
+    travelTime: '2h aprox.',
+    capacity: 6,
+    vehicleType: 'Toyota Avanza (Camioneta)'
   },
   {
     slug: 'cangallo',
     name: 'Cangallo',
     category: 'destino',
     price: 'Desde S/ 25',
-    travelTime: '2h 30m aprox.'
+    travelTime: '2h 30m aprox.',
+    capacity: 4,
+    vehicleType: 'Toyota Yaris (Sedán)'
   },
   {
     slug: 'huancasancos',
     name: 'Huancasancos',
     category: 'destino',
     price: 'Desde S/ 45',
-    travelTime: '4h aprox.'
+    travelTime: '4h aprox.',
+    capacity: 6,
+    vehicleType: 'Toyota Avanza (Camioneta)'
   },
   {
     slug: 'tour-millpu',
     name: 'Aguas Turquesas de Millpu',
     category: 'tour',
     price: 'S/ 80',
-    travelTime: 'Full Day'
+    travelTime: 'Full Day',
+    capacity: 6,
+    vehicleType: 'Toyota Avanza (Camioneta)'
   },
   {
     slug: 'tour-pachapupum',
     name: 'Pachapupum (Huanca Sancos)',
     category: 'tour',
     price: 'S/ 110',
-    travelTime: 'Full Day'
+    travelTime: 'Full Day',
+    capacity: 6,
+    vehicleType: 'Toyota Avanza (Camioneta)'
   }
 ];
 
