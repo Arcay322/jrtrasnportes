@@ -4,17 +4,20 @@ import { destinations } from '../data/destinations';
 export const GET: APIRoute = async ({ site }) => {
   const baseUrl = site?.origin || 'https://jrtransportesmorochucos.com';
 
-  const defaultImage = `${baseUrl}/images/Pampa%20cangallo/pampa-cangallo.webp`;
+  const defaultImage = `${baseUrl}/images/pampa-cangallo/pampa-cangallo.webp`;
+
+  const today = new Date().toISOString().split('T')[0];
 
   const pages = [
-    { url: '/', priority: '1.0', changefreq: 'weekly', image: defaultImage },
+    { url: '/', priority: '1.0', changefreq: 'weekly', lastmod: today, image: defaultImage },
     {
       url: '/destinos',
       priority: '0.9',
       changefreq: 'weekly',
+      lastmod: today,
       image: defaultImage
     },
-    { url: '/blog', priority: '0.8', changefreq: 'weekly', image: defaultImage }
+    { url: '/blog', priority: '0.8', changefreq: 'weekly', lastmod: today, image: defaultImage }
   ];
 
   const destinationPages = destinations.map((d) => ({

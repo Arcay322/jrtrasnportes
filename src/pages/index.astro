@@ -1,4 +1,6 @@
 ---
+export const prerender = true;
+
 import Layout from '../components/Layout.astro';
 import '../styles/global.css';
 import { destinations } from '../data/destinations';
@@ -72,7 +74,7 @@ const localBusinessSchema = {
   url: 'https://jrtransportesmorochucos.com',
   logo: 'https://jrtransportesmorochucos.com/JRlogo.webp',
   image:
-    'https://jrtransportesmorochucos.com/images/Pampa%20cangallo/pampa-cangallo.webp',
+    'https://jrtransportesmorochucos.com/images/pampa-cangallo/pampa-cangallo.webp',
   areaServed: {
     '@type': 'City',
     name: 'Ayacucho',
@@ -183,7 +185,7 @@ const schemas = [
   ogTitle="JR Transportes | Transporte Interprovincial Ayacucho"
   ogDescription="Servicio de transporte interprovincial en Ayacucho. Pasajeros, giros, encomiendas y tours turisticos con la maxima seguridad."
   ogType="website"
-  ogImage="https://jrtransportesmorochucos.com/images/Pampa%20cangallo/pampa-cangallo.webp"
+  ogImage="https://jrtransportesmorochucos.com/images/pampa-cangallo/pampa-cangallo.webp"
   ogLocale="es_PE"
   schema={schemas}
   activePage="index"
@@ -197,7 +199,7 @@ const schemas = [
   >
     <img
       class="absolute inset-0 h-full w-full object-cover"
-      src="https://lh3.googleusercontent.com/aida-public/AB6AXuDY7u1kL2Z1wZDsppmSkekS25Q5CEUM500ZfM0TwbLpuE9JB1NCTr6Yl8adRmLAk6icC0aC6oCBUzVdrb18-k2Dj6NyJGsrHtHsmsiZ3hVX6zjUx-Zz-oPShMrtGU81Sk4g72Yj2x2vYQeAcsfdzfBdtHDc5oiHmtSnM7WUkSYdrNAXvVAETkwWkgmiFVZuvLk7Dh5AcOTT7GlKyytJrCI_OkgoIxTcpjnCVzL3E4Bv2VGXudL3Y5cV6UilB4F_uGpFfrjEQHG6pw"
+      src="/images/hero/hero.webp"
       alt="Paisaje andino de las pampas de Ayacucho"
     />
     <div

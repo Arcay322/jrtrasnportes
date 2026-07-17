@@ -4,7 +4,7 @@ title: '5 Consejos para un viaje interprovincial seguro y confortable'
 description: 'Viajar por las rutas de la cordillera requiere previsión y responsabilidad. Conoce nuestras recomendaciones clave para tu próximo viaje en Ayacucho.'
 author: 'Equipo JR'
 date: '2026-04-10'
-image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1200&auto=format&fit=crop'
+image: '/images/blog/viaje-seguro.webp'
 ---
 
 Las carreteras peruanas nos regalan paisajes incomparables, y en Ayacucho no es la excepción. Sin embargo, para disfrutar del trayecto con total tranquilidad, es importante tener en cuenta varios factores.

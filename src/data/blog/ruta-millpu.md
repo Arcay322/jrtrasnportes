@@ -4,7 +4,7 @@ title: 'Aguas Turquesas de Millpu: Todo lo que necesitas saber'
 description: 'Descubre cómo llegar, cuándo visitar y qué llevar a una de las maravillas naturales más asombrosas que tiene el departamento de Ayacucho.'
 author: 'Guías JR'
 date: '2026-04-12'
-image: 'https://images.unsplash.com/photo-1542259009477-d625272157b7?q=80&w=1200&auto=format&fit=crop'
+image: '/images/blog/ruta-millpu.webp'
 ---
 
 Si hay un lugar que se ha robado el corazón de miles de viajeros en los últimos años, son las piscinas naturales de **Millpu**. Descansando escondidas entre la geografía de Víctor Fajardo, estas aguas turquesas son el destino ideal para una excursión de fin de semana.

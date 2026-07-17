@@ -1,0 +1,81 @@
+---
+import Layout from '../../components/Layout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import '../../styles/global.css';
+
+const phoneRaw = '51928413201';
+const waRoute = `https://wa.me/${phoneRaw}?text=${encodeURIComponent('Hola JR Transportes, tengo una consulta sobre los terminos del servicio.')}`;
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Términos y Condiciones - JR Transportes',
+    description: 'Términos y condiciones del servicio de transporte interprovincial, tours y encomiendas de JR Transportes en Ayacucho.'
+  }
+];
+---
+
+<Layout
+  title="Términos y Condiciones | JR Transportes"
+  description="Conoce los términos y condiciones del servicio de transporte interprovincial, tours y encomiendas de JR Transportes en Ayacucho."
+  keywords="terminos y condiciones, politicas de viaje, condiciones de servicio, JR transportes, transporte Ayacucho"
+  ogTitle="Términos y Condiciones | JR Transportes"
+  ogDescription="Conoce los términos y condiciones del servicio de transporte interprovincial, tours y encomiendas de JR Transportes."
+  ogType="website"
+  schema={schemas}
+  ctaText="Contactar"
+  ctaHref={waRoute}
+>
+  <div class="mx-auto w-full max-w-3xl px-5 py-12">
+    <Breadcrumb items={[{ label: 'Términos y Condiciones' }]} />
+
+    <h1 class="font-headline text-4xl text-pampa-900 sm:text-5xl mt-6 mb-8">
+      Términos y Condiciones
+    </h1>
+
+    <div class="prose prose-pampa max-w-none space-y-8 text-sm leading-relaxed text-pampa-700/80">
+      <section>
+        <h2 class="font-headline text-2xl text-pampa-800 mb-3">1. General</h2>
+        <p>JR Transportes es una empresa de transporte interprovincial con sede en Ayacucho, Perú. Al hacer uso de nuestros servicios de transporte de pasajeros, tours turísticos y encomiendas, usted acepta los presentes términos y condiciones.</p>
+      </section>
+
+      <section>
+        <h2 class="font-headline text-2xl text-pampa-800 mb-3">2. Reservas y Pasajes</h2>
+        <p>La compra de pasajes puede realizarse a través de nuestra plataforma web o directamente por WhatsApp. El pasajero debe presentarse con anticipación en la Terminal Terrestre de Ayacucho. Las salidas están sujetas a disponibilidad y coordinación previa. JR Transportes se reserva el derecho de modificar horarios por causas de fuerza mayor.</p>
+      </section>
+
+      <section>
+        <h2 class="font-headline text-2xl text-pampa-800 mb-3">3. Equipaje</h2>
+        <p>El equipaje debe estar debidamente identificado y en buen estado. El equipaje especial o voluminoso debe coordinarse antes de la salida. JR Transportes no se hace responsable por objetos de valor dejados en el equipaje de bodega.</p>
+      </section>
+
+      <section>
+        <h2 class="font-headline text-2xl text-pampa-800 mb-3">4. Encomiendas</h2>
+        <p>Se reciben encomiendas correctamente embaladas y con datos completos de remitente y destinatario. La coordinación de entrega y recojo se realiza por WhatsApp. Los plazos de entrega son referenciales y pueden variar según la ruta.</p>
+      </section>
+
+      <section>
+        <h2 class="font-headline text-2xl text-pampa-800 mb-3">5. Cancelaciones y Reembolsos</h2>
+        <p>Las cancelaciones deben ser comunicadas con anticipación. Los reembolsos están sujetos a evaluación y pueden aplicar cargos administrativos. Para consultas sobre cancelaciones, contáctenos por WhatsApp.</p>
+      </section>
+
+      <section>
+        <h2 class="font-headline text-2xl text-pampa-800 mb-3">6. Modificaciones</h2>
+        <p>JR Transportes se reserva el derecho de modificar estos términos en cualquier momento. Los cambios serán publicados en esta página y entrarán en vigor inmediatamente después de su publicación.</p>
+      </section>
+    </div>
+  </div>
+
+  <a
+    slot="after-footer"
+    class="fixed bottom-5 right-5 z-40 flex items-center gap-2 rounded-full bg-quebrada-500 px-4 py-3 text-sm font-bold text-white no-underline shadow-float transition-all duration-200 hover:-translate-y-0.5 hover:bg-quebrada-400 hover:shadow-elevated"
+    href={waRoute}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Abrir WhatsApp"
+  >
+    <span class="material-symbols-outlined text-lg">chat</span>
+    WhatsApp
+  </a>
+</Layout>

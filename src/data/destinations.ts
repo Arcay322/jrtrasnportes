@@ -20,11 +20,11 @@ export const destinations: Destination[] = [
     category: 'destino',
     price: 'Desde S/ 20',
     description: 'Tierra morochuca de llanuras altas y tradicion viva.',
-    image: '/images/Pampa%20cangallo/pampa-cangallo.webp',
+    image: '/images/pampa-cangallo/pampa-cangallo.webp',
     gallery: [
-      '/images/Pampa%20cangallo/pampa-cangallo.webp',
-      '/images/Pampa%20cangallo/pampa-cangallo2.webp',
-      '/images/Pampa%20cangallo/pampa-cangallo3.webp'
+      '/images/pampa-cangallo/pampa-cangallo.webp',
+      '/images/pampa-cangallo/pampa-cangallo2.webp',
+      '/images/pampa-cangallo/pampa-cangallo3.webp'
     ],
     fleetImage: '/images/avanzarojo.webp',
     longDescription:
@@ -90,11 +90,11 @@ export const destinations: Destination[] = [
     price: 'A consultar',
     description:
       'Son unas famosas piscinas naturales escalonadas que se forman a lo largo de un cañón en la comunidad de Circamarca.',
-    image: '/images/Aguas%20turquesas/aguas_turquesas.webp',
+    image: '/images/aguas-turquesas/aguas_turquesas.webp',
     gallery: [
-      '/images/Aguas%20turquesas/aguas_turquesas.webp',
-      '/images/Aguas%20turquesas/aguas_turquesas2.webp',
-      '/images/Aguas%20turquesas/aguas_turquesas3.jpg'
+      '/images/aguas-turquesas/aguas_turquesas.webp',
+      '/images/aguas-turquesas/aguas_turquesas2.webp',
+      '/images/aguas-turquesas/aguas_turquesas3.webp'
     ],
     fleetImage: '/images/avanzarojo.webp',
     longDescription:
@@ -113,7 +113,7 @@ export const destinations: Destination[] = [
     image: '/images/Pachapupum/pachapupum.webp',
     gallery: [
       '/images/Pachapupum/pachapupum.webp',
-      '/images/Pachapupum/pachapupum2.jpg',
+      '/images/Pachapupum/pachapupum2.webp',
       '/images/Pachapupum/pachapupum3.webp'
     ],
     fleetImage: '/images/avanzarojo.webp',
@@ -130,11 +130,11 @@ export const destinations: Destination[] = [
     price: 'A consultar',
     description:
       'Caminata impresionante a través de caídas de agua hermosas, conocidas por la fuerte energía "mística" del lugar.',
-    image: '/images/Cataratas%20de%20pumapaqcha/pumapaqcha.webp',
+    image: '/images/cataratas-de-pumapaqcha/pumapaqcha.webp',
     gallery: [
-      '/images/Cataratas%20de%20pumapaqcha/pumapaqcha.webp',
-      '/images/Cataratas%20de%20pumapaqcha/batan.webp',
-      '/images/Cataratas%20de%20pumapaqcha/pumapaqcha2.webp'
+      '/images/cataratas-de-pumapaqcha/pumapaqcha.webp',
+      '/images/cataratas-de-pumapaqcha/batan.webp',
+      '/images/cataratas-de-pumapaqcha/pumapaqcha2.webp'
     ],
     fleetImage: '/images/avanzarojo.webp',
     longDescription:
@@ -150,11 +150,11 @@ export const destinations: Destination[] = [
     price: 'A consultar',
     description:
       'Imponente caída de agua rodeada de naturaleza pura en el distrito de Sarhua, rodeado de cultura ancestral.',
-    image: '/images/cascada%20de%20campanayocc/campanayocc.webp',
+    image: '/images/cascada-de-campanayocc/campanayocc.webp',
     gallery: [
-      '/images/cascada%20de%20campanayocc/campanayocc.webp',
-      '/images/cascada%20de%20campanayocc/campanayocc2.webp',
-      '/images/cascada%20de%20campanayocc/campanayocc3.jpg'
+      '/images/cascada-de-campanayocc/campanayocc.webp',
+      '/images/cascada-de-campanayocc/campanayocc2.webp',
+      '/images/cascada-de-campanayocc/campanayocc3.webp'
     ],
     fleetImage: '/images/avanzarojo.webp',
     longDescription:
@@ -170,11 +170,11 @@ export const destinations: Destination[] = [
     price: 'A consultar',
     description:
       'Joya natural ubicada en Chuschi, famosa porque el rocío del agua y la luz del sol forman arcoíris naturales.',
-    image: '/images/cascada%20de%20Ruqruqa/cascada_ruqruqa.png',
+    image: '/images/cascada-de-ruqruqa/cascada_ruqruqa.webp',
     gallery: [
-      '/images/cascada%20de%20Ruqruqa/cascada_ruqruqa.png',
-      '/images/cascada%20de%20Ruqruqa/cascada_ruqruqa2.webp',
-      '/images/cascada%20de%20Ruqruqa/cascada_ruqruqa3.webp'
+      '/images/cascada-de-ruqruqa/cascada_ruqruqa.webp',
+      '/images/cascada-de-ruqruqa/cascada_ruqruqa2.webp',
+      '/images/cascada-de-ruqruqa/cascada_ruqruqa3.webp'
     ],
     fleetImage: '/images/avanzarojo.webp',
     longDescription:
@@ -210,11 +210,11 @@ export const destinations: Destination[] = [
     price: 'A consultar',
     description:
       'Santuario Histórico de la Pampa de Ayacucho, un lugar bellísimo y clave en nuestra historia donde destaca el obelisco de 44 metros.',
-    image: '/images/pampa%20de%20quinua/quinua1.jpg',
+    image: '/images/pampa-de-quinua/quinua1.webp',
     gallery: [
-      '/images/pampa%20de%20quinua/quinua1.jpg',
-      '/images/pampa%20de%20quinua/quinua2.webp',
-      '/images/pampa%20de%20quinua/quinua3.jpg'
+      '/images/pampa-de-quinua/quinua1.webp',
+      '/images/pampa-de-quinua/quinua2.webp',
+      '/images/pampa-de-quinua/quinua3.webp'
     ],
     fleetImage: '/images/avanzarojo.webp',
     longDescription:

@@ -1,7 +1,15 @@
 ---
+export const prerender = true;
+
 import Layout from '../../components/Layout.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import '../../styles/global.css';
+
+export async function getStaticPaths() {
+  const rawPosts = import.meta.glob('../../data/blog/*.md', { eager: true });
+  const allPosts = Object.values(rawPosts) as any[];
+  return allPosts.map((post: any) => ({ params: { slug: post.frontmatter.slug } }));
+}
 
 const { slug } = Astro.params;
 
@@ -114,7 +122,7 @@ const combinedSchema = [breadcrumbSchema, articleSchema];
   bodyClass="bg-white selection:bg-pampa-300 selection:text-pampa-900"
   showFooterLinks={false}
 >
-  <main class="min-h-screen pb-16 pt-4 mt-2">
+  <div class="min-h-screen pb-16 pt-4 mt-2">
     <div
       class="mx-auto flex max-w-6xl flex-col items-start gap-10 px-5 lg:flex-row lg:gap-12"
     >
@@ -267,5 +275,5 @@ const combinedSchema = [breadcrumbSchema, articleSchema];
         }
       </aside>
     </div>
-  </main>
+  </div>
 </Layout>
